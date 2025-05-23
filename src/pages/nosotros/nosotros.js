@@ -1,0 +1,73 @@
+/* Efecto carrusel slide auto */
+const equipo = [
+  { nombre: "Persona1", rol: "Backend", foto: "/resources/images/nosotros/fotosPrueba/foto1.webp", descripcion: " Descripcion personal 1", linkedin: "https://mx.linkedin.com/ ", github:"https://github.com/"},
+  { nombre: "Persona2", rol: "Frontend", foto: "/resources/images/nosotros/fotosPrueba/foto2.webp", descripcion: "Descripcion persona 2" ,linkedin: " ",},
+  { nombre: "Persona3", rol: "UX/UI", foto: "/resources/images/nosotros/fotosPrueba/foto3.webp", descripcion: " Descripcion persona 3" ,linkedin: " ",},
+  { nombre: "Persona4", rol: "Scrum Master", foto: "/resources/images/nosotros/fotosPrueba/foto4.webp", descripcion: "Descripcion personal 4" ,linkedin: " ",},
+  { nombre: "Persona5", rol: "Tester", foto: "/resources/images/nosotros/fotosPrueba/foto5.jpg", descripcion: "Descripcion personal 5" ,linkedin: " ",},
+  { nombre: "Persona6", rol: "DevOps", foto: "/resources/images/nosotros/fotosPrueba/foto6.jpg", descripcion: "Descripcion personal 6" ,linkedin: " ",},
+  { nombre: "Persona7", rol: "Database", foto: "/resources/images/nosotros/fotosPrueba/foto7.webp", descripcion: "Descripcion personal 7" ,linkedin: " ",},
+  { nombre: "Persona8", rol: "Mobile", foto: "/resources/images/nosotros/fotosPrueba/foto8.webp" , descripcion: "Descripcion persona 8",linkedin: " ",},
+  { nombre: "Persona9", rol: "Documentación", foto: "/resources/images/nosotros/fotosPrueba/foto9.webp", descripcion: "Descripcion persona l9" ,linkedin: " ",},
+  { nombre: "Persona10", rol: "FullStack", foto: "/resources/images/nosotros/fotosPrueba/foto10.webp", descripcion: "Descripcion personal 10" ,linkedin: " ",},
+  { nombre: "Persona11", rol: "Líder Técnico", foto: "/resources/images/nosotros/fotosPrueba/foto11.webp", descripcion: "Descripcion personal 11" ,linkedin: " ",}
+];
+
+const track = document.getElementById("carouselTrack");
+let currentIndex = 0;
+
+equipo.forEach(miembro => {
+  const slide = document.createElement("div");
+  slide.className = "carousel-slide";
+
+  slide.innerHTML = `
+    <div class="card profile-card">
+      <div class="card-body text-center">
+        <img src="${miembro.foto}" alt="${miembro.nombre}" class="rounded-circle profile-img mb-3" />
+        <h3 class="card-title mb-2">${miembro.nombre}</h3>
+        <p class="card-text text-muted mb-3">${miembro.rol}</p>
+
+        <p class="card-text mb-4">${miembro.descripcion}</p>
+        <div class="social-icons mb-4">
+          <a href="${miembro.github}"><i class="fab fa-github"></i></a>
+        </div>
+        <a href="${miembro.linkedin}" class="btn btn-primary btn-lg w-100" target="_blank">Conecta a <i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  `;
+
+  track.appendChild(slide);
+});
+
+const slides = document.querySelectorAll(".carousel-slide");
+
+function updateCarousel() {
+  const slide = slides[0];
+  const slideStyle = getComputedStyle(slide);
+  const slideWidth = slide.offsetWidth + parseFloat(slideStyle.marginLeft) + parseFloat(slideStyle.marginRight);
+  const visibleWidth = document.querySelector(".carousel-window").offsetWidth;
+  const totalSlides = slides.length;
+
+  let offset = (slideWidth * currentIndex) * -1 + (visibleWidth - slideWidth) / 2;
+
+  const maxOffset = -(slideWidth * (totalSlides - 1)) + (visibleWidth - slideWidth) / 2;
+
+  if (offset < maxOffset) offset = maxOffset;
+  if (offset > (visibleWidth - slideWidth) / 2) offset = (visibleWidth - slideWidth) / 2;
+
+  track.style.transform = `translateX(${offset}px)`;
+
+  slides.forEach((slide, idx) => {
+    slide.classList.toggle("active", idx === currentIndex);
+  });
+}
+
+setInterval(() => {
+  currentIndex = (currentIndex + 1) % equipo.length;
+  updateCarousel();
+}, 3000);
+
+updateCarousel();
+
+/* --------------------------------- */
+
