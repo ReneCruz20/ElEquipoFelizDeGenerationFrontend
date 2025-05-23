@@ -1,0 +1,186 @@
+/* Reset básico */
+body {
+  margin: 0;
+  font-family: 'Helvetica', sans-serif;
+  background-color: #f5f5dc;
+}
+
+header {
+  background-color: #2e8b57;
+  height: 93px;
+  border-bottom: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+header img {
+  width: 68px;
+  height: 68px;
+}
+
+nav a {
+  margin-right: 1rem;
+  text-decoration: none;
+  color: #d0f0c0;
+  font-weight: bold;
+}
+
+.icon-group img {
+  width: 35px;
+  height: 35px;
+  margin-left: 1rem;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 300;
+}
+
+.section {
+  padding: 4rem 2rem;
+  background-color: #F5F5DC;
+}
+.section1 {
+  
+  background-color: #C1D7AE;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.column {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+.carousel {
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+  background-color: #fff;
+  text-align: center;
+  padding: 2rem;
+}
+
+.carousel img {
+  width: 248px;
+  height: 272px;
+  object-fit: cover;
+}
+
+footer {
+  background-color: #f5f5dc;
+  border-top: 1px solid black;
+  padding: 2rem;
+}
+
+.social-icons img {
+  width: 24px;
+  height: 24px;
+  margin-right: 0.5rem;
+}
+
+footer .column a {
+  display: block;
+  color: black;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+}
+
+footer .column h4 {
+  margin-bottom: 1rem;
+}
+
+
+
+/* Estilos generales del contenedor */
+.about-us-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 40px 0;
+  background-color: #C1D7AE;
+}
+
+/* Botones de navegación */
+.nav-button {
+  background-color: #F5F5DC;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}
+
+.nav-button:hover {
+  background-color: #eee;
+}
+
+/* Ventana del carrusel (oculta el desbordamiento) */
+.carousel-window {
+  width: 600px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Pista del carrusel que se desliza */
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+/* Cada slide individual */
+.carousel-slide {
+  flex: 0 0 200px;
+  margin: 0 10px;
+  text-align: center;
+  opacity: 0.4;
+  transform: scale(0.85);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* Imagen de perfil */
+.carousel-slide img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #ccc;
+  transition: border-color 0.3s;
+}
+
+/* Información del integrante */
+.carousel-slide .info {
+  margin-top: 12px;
+  color: #333;
+}
+
+.carousel-slide .info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.carousel-slide .info p {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Slide activo en el centro */
+.carousel-slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.carousel-slide.active img {
+  border-color: #538d72;
+}
