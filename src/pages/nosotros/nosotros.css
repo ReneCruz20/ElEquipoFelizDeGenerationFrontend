@@ -1,4 +1,3 @@
-/* Reset básico */
 body {
   margin: 0;
   font-family: 'Helvetica', sans-serif;
@@ -41,8 +40,8 @@ h1, h2, h3, h4 {
   padding: 4rem 2rem;
   background-color: #F5F5DC;
 }
+
 .section1 {
-  
   background-color: #C1D7AE;
 }
 
@@ -96,8 +95,6 @@ footer .column a {
 footer .column h4 {
   margin-bottom: 1rem;
 }
-
-
 
 /* Estilos generales del contenedor */
 .about-us-container {
@@ -183,4 +180,148 @@ footer .column h4 {
 
 .carousel-slide.active img {
   border-color: #538d72;
+}
+
+
+.about-us-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 40px 0;
+  background-color: #C1D7AE;
+}
+
+.nav-button {
+  background-color: #F5F5DC;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}
+
+.nav-button:hover {
+  background-color: #eee;
+}
+
+.carousel-window {
+  width: 600px;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel-slide {
+  flex: 0 0 260px;
+  margin: 0 10px;
+  text-align: center;
+  opacity: 0.4;
+  transform: scale(0.85);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.profile-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgb(0 0 0 / 0.15);
+  padding: 1rem;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 4px solid #ccc;
+  transition: border-color 0.3s;
+  margin: 0 auto;
+  display: block;
+  border-radius: 50%;
+}
+
+.carousel-slide.active .profile-img {
+  border-color: #538d72;
+}
+
+.social-icons a {
+  color: #538d72;
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+  transition: color 0.3s;
+}
+
+.social-icons a:hover {
+  color: #2e8b57;
+}
+
+.btn-primary {
+  background-color: #2e8b57;
+  border: none;
+  padding: 0.6rem 0;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+}
+
+.btn-primary:hover {
+  background-color: #256644;
+}
+
+/* Responsividad del carrusel */
+/* Adaptacion de Carrusel en diferentes dispositivos moviles */
+@media (max-width: 768px) {
+  .carousel-window {
+    width: 90%;
+  }
+
+  .carousel-slide {
+    flex: 0 0 80%;
+    margin: 0 8px;
+  }
+
+  .profile-img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .btn-primary {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-window {
+    width: 100%;
+  }
+
+  .carousel-slide {
+    flex: 0 0 90%;
+  }
+
+  .profile-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .card-text {
+    font-size: 0.85rem;
+  }
 }
