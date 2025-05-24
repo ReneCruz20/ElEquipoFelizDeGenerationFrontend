@@ -5,39 +5,11 @@ body {
   font-family: 'Helvetica', sans-serif;
   background-color: #f5f5dc;
 }
-/*
-header {
-  background-color: #2e8b57;
-  height: 93px;
-  border-bottom: 1px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-}
 
-header img {
-  width: 68px;
-  height: 68px;
-}
-
-nav a {
-  margin-right: 1rem;
-  text-decoration: none;
-  color: #d0f0c0;
-  font-weight: bold;
-}
-
-.icon-group img {
-  width: 35px;
-  height: 35px;
-  margin-left: 1rem;
-}
-*/
 /*Estilos del NavBar*/
 .navbar-brand{
   font-family: 'Merriweather';
-  font-size: 200%;
+  font-size: 180%;
   color: #F5F5DC;
 }
 
