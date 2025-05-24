@@ -5,11 +5,11 @@ const equipo = [
   { nombre: "Persona3", rol: "UX/UI", foto: "/resources/images/nosotros/fotosPrueba/foto3.webp", descripcion: " Descripcion persona 3" ,linkedin: " ",},
   { nombre: "Persona4", rol: "Scrum Master", foto: "/resources/images/nosotros/fotosPrueba/foto4.webp", descripcion: "Descripcion personal 4" ,linkedin: " ",},
   { nombre: "Persona5", rol: "Tester", foto: "/resources/images/nosotros/fotosPrueba/foto5.jpg", descripcion: "Descripcion personal 5" ,linkedin: " ",},
-  { nombre: "Persona6", rol: "DevOps", foto: "/resources/images/nosotros/fotosPrueba/foto6.jpg", descripcion: "Descripcion personal 6" ,linkedin: " ",},
+  { nombre: "Anna Michel Juárez Linares", rol: "Scrum Master", foto: "/resources/images/nosotros/fotosPrueba/foto6.jpg", descripcion: "Certified Engineer Multi-Domain Expertise: Salesforce, Data Analytics, IT Support & Cybersecurity Future Java Full-Stack Developer, Passionate About Innovation & Scalable Solutions." ,linkedin: "https://www.linkedin.com/in/micheljlinares/ ",},
   { nombre: "Persona7", rol: "Database", foto: "/resources/images/nosotros/fotosPrueba/foto7.webp", descripcion: "Descripcion personal 7" ,linkedin: " ",},
   { nombre: "Persona8", rol: "Mobile", foto: "/resources/images/nosotros/fotosPrueba/foto8.webp" , descripcion: "Descripcion persona 8",linkedin: " ",},
-  { nombre: "Persona9", rol: "Documentación", foto: "/resources/images/nosotros/fotosPrueba/foto9.webp", descripcion: "Descripcion persona l9" ,linkedin: " ",},
-  { nombre: "Persona10", rol: "FullStack", foto: "/resources/images/nosotros/fotosPrueba/foto10.webp", descripcion: "Descripcion personal 10" ,linkedin: " ",},
+  { nombre: "Mariana Encarnación Calzada", rol: "Developer", foto: "/resources/images/nosotros/fotosPrueba/foto9.jpg", descripcion: "Professional with a background in Hispanic Literature, now building a career in IT with a focus on Cybersecurity and Fullstack Development." ,linkedin: "https://www.linkedin.com/in/mariana-encarnacion/",},
+  { nombre: "Luis Eduardo Varela Orduña", rol: "Developer", foto: "/resources/images/nosotros/fotosPrueba/foto10.jpg", descripcion: "Petroleum engineer with a good critical eye, my adaptability allows me to develop in the field of technology and development with knowledge of programming languages that are: HTML, Java Script and CSS." ,linkedin: "https://www.linkedin.com/in/luis-eduardo-varela-ordu%C3%B1a/ ",},
   { nombre: "Persona11", rol: "Líder Técnico", foto: "/resources/images/nosotros/fotosPrueba/foto11.webp", descripcion: "Descripcion personal 11" ,linkedin: " ",}
 ];
 
@@ -31,7 +31,7 @@ equipo.forEach(miembro => {
         <div class="social-icons mb-4">
           <a href="${miembro.github}"><i class="fab fa-github"></i></a>
         </div>
-        <a href="${miembro.linkedin}" class="btn btn-primary btn-lg w-100" target="_blank">Conecta a <i class="fab fa-linkedin-in"></i></a>
+        <a href="${miembro.linkedin}" class="btn btn-primary btn-lg w-100" target="_blank">Conectar<i class="fab fa-linkedin-in"></i></a>
       </div>
     </div>
   `;
