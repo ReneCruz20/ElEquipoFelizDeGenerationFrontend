@@ -37,13 +37,13 @@ nav a {
 /*Estilos del NavBar*/
 .navbar-brand{
   font-family: 'Merriweather';
-  font-size: 40px;
+  font-size: 200%;
   color: #F5F5DC;
 }
 
 .nav-link{
   font-family: 'Nunito Sans';
-  font-size: 20px;
+  font-size: 130%;
   color: #F5F5DC;
 }
 
