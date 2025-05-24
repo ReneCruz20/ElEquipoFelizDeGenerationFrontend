@@ -9,7 +9,7 @@ const equipo = [
   { nombre: "Persona7", rol: "Database", foto: "/resources/images/nosotros/fotosPrueba/foto7.webp", descripcion: "Descripcion personal 7" ,linkedin: " ",},
   { nombre: "Persona8", rol: "Mobile", foto: "/resources/images/nosotros/fotosPrueba/foto8.webp" , descripcion: "Descripcion persona 8",linkedin: " ",},
   { nombre: "Mariana Encarnación Calzada", rol: "Developer", foto: "/resources/images/nosotros/fotosPrueba/foto9.jpg", descripcion: "Professional with a background in Hispanic Literature, now building a career in IT with a focus on Cybersecurity and Fullstack Development." ,linkedin: "https://www.linkedin.com/in/mariana-encarnacion/",},
-  { nombre: "Persona10", rol: "FullStack", foto: "/resources/images/nosotros/fotosPrueba/foto10.webp", descripcion: "Descripcion personal 10" ,linkedin: " ",},
+  { nombre: "Luis Eduardo Varela Orduña", rol: "Developer", foto: "/resources/images/nosotros/fotosPrueba/foto10.jpg", descripcion: "Petroleum engineer with a good critical eye, my adaptability allows me to develop in the field of technology and development with knowledge of programming languages that are: HTML, Java Script and CSS." ,linkedin: "https://www.linkedin.com/in/luis-eduardo-varela-ordu%C3%B1a/ ",},
   { nombre: "Persona11", rol: "Líder Técnico", foto: "/resources/images/nosotros/fotosPrueba/foto11.webp", descripcion: "Descripcion personal 11" ,linkedin: " ",}
 ];
 
