@@ -8,7 +8,7 @@ const equipo = [
   { nombre: "Anna Michel Juárez Linares", rol: "Scrum Master", foto: "/resources/images/nosotros/fotosPrueba/foto6.jpg", descripcion: "Certified Engineer Multi-Domain Expertise: Salesforce, Data Analytics, IT Support & Cybersecurity Future Java Full-Stack Developer, Passionate About Innovation & Scalable Solutions." ,linkedin: "https://www.linkedin.com/in/micheljlinares/ ",},
   { nombre: "Persona7", rol: "Database", foto: "/resources/images/nosotros/fotosPrueba/foto7.webp", descripcion: "Descripcion personal 7" ,linkedin: " ",},
   { nombre: "Persona8", rol: "Mobile", foto: "/resources/images/nosotros/fotosPrueba/foto8.webp" , descripcion: "Descripcion persona 8",linkedin: " ",},
-  { nombre: "Persona9", rol: "Documentación", foto: "/resources/images/nosotros/fotosPrueba/foto9.webp", descripcion: "Descripcion persona l9" ,linkedin: " ",},
+  { nombre: "Mariana Encarnación Calzada", rol: "Developer", foto: "/resources/images/nosotros/fotosPrueba/foto9.jpg", descripcion: "Professional with a background in Hispanic Literature, now building a career in IT with a focus on Cybersecurity and Fullstack Development." ,linkedin: "https://www.linkedin.com/in/mariana-encarnacion/",},
   { nombre: "Persona10", rol: "FullStack", foto: "/resources/images/nosotros/fotosPrueba/foto10.webp", descripcion: "Descripcion personal 10" ,linkedin: " ",},
   { nombre: "Persona11", rol: "Líder Técnico", foto: "/resources/images/nosotros/fotosPrueba/foto11.webp", descripcion: "Descripcion personal 11" ,linkedin: " ",}
 ];
