@@ -10,7 +10,7 @@ const equipo = [
   { nombre: "Persona8", rol: "Mobile", foto: "/resources/images/nosotros/fotosPrueba/foto8.webp" , descripcion: "Descripcion persona 8",linkedin: " ",},
   { nombre: "Mariana Encarnación Calzada", rol: "Developer", foto: "/resources/images/nosotros/fotosPrueba/foto9.jpg", descripcion: "Professional with a background in Hispanic Literature, now building a career in IT with a focus on Cybersecurity and Fullstack Development." ,linkedin: "https://www.linkedin.com/in/mariana-encarnacion/",},
   { nombre: "Luis Eduardo Varela Orduña", rol: "Developer", foto: "/resources/images/nosotros/fotosPrueba/foto10.jpg", descripcion: "Petroleum engineer with a good critical eye, my adaptability allows me to develop in the field of technology and development with knowledge of programming languages that are: HTML, Java Script and CSS." ,linkedin: "https://www.linkedin.com/in/luis-eduardo-varela-ordu%C3%B1a/ ",},
-  { nombre: "Persona11", rol: "Líder Técnico", foto: "/resources/images/nosotros/fotosPrueba/foto11.webp", descripcion: "Descripcion personal 11" ,linkedin: " ",}
+  { nombre: "Diana Teresa Ortiz Vargas", rol: "Developer", foto: "https://i.postimg.cc/3NCpkZ0y/dtov.jpg", descripcion: "Socio-environmental research and sustainability professional transitioning into IT fiel. Aspiring full-stack developer passionate about creating innovative solutions to complex problems. Driven by a systems-thinking approach and a commitment to meaningful, impact-oriented work." ,linkedin: "https://www.linkedin.com/in/teresa-ov-dt25/",}
 ];
 
 const track = document.getElementById("carouselTrack");
