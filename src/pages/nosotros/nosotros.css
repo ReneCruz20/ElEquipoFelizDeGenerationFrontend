@@ -418,3 +418,17 @@ footer .column h4 {
     font-size: 0.85rem;
   }
 }
+
+/* Estilos para los íconos sociales */
+.social-icons {
+  display: flex;
+  gap: 0.625rem; /* Espaciado entre los íconos */
+  align-items: center; /* Alineación vertical */
+}
+
+/* Ajustes para las imágenes de los íconos */
+.social-icons img {
+  width: 1.875rem;
+  height: 1.875rem;
+  object-fit: contain; /* Mantiene la proporción sin recortar */
+}
