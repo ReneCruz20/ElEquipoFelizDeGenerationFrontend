@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+.navbar-brand{
+  font-family: 'Merriweather';
+  font-size: 180%;
+  color: #F5F5DC;
+}
+
+.nav-link{
+  font-family: 'Nunito Sans';
+  font-size: 130%;
+  color: #F5F5DC;
+}
