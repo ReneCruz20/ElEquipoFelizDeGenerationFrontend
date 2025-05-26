@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contáctanos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5dc;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .left, .right {
+            width: 45%;
+        }
+        .left img {
+            width: 100%;
+        }
+        .contact-info, .social-media {
+            margin-top: 20px;
+        }
+        .social-media-icons {
+            display: flex;
+            gap: 10px;
+        }
+        .social-media-icons img {
+            width: 30px;
+            height: 30px;
+        }
+        .contact-form {
+            background-color: #d3e4cd;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .contact-form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .contact-form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <img src="map.png" alt="Mapa de ubicación">
+            <div class="contact-info">
+                <p><strong>Teléfonos de contacto:</strong></p>
+                <p>Desde la República Mexicana: 55 1801-8584, 55 1801-8586</p>
+                <p>Lada sin costo: 800 253 4978</p>
+                <p>Desde el extranjero: +52 (55) 8985-6486</p>
+                <p><strong>WhatsApp:</strong> +52 (55) 8385 1010</p>
+            </div>
+            <div class="social-media">
+                <p><strong>Redes Sociales:</strong></p>
+                <div class="social-media-icons">
+                    <img src="facebook.png" alt="Facebook">
+                    <img src="instagram.png" alt="Instagram">
+                    <img src="twitter.png" alt="Twitter">
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="contact-form">
+                <h2>¿Te interesa conocer más de nosotros?</h2>
+                <input type="text" placeholder="Nombre(s)" id="nombre">
+                <input type="text" placeholder="Apellidos" id="apellidos">
+                <input type="email" placeholder="Email" id="email">
+                <textarea placeholder="Dudas o sugerencias:" id="dudas"></textarea>
+                <button onclick="submitForm()">Enviar</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function submitForm() {
+            const nombre = document.getElementById('nombre').value;
+            const apellidos = document.getElementById('apellidos').value;
+            const email = document.getElementById('email').value;
+            const dudas = document.getElementById('dudas').value;
+            alert(`Nombre: ${nombre}\\nApellidos: ${apellidos}\\nEmail: ${email}\\nDudas o sugerencias: ${dudas}`);
+        }
+    </script>
+</body>
+</html>
