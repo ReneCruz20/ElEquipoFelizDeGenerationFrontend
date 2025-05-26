@@ -3,7 +3,7 @@ const equipo = [
   { nombre: "Persona1", rol: "Backend", foto: "/resources/images/nosotros/fotosPrueba/foto1.webp", descripcion: " Descripcion personal 1", linkedin: "https://mx.linkedin.com/ ", github:"https://github.com/"},
   { nombre: "Persona2", rol: "Frontend", foto: "/resources/images/nosotros/fotosPrueba/foto2.webp", descripcion: "Descripcion persona 2" ,linkedin: " ",},
   { nombre: "Persona3", rol: "UX/UI", foto: "/resources/images/nosotros/fotosPrueba/foto3.webp", descripcion: " Descripcion persona 3" ,linkedin: " ",},
-  { nombre: "Persona4", rol: "Scrum Master", foto: "/resources/images/nosotros/fotosPrueba/foto4.webp", descripcion: "Descripcion personal 4" ,linkedin: " ",},
+  { nombre: "Perla Beatriz Lopez Armenta", rol: "Developer", foto: "/resources/images/nosotros/fotosPrueba/foto4.jpg", descripcion: "IT professional with training in various technologies. I stand out for my adaptability and problem-solving skills, which allow me to integrate effectively into teams and face new challenges" ,linkedin: "https://www.linkedin.com/in/perla-lopez-armenta/ ",},
   { nombre: "Persona5", rol: "Tester", foto: "/resources/images/nosotros/fotosPrueba/foto5.jpg", descripcion: "Descripcion personal 5" ,linkedin: " ",},
   { nombre: "Anna Michel Juárez Linares", rol: "Scrum Master", foto: "/resources/images/nosotros/fotosPrueba/foto6.jpg", descripcion: "Certified Engineer Multi-Domain Expertise: Salesforce, Data Analytics, IT Support & Cybersecurity Future Java Full-Stack Developer, Passionate About Innovation & Scalable Solutions." ,linkedin: "https://www.linkedin.com/in/micheljlinares/ ",},
   { nombre: "Persona7", rol: "Database", foto: "/resources/images/nosotros/fotosPrueba/foto7.webp", descripcion: "Descripcion personal 7" ,linkedin: " ",},
