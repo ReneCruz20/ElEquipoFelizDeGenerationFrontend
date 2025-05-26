@@ -28,10 +28,10 @@ equipo.forEach(miembro => {
         <p class="card-text text-muted mb-3">${miembro.rol}</p>
 
         <p class="card-text mb-4">${miembro.descripcion}</p>
-        <div class="social-icons mb-4">
+        <div class="social-icons mb-2 d-flex justify-content-center">
           <a href="${miembro.github}"><i class="fab fa-github"></i></a>
         </div>
-        <a href="${miembro.linkedin}" class="btn btn-primary btn-lg w-100" target="_blank">Conectar<i class="fab fa-linkedin-in"></i></a>
+        <a href="${miembro.linkedin}" class="btn btn-primary btn-lg w-100" target="_blank"> Conectar <i class="fab fa-linkedin-in"></i></a>
       </div>
     </div>
   `;
