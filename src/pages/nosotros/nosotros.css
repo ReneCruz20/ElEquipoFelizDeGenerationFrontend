@@ -37,20 +37,6 @@ a {
     color: inherit;
 }
 
-/*Estilos del NavBar*/
-.navbar-brand{
-  font-family: 'Merriweather';
-  font-size: 180%;
-  color: #F5F5DC;
-}
-
-.nav-link{
-  font-family: 'Nunito Sans';
-  font-size: 130%;
-  color: #F5F5DC;
-}
-
-
 
 
 .section {
