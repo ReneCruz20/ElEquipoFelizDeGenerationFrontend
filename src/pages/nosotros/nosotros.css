@@ -541,13 +541,9 @@ font-size: 40px;
 }
 
 
-<<<<<<< HEAD
-
-=======
 /* Ajustes para las imágenes de los íconos */
 .social-icons img {
   width: 1.875rem;
   height: 1.875rem;
   object-fit: contain; /* Mantiene la proporción sin recortar */
 }
->>>>>>> 06eff35 (feat:Agregue tarjeta de presentancion, tarjeta 2)
