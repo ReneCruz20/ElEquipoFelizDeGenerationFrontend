@@ -1,6 +1,8 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+
         body {
-            font-family: Arial, sans-serif;
             background-color: #f5f5dc;
             margin: 0;
             padding: 0;
