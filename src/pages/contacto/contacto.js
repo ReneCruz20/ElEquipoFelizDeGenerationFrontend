@@ -9,3 +9,5 @@
 import { insertFooter } from "../../modules/footer/footer.js";
 
 insertFooter(document.getElementById("footer"));
+
+//    CREAR funcion que envie correo al email del usuario desde email de la empresa [ htagreenhousesupplies54@gmail.com ]
