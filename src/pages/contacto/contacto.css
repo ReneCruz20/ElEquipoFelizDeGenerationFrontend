@@ -1,0 +1,53 @@
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5dc;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .left, .right {
+            width: 45%;
+        }
+        .left img {
+            width: 100%;
+        }
+        .contact-info, .social-media {
+            margin-top: 20px;
+        }
+        .social-media-icons {
+            display: flex;
+            gap: 10px;
+        }
+        .social-media-icons img {
+            width: 30px;
+            height: 30px;
+        }
+        .contact-form {
+            background-color: #d3e4cd;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .contact-form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .contact-form button:hover {
+            background-color: #45a049;
+        }
+    
