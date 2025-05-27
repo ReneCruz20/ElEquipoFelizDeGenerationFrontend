@@ -1,55 +1,90 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
+:root {
+    --sea-green: #118A4D;
+    --cambridge-blue: #8FAF8A;
+    --british-racing-green: #0D3B1E;
+    --tea-green: #C1D7AE;
+    --beige: #F5F5DC;
+    --cinereous: #8D6E63;
+    --pale-tea-green: #C8E6C9;
+}
 
-        body {
-            background-color: #f5f5dc;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-        }
-        .left, .right {
-            width: 45%;
-        }
-        .left img {
-            width: 100%;
-        }
-        .contact-info, .social-media {
-            margin-top: 20px;
-        }
-        .social-media-icons {
-            display: flex;
-            gap: 10px;
-        }
-        .social-media-icons img {
-            width: 30px;
-            height: 30px;
-        }
-        .contact-form {
-            background-color: #d3e4cd;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .contact-form button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .contact-form button:hover {
-            background-color: #45a049;
-        }
-    
+
+body {
+    background-color: var(--beige);
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    font-family: 'Merriweather', serif;
+    color: var(--british-racing-green);
+}
+
+p{
+    font-family: 'Work Sans';
+    color: var(--british-racing-green);
+    font-size: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.left,
+.right {
+    width: 45%;
+}
+
+.left img {
+    width: 100%;
+}
+
+.contact-info,
+.social-media {
+    margin-top: 20px;
+}
+
+.social-media-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.social-media-icons img {
+    width: 30px;
+    height: 30px;
+}
+
+.contact-form {
+    background-color: #d3e4cd;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Work Sans';
+}
+
+.contact-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Nunito Sans'; 
+    font-size: 100%;
+}
+
+.contact-form button:hover {
+    background-color: #45a049;
+}
