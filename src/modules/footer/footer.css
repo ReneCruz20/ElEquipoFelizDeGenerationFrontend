@@ -23,6 +23,11 @@
     padding: 4rem 0 0;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .footer-container {
     display: flex;
     flex-wrap: wrap;

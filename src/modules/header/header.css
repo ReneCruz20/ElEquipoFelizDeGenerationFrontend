@@ -11,3 +11,14 @@
   font-size: 130%;
   color: #F5F5DC;
 }
+
+/* Menu productos */
+
+.dropdown-menu.bg-success {
+  background-color: #118A4D !important; /* mismo color que el navbar */
+}
+
+.dropdown-menu.bg-success .dropdown-item:hover {
+  background-color: #0d6e3f !important; /* color más oscuro al pasar el mouse */
+  color: #fff !important;
+}
