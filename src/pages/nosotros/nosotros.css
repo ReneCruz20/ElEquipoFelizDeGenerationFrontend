@@ -193,25 +193,37 @@ font-size: 40px;
 
 /* Estilos generales del contenedor */
 .about-us-container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 40px 0;
-  background-color: #C1D7AE;
+  padding: 40px 60px; /* Aumentar padding para espacio de botones */
 }
 
+/* Botones de navegación */
 /* Botones de navegación */
 .nav-button {
   background-color: #F5F5DC;
   border: none;
   font-size: 2rem;
   cursor: pointer;
-  padding: 10px;
+  padding: 10px 20px;
   border-radius: 50%;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s;
+  position: relative;
+  z-index: 10;
 }
+
+.prev-button {
+  left: 20px;
+}
+
+.next-button {
+  right: 20px;
+}
+
 
 .nav-button:hover {
   background-color: #eee;

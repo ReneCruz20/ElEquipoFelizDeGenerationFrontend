@@ -20,8 +20,37 @@ const equipo = [
 
 
 const track = document.getElementById("carouselTrack");
-let currentIndex = 0;
 
+let currentIndex = 0;
+let autoScrollInterval;
+const scrollDelay = 3000;
+
+function startAutoScroll() {
+  autoScrollInterval = setInterval(() => {
+    currentIndex = (currentIndex + 1) % equipo.length;
+    updateCarousel();
+  }, scrollDelay);
+}
+
+//  navegación manual
+function moveSlide(direction) {
+  clearInterval(autoScrollInterval);
+  currentIndex = (currentIndex + direction + equipo.length) % equipo.length;
+  updateCarousel();
+  startAutoScroll(); // Reiniciar el auto-scroll después de navegación manual
+}
+
+document.querySelector('.prev-button').addEventListener('click', () => moveSlide(-1));
+document.querySelector('.next-button').addEventListener('click', () => moveSlide(1));
+
+// pausa del hover
+const carouselWindow = document.querySelector('.carousel-window');
+carouselWindow.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+carouselWindow.addEventListener('mouseleave', startAutoScroll);
+
+startAutoScroll();
+
+// tarjeta de equipo
 equipo.forEach(miembro => {
   const slide = document.createElement("div");
   slide.className = "carousel-slide";
@@ -68,10 +97,7 @@ function updateCarousel() {
   });
 }
 
-setInterval(() => {
-  currentIndex = (currentIndex + 1) % equipo.length;
-  updateCarousel();
-}, 3000);
+
 
 updateCarousel();
 
