@@ -1,54 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-
-/* Global Styles */
-:root {
-    --sea-green: #118A4D;
-    --cambridge-blue: #8FAF8A;
-    --british-racing-green: #0D3B1E;
-    --tea-green: #C1D7AE;
-    --beige: #F5F5DC;
-    --cinereous: #8D6E63;
-    --pale-tea-green: #C8E6C9;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Work Sans', sans-serif;
-    background-color: var(--beige);
-    color: var(--british-racing-green);
-    line-height: 1.6;
-}
-
-h1, h2, h3, h4 {
-    font-family: 'Merriweather', serif;
-}
-
-button, .button {
-    font-family: 'Nunito Sans', sans-serif;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
 
 
 
-.section {
-  padding: 4rem 2rem;
-  background-color: #F5F5DC;
-}
 
-.titulos{
-text-align: center;
-font-family: 'Merriweather';
-font-size: 40px;
-}
+
 
 /* Imagen Invernadero */
 #invernadero {
