@@ -1,4 +1,7 @@
 /* Efecto carrusel slide auto */
+import { insertFooter } from "../../modules/footer/footer.js";
+
+insertFooter(document.getElementById("footer"));
 
 const equipo = [
   { nombre: "Persona1", rol: "Backend", foto: "/resources/images/nosotros/fotosPrueba/foto1.webp", descripcion: " Descripcion personal 1", linkedin: "https://mx.linkedin.com/ ", github:"https://github.com/"},
