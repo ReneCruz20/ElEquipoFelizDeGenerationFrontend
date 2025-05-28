@@ -24,6 +24,7 @@ import { insertFooter } from "../../modules/footer/footer.js";
 
 insertFooter(document.getElementById("footer"));
 
+<<<<<<< HEAD
 function validateForm() {
     // Limpiar mensajes de error previos
     document.querySelectorAll(".error-message").forEach(msg => msg.innerHTML = "");
@@ -67,3 +68,7 @@ document.querySelector("button").addEventListener("click", function(event) {
         console.log("Formulario enviado correctamente.");
     }
 });
+=======
+
+//    CREAR funcion que envie correo al email del usuario desde email de la empresa [ htagreenhousesupplies54@gmail.com ]
+>>>>>>> 167b659d80491b7441c01bd25ea8efb9174615ae
