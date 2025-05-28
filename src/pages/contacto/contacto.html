@@ -47,12 +47,18 @@
             <div class="col-md-6 col-12">
                 <div class="contact-form">
                     <h2>¿Te interesa conocer más de nosotros?</h2>
-                    <input type="text" placeholder="Nombre(s)" id="nombre">
-                    <input type="text" placeholder="Apellidos" id="apellidos">
-                    <input type="email" placeholder="Email" id="email">
-                    <input type="telefono" placeholder="Teléfono" id="telefono">
-                    <textarea placeholder="Dudas o sugerencias:" id="dudas"></textarea>
+                    <input type="text" placeholder="Nombre(s)" id="nombre" class="form-control">
+                    <div id="nombre-error" class="error-message"></div>
+                    <input type="text" placeholder="Apellidos" id="apellidos" class="form-control">
+                    <div id="apellidos-error" class="error-message"></div>
+                    <input type="email" placeholder="Email" id="email" class="form-control">
+                    <div id="email-error" class="error-message"></div>
+                    <input type="telefono" placeholder="Teléfono" id="telefono" class="form-control">
+                    <div id="telefono-error" class="error-message"></div>
+                    <textarea placeholder="Dudas o sugerencias:" id="dudas" class="form-control"></textarea>
+                    <div id="dudas-error" class="error-message"></div>
                     <button class="btn btn-primary w-10" onclick="submitForm()">Enviar</button>
+                    <div id="mesaje-formulario" class="text-left fw-bold mt-2"></div>
                 </div>
             </div>
         </div>
