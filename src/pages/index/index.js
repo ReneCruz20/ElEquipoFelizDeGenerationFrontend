@@ -1,18 +1,14 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Header Scroll Effect
-    const header = document.getElementById('main-header');
-    const companyName = document.querySelector('.company-name');
-    const searchContainer = document.querySelector('.search-container');
-    
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
 
-    // Carousel Functionality
+
+import { insertFooter } from "../../modules/footer/footer.js";
+
+insertFooter(document.getElementById("footer"));
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+
+    // carrusel
     const carouselContainer = document.querySelector('.carousel-container');
     const slides = document.querySelectorAll('.carousel-slide');
     const prevBtn = document.querySelector('.carousel-prev');
@@ -25,8 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function updateCarousel() {
         carouselContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
-        
-        // Update indicators
         indicators.forEach((indicator, index) => {
             if (index === currentIndex) {
                 indicator.classList.add('active');
@@ -49,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
     nextBtn.addEventListener('click', nextSlide);
     prevBtn.addEventListener('click', prevSlide);
     
-    // Indicator clicks
+    // clicks
     indicators.forEach((indicator, index) => {
         indicator.addEventListener('click', () => {
             currentIndex = index;
@@ -58,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Auto slide
+    // auto slide
     function startAutoSlide() {
         autoSlideInterval = setInterval(nextSlide, 5000);
     }
@@ -70,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     startAutoSlide();
     
-    // Pause auto slide on hover
+    // pausa el auto slide en hover
     carouselContainer.addEventListener('mouseenter', () => {
         clearInterval(autoSlideInterval);
     });
@@ -88,24 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    backToTopBtn.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
-    // Mouse Effect
-    const mouseEffect = document.createElement('div');
-    mouseEffect.classList.add('mouse-effect');
-    document.body.appendChild(mouseEffect);
-    
-    document.addEventListener('mousemove', function(e) {
-        mouseEffect.style.left = e.clientX + 'px';
-        mouseEffect.style.top = e.clientY + 'px';
-    });
-    
-    // Toggle search on mobile
+    // busqueda en movil
     const searchBtn = document.querySelector('.search-btn');
     const searchInputContainer = document.querySelector('.search-container');
     
@@ -113,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
         searchInputContainer.style.display = searchInputContainer.style.display === 'flex' ? 'none' : 'flex';
     });
 
-    // Responsive menu toggle
+    // menu responsive
     const menuBtn = document.querySelector('.menu-btn');
     const mainNav = document.querySelector('.main-nav');
     
@@ -121,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
         mainNav.classList.toggle('active');
     });
 
-    // Product hover effect
     const productCards = document.querySelectorAll('.product-card');
     
     productCards.forEach(card => {
