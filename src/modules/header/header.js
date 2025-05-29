@@ -40,17 +40,17 @@ const insertHeader = () =>{
                 Productos
               </a>
               <ul class="dropdown-menu bg-success" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item text-light" href="#">Geotextiles</a></li>
-                <li><a class="dropdown-item text-light" href="#">Sistemas de riego</a></li>
+                <li><a class="dropdown-item text-light" href="#">Productos para invernadero</a></li>
+                <li><a class="dropdown-item text-light" href="#">Mallas sombra</a></li>
+                <li><a class="dropdown-item text-light" href="#">Mallas decorativas</a></li>
                 <li><a class="dropdown-item text-light" href="#">Accesorios hidroponia</a></li>
               </ul>
             </li>
-
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">Ofertas</a>
-            </li>
             <li class="nav-item">
               <a class="nav-link" href="/src/pages/contacto/contacto.html">Contacto</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="/src/pages/formulario/formulario.html">Regístrate</a>
             </li>
           </ul>
         </div>
