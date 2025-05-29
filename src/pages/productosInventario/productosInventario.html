@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestión de Productos</title>
+
+  <!-- Bootstrap y FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+  <!-- Estilos personalizados -->
+  <link rel="stylesheet" href="../../modules/header/header.css" />
+  <link rel="stylesheet" href="../../modules/footer/footer.css" />
+
+  <style>
+    .product-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      background-color: #fff;
+      transition: transform 0.2s;
+    }
+
+    .product-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .low-stock {
+      border-color: red;
+    }
+
+    .low-stock .stock {
+      color: red;
+      font-weight: bold;
+    }
+
+    .warehouse-box {
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 40px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header id="navBar"></header>
+
+  <!-- Contenido -->
+  <main class="container my-5">
+
+    <!-- Almacén A -->
+    <div class="warehouse-box">
+      <h2 class="mb-3">Warehouse A</h2>
+      <p><i class="fa-solid fa-boxes-stacked"></i> 50 productos | 1,000 artículos</p>
+      <p><i class="fa-solid fa-location-dot"></i> 786 South Main Street, Jacksonville, FL 32202</p>
+
+      <div class="row g-3 mt-4">
+        <!-- Producto 1 -->
+        <div class="col-md-4">
+          <div class="product-card text-center">
+            <p class="fw-bold">Código: SWE-1</p>
+            <p>Suéter Verde</p>
+            <p>Precio: <strong>$100</strong></p>
+            <p class="stock">Disponibles: 200</p>
+          </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="col-md-4">
+          <div class="product-card text-center">
+            <p class="fw-bold">Código: BTS</p>
+            <p>Camiseta Azul</p>
+            <p>Precio: <strong>$100</strong></p>
+            <p class="stock">Disponibles: 200</p>
+          </div>
+        </div>
+
+        <!-- Producto 3 (Stock Bajo) -->
+        <div class="col-md-4">
+          <div class="product-card text-center low-stock">
+            <p class="fw-bold">Código: WCS</p>
+            <p>Camisa Blanca Casual</p>
+            <p>Precio: <strong>$100</strong></p>
+            <p class="stock">Disponibles: 50</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Almacén B -->
+    <div class="warehouse-box">
+      <h2 class="mb-3">Warehouse B</h2>
+      <p><i class="fa-solid fa-boxes-stacked"></i> 40 productos | 345 artículos</p>
+      <p><i class="fa-solid fa-location-dot"></i> 788 South Main Street, Jacksonville, FL 32202</p>
+
+      <!-- Puedes agregar productos aquí también -->
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer" class="main-footer"></footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="../productosInventario/productosInventario.js"></script>
+  <script type="module" src="../../modules/footer/footer.js"></script>
+  <script type="module" src="../../modules/header/header.js"></script>
+</body>
+</html>
