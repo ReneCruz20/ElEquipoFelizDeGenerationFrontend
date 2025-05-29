@@ -1,0 +1,409 @@
+
+
+
+
+/* carrusel */
+.hero-carousel {
+    margin-top: 180px;
+    position: relative;
+    overflow: hidden;
+    height: 500px; /* Altura fija para el contenedor */
+}
+
+.carousel-container {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+    height: 100%; 
+}
+
+.carousel-slide {
+    min-width: 100%;
+    position: relative;
+    height: 100%; 
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; 
+    display: block;
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 20%;
+    left: 10%;
+    background-color: rgba(13, 59, 30, 0.8);
+    color: var(--pale-tea-green);
+    padding: 2rem;
+    max-width: 500px;
+    border-radius: 5px;
+}
+
+.carousel-caption h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.carousel-caption p {
+    margin-bottom: 1.5rem;
+}
+
+.carousel-btn {
+    display: inline-block;
+    background-color: var(--sea-green);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.carousel-btn:hover {
+    background-color: var(--cambridge-blue);
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 2rem;
+}
+
+.carousel-controls button {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--british-racing-green);
+    transition: all 0.3s;
+}
+
+.carousel-controls button:hover {
+    background-color: white;
+    transform: scale(1.1);
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.indicator.active {
+    background-color: white;
+}
+
+/*    best sellers    */
+.best-sellers {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.best-sellers h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+    color: var(--british-racing-green);
+}
+
+.products-carousel {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--cambridge-blue) var(--tea-green);
+}
+
+.products-carousel::-webkit-scrollbar {
+    height: 8px;
+}
+
+.products-carousel::-webkit-scrollbar-track {
+    background: var(--tea-green);
+    border-radius: 10px;
+}
+
+.products-carousel::-webkit-scrollbar-thumb {
+    background-color: var(--cambridge-blue);
+    border-radius: 10px;
+}
+
+.product-card {
+    min-width: 250px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+}
+
+.product-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.product-card h3 {
+    padding: 1rem 1rem 0;
+    font-size: 1.1rem;
+}
+
+.product-rating {
+    padding: 0.5rem 1rem;
+    color: #FFD700;
+}
+
+.product-price {
+    padding: 0 1rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--sea-green);
+}
+
+.add-to-cart {
+    display: block;
+    width: calc(100% - 2rem);
+    margin: 1rem;
+    padding: 0.8rem;
+    background-color: var(--sea-green);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart:hover {
+    background-color: var(--british-racing-green);
+}
+
+/*    comentarios     */
+.testimonials {
+    background-color: var(--tea-green);
+    padding: 4rem 2rem;
+}
+
+.testimonials h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+    color: var(--british-racing-green);
+}
+
+.testimonials-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    min-width: 300px;
+    max-width: 350px;
+    transition: transform 0.3s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-10px);
+}
+
+.testimonial-rating {
+    color: #FFD700;
+    margin-bottom: 1rem;
+}
+
+.testimonial-text {
+    font-style: italic;
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-author {
+    font-weight: bold;
+    text-align: right;
+}
+
+/*     sobre hta    */
+.about-section {
+    display: flex;
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.about-image {
+    flex: 2;
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px 0 0 10px;
+}
+
+.about-text {
+    flex: 1;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.about-text h2 {
+    margin-bottom: 1.5rem;
+    color: var(--british-racing-green);
+}
+
+.about-text p {
+    margin-bottom: 1rem;
+}
+
+.learn-more {
+    display: inline-block;
+    background-color: var(--sea-green);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    margin-top: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.learn-more:hover {
+    background-color: var(--british-racing-green);
+}
+
+
+/* Responsive */
+@media (max-width: 992px) {
+    .header-container {
+        flex-wrap: wrap;
+    }
+    
+    .main-nav {
+        order: 3;
+        width: 100%;
+        margin-top: 1rem;
+    }
+    
+    .main-nav ul {
+        justify-content: center;
+    }
+    
+    .hero-carousel {
+        margin-top: 220px;
+    }
+    
+    .about-section {
+        flex-direction: column;
+    }
+    
+    .about-image img {
+        border-radius: 10px 10px 0 0;
+    }
+    
+    .about-text {
+        border-radius: 0 0 10px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-actions {
+        margin-left: auto;
+    }
+    
+    .company-name {
+        font-size: 1.5rem;
+    }
+    
+    .carousel-caption {
+        bottom: 10%;
+        left: 5%;
+        max-width: 90%;
+    }
+    
+    .carousel-caption h2 {
+        font-size: 1.5rem;
+    }
+    
+    .testimonial-card {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .header-container {
+        padding: 0 1rem;
+    }
+    
+    .logo {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .company-name {
+        font-size: 1.3rem;
+    }
+    
+    .main-nav li {
+        margin: 0 0.5rem;
+    }
+    
+    .header-actions button {
+        margin-left: 1rem;
+    }
+    
+    .hero-carousel {
+        margin-top: 180px;
+    }
+    
+    .carousel-caption {
+        position: static;
+        background-color: transparent;
+        color: var(--british-racing-green);
+        padding: 1rem;
+    }
+    
+    .carousel-controls {
+        padding: 0 1rem;
+    }
+    
+    .carousel-controls button {
+        width: 40px;
+        height: 40px;
+    }
+}
