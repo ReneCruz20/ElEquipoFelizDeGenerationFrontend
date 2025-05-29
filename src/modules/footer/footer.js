@@ -1,9 +1,9 @@
 
 
-const insertFooter = (footer)=>{
+const insertFooter = (footer) => {
 
-    
-    footer.innerHTML = `
+
+  footer.innerHTML = `
     <div class="footer-container" class="main-footer"> <!-- class="flex" -->
       <div class="footer-section"> <!-- class="column" -->
 
@@ -52,7 +52,26 @@ const insertFooter = (footer)=>{
   
     `;
 
+  // Back to Top Button
+  const backToTopBtn = document.getElementById('back-to-top');
+
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 300) {
+      backToTopBtn.style.display = 'flex';
+    } else {
+      backToTopBtn.style.display = 'none';
+    }
+  });
+
+  backToTopBtn.addEventListener('click', function () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
 }
 
 
-export{insertFooter};
+
+export { insertFooter };
