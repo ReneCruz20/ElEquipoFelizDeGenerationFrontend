@@ -24,9 +24,7 @@ const insertHeader = () =>{
               <a class="nav-link" href="/index.html">Inicio</a>
             </li>
 
-             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/src/pages/nosotros/nosotros.html">Nosotros</a>
-            </li>
+            
         
             <li class="nav-item dropdown px-3">
               <a
@@ -46,6 +44,12 @@ const insertHeader = () =>{
                 <li><a class="dropdown-item text-light" href="/src/pages/productos/productos.html">Accesorios hidroponia</a></li>
               </ul>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/src/pages/nosotros/nosotros.html">Nosotros</a>
+            </li>
+
+            
             <li class="nav-item">
               <a class="nav-link" href="/src/pages/contacto/contacto.html">Contacto</a>
             </li>
