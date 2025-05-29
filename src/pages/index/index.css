@@ -1,0 +1,768 @@
+/* Global Styles */
+:root {
+    --sea-green: #118A4D;
+    --cambridge-blue: #8FAF8A;
+    --british-racing-green: #0D3B1E;
+    --tea-green: #C1D7AE;
+    --beige: #F5F5DC;
+    --cinereous: #8D6E63;
+    --pale-tea-green: #C8E6C9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Work Sans', sans-serif;
+    background-color: var(--beige);
+    color: var(--british-racing-green);
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Merriweather', serif;
+}
+
+button, .button {
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Header Styles */
+#main-header {
+    background-color: var(--sea-green);
+    color: white;
+    padding: 1.5rem 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 1rem;
+}
+
+.company-name {
+    font-size: 1.8rem;
+    transition: all 0.3s ease;
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+}
+
+.main-nav li {
+    margin: 0 1rem;
+}
+
+.main-nav a {
+    color: white;
+    font-weight: 500;
+    transition: color 0.3s;
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.main-nav a:hover {
+    color: var(--tea-green);
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: var(--tea-green);
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s;
+}
+
+.main-nav a:hover::after {
+    width: 100%;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+}
+
+.header-actions button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    margin-left: 1.5rem;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.header-actions button:hover {
+    transform: scale(1.1);
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: var(--tea-green);
+    color: var(--british-racing-green);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.search-container {
+    max-width: 1200px;
+    margin: 1.5rem auto 0;
+    padding: 0 2rem;
+    display: flex;
+    transition: all 0.3s ease;
+}
+
+.search-input {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 30px 0 0 30px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.search-submit {
+    background-color: var(--british-racing-green);
+    color: white;
+    border: none;
+    padding: 0 1.5rem;
+    border-radius: 0 30px 30px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-submit:hover {
+    background-color: var(--cambridge-blue);
+}
+
+/* Scrolled Header */
+#main-header.scrolled {
+    padding: 0.5rem 0;
+}
+
+#main-header.scrolled .company-name {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+}
+
+#main-header.scrolled .search-container {
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0 2rem;
+}
+
+/* Hero Carousel */
+.hero-carousel {
+    margin-top: 180px;
+    position: relative;
+    overflow: hidden;
+    height: 500px; /* Altura fija para el contenedor */
+}
+
+.carousel-container {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+    height: 100%; /* Asegura que el contenedor ocupe toda la altura */
+}
+
+.carousel-slide {
+    min-width: 100%;
+    position: relative;
+    height: 100%; /* Asegura que cada slide ocupe toda la altura */
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%; /* Ocupa todo el espacio disponible */
+    object-fit: cover; /* Mantiene la relación de aspecto cubriendo el espacio */
+    display: block;
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 20%;
+    left: 10%;
+    background-color: rgba(13, 59, 30, 0.8);
+    color: var(--pale-tea-green);
+    padding: 2rem;
+    max-width: 500px;
+    border-radius: 5px;
+}
+
+.carousel-caption h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.carousel-caption p {
+    margin-bottom: 1.5rem;
+}
+
+.carousel-btn {
+    display: inline-block;
+    background-color: var(--sea-green);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.carousel-btn:hover {
+    background-color: var(--cambridge-blue);
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 2rem;
+}
+
+.carousel-controls button {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--british-racing-green);
+    transition: all 0.3s;
+}
+
+.carousel-controls button:hover {
+    background-color: white;
+    transform: scale(1.1);
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.indicator.active {
+    background-color: white;
+}
+
+/* Best Sellers */
+.best-sellers {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.best-sellers h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+    color: var(--british-racing-green);
+}
+
+.products-carousel {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--cambridge-blue) var(--tea-green);
+}
+
+.products-carousel::-webkit-scrollbar {
+    height: 8px;
+}
+
+.products-carousel::-webkit-scrollbar-track {
+    background: var(--tea-green);
+    border-radius: 10px;
+}
+
+.products-carousel::-webkit-scrollbar-thumb {
+    background-color: var(--cambridge-blue);
+    border-radius: 10px;
+}
+
+.product-card {
+    min-width: 250px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+}
+
+.product-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.product-card h3 {
+    padding: 1rem 1rem 0;
+    font-size: 1.1rem;
+}
+
+.product-rating {
+    padding: 0.5rem 1rem;
+    color: #FFD700;
+}
+
+.product-price {
+    padding: 0 1rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--sea-green);
+}
+
+.add-to-cart {
+    display: block;
+    width: calc(100% - 2rem);
+    margin: 1rem;
+    padding: 0.8rem;
+    background-color: var(--sea-green);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart:hover {
+    background-color: var(--british-racing-green);
+}
+
+/* Testimonials */
+.testimonials {
+    background-color: var(--tea-green);
+    padding: 4rem 2rem;
+}
+
+.testimonials h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+    color: var(--british-racing-green);
+}
+
+.testimonials-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    min-width: 300px;
+    max-width: 350px;
+    transition: transform 0.3s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-10px);
+}
+
+.testimonial-rating {
+    color: #FFD700;
+    margin-bottom: 1rem;
+}
+
+.testimonial-text {
+    font-style: italic;
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-author {
+    font-weight: bold;
+    text-align: right;
+}
+
+/* About Section */
+.about-section {
+    display: flex;
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.about-image {
+    flex: 2;
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px 0 0 10px;
+}
+
+.about-text {
+    flex: 1;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.about-text h2 {
+    margin-bottom: 1.5rem;
+    color: var(--british-racing-green);
+}
+
+.about-text p {
+    margin-bottom: 1rem;
+}
+
+.learn-more {
+    display: inline-block;
+    background-color: var(--sea-green);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    margin-top: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.learn-more:hover {
+    background-color: var(--british-racing-green);
+}
+
+/* Footer */
+.main-footer {
+    background-color: var(--cinereous);
+    color: var(--pale-tea-green);
+    padding: 4rem 0 0;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    gap: 2rem;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background-color: var(--sea-green);
+}
+
+.footer-section p {
+    margin-bottom: 1rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-section ul li a {
+    transition: color 0.3s;
+    position: relative;
+    padding-left: 1.2rem;
+}
+
+.footer-section ul li a::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--sea-green);
+    transition: transform 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: var(--tea-green);
+}
+
+.footer-section ul li a:hover::before {
+    transform: translateX(5px);
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+.social-icons a:hover {
+    background-color: var(--sea-green);
+    transform: translateY(-5px);
+}
+
+.newsletter input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.newsletter input::placeholder {
+    color: var(--pale-tea-green);
+}
+
+.newsletter button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--sea-green);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.newsletter button:hover {
+    background-color: var(--british-racing-green);
+}
+
+.footer-bottom {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 1.5rem 0;
+    text-align: center;
+    position: relative;
+}
+
+.back-to-top-btn {
+    position: absolute;
+    right: 2rem;
+    bottom: 1.5rem;
+    width: 50px;
+    height: 50px;
+    background-color: var(--sea-green);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-to-top-btn:hover {
+    background-color: var(--british-racing-green);
+    transform: translateY(-5px);
+}
+
+/* Mouse Effect */
+.mouse-effect {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(17, 138, 77, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    mix-blend-mode: multiply;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .header-container {
+        flex-wrap: wrap;
+    }
+    
+    .main-nav {
+        order: 3;
+        width: 100%;
+        margin-top: 1rem;
+    }
+    
+    .main-nav ul {
+        justify-content: center;
+    }
+    
+    .hero-carousel {
+        margin-top: 220px;
+    }
+    
+    .about-section {
+        flex-direction: column;
+    }
+    
+    .about-image img {
+        border-radius: 10px 10px 0 0;
+    }
+    
+    .about-text {
+        border-radius: 0 0 10px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-actions {
+        margin-left: auto;
+    }
+    
+    .company-name {
+        font-size: 1.5rem;
+    }
+    
+    .carousel-caption {
+        bottom: 10%;
+        left: 5%;
+        max-width: 90%;
+    }
+    
+    .carousel-caption h2 {
+        font-size: 1.5rem;
+    }
+    
+    .testimonial-card {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .header-container {
+        padding: 0 1rem;
+    }
+    
+    .logo {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .company-name {
+        font-size: 1.3rem;
+    }
+    
+    .main-nav li {
+        margin: 0 0.5rem;
+    }
+    
+    .header-actions button {
+        margin-left: 1rem;
+    }
+    
+    .hero-carousel {
+        margin-top: 180px;
+    }
+    
+    .carousel-caption {
+        position: static;
+        background-color: transparent;
+        color: var(--british-racing-green);
+        padding: 1rem;
+    }
+    
+    .carousel-controls {
+        padding: 0 1rem;
+    }
+    
+    .carousel-controls button {
+        width: 40px;
+        height: 40px;
+    }
+}
