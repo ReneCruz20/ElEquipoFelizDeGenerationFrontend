@@ -5,12 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contáctanos</title>
+    <!--Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <!-- Estilos CSS -->
+     <link rel="stylesheet" href="/src/modules/globales/globales.css" /> <!-- ESTILOS GLOBALES -->
     <link rel="stylesheet" href="contacto.css">
     <link rel="stylesheet" href="../../modules/header/header.css">
     <link rel="stylesheet" href="../../modules/footer/footer.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -44,7 +47,7 @@
                     <h3 class="mt-3">Teléfonos de contacto:</h3>
                 </figure>
                 <div class="contact-info">
-                    
+
                     <p>Desde la República Mexicana: 55 1801-8584, 55 1801-8586</p>
                     <p>Lada sin costo: 800 253 4978</p>
                     <p>Desde el extranjero: +52 (55) 8985-6486</p>
@@ -54,53 +57,38 @@
             </div>
             <div class="col-md-6 col-12 mt-4">
                 <div class="contact-form">
-                    <h2>¿Te interesa conocer más de nosotros?</h2>
-                    <input type="text" placeholder="Nombre(s)" id="nombre" class="form-control">
+                    <h2 class="text-center mb-4">¿Te interesa conocer más de nosotros?</h2>
+                    <input type="text" placeholder="Nombre(s)" id="nombre" class="form-control w-75 mx-auto mb-2">
                     <div id="nombre-error" class="error-message"></div>
-                    <input type="text" placeholder="Apellidos" id="apellidos" class="form-control">
+                    <input type="text" placeholder="Apellidos" id="apellidos" class="form-control w-75 mx-auto mb-2">
                     <div id="apellidos-error" class="error-message"></div>
-                    <input type="email" placeholder="Email" id="email" class="form-control">
+                    <input type="email" placeholder="Email" id="email" class="form-control w-75 mx-auto mb-2">
                     <div id="email-error" class="error-message"></div>
-                    <input type="telefono" placeholder="Teléfono" id="telefono" class="form-control">
+                    <input type="telefono" placeholder="Teléfono" id="telefono" class="form-control w-75 mx-auto mb-2">
                     <div id="telefono-error" class="error-message"></div>
-                    <textarea placeholder="Dudas o sugerencias:" id="dudas" class="form-control"></textarea>
-                    <div id="dudas-error" class="error-message"></div>
+                    <textarea placeholder="Dudas o sugerencias:" id="dudas"
+                        class="form-control w-75 mx-auto mb-2"></textarea>
+                    <div id="dudas-error" class="error-message mb-3"></div>
                     <!-- Añado id para boton y elimino onclick para usar addEventListener-->
-                    <button id="btnEnviar" class="btn btn-primary w-10">Enviar</button>
-                    <div id="mesaje-formulario" class="text-left fw-bold mt-2"></div>
+                    <button id="btnEnviar" class="btn btn-primary d-block mx-auto">Enviar</button>
+                    <div id="mesaje-formulario" class="fw-bold mt-3"></div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- contenido de contacto -->
-
-    <!-- footer -->
-    <footer id="footer" class="main-footer"></footer>
-
-
 
     <!-- Footer -->
-    <!-- Solo lo puse para probar, está hasta arriba en el live porque no esta dentro de ningun container (div/section) que lo mantenga abajo   -->
-
+    <footer id="footer" class="main-footer"></footer>
+    <!-- libreria Bootstrap para correos emailsjs -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!--Bootstrap-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
         crossorigin="anonymous"></script>
-
-        <!-- libreria para correos emailsjs -->
-         
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-
-
-
-
-
-    <script type="module" src="../contacto/contacto.js"></script>
-    <script type="module" src="../../modules/footer/footer.js"></script>
-    <script type="module" src="../../modules/header/header.js"></script>
-
-
-
+      <!--JavaScript src-->
+    <script type="module" src="contacto.js"></script>
+    <script type="module" src="/src/modules/header/header.js"></script>
+    <script type="module" src="/src/modules/footer/footer.js"></script>
 </body>
 
 </html>
