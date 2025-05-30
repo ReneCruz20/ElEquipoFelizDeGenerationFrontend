@@ -1,9 +1,4 @@
 
-
-
-
-
-
 /* Imagen Invernadero */
 #invernadero {
   width: 100%;
@@ -14,6 +9,7 @@
 /*Sobre Nosotros */
 .titulo-nosotros{
   text-align: center;
+  font-size: 25px;
 }
 
 .section-nosotros { /*antes section1 */
