@@ -1,9 +1,9 @@
 
 
-const insertFooter = (footer)=>{
+const insertFooter = (footer) => {
 
-    
-    footer.innerHTML = `
+
+  footer.innerHTML = `
     <div class="footer-container" class="main-footer"> <!-- class="flex" -->
       <div class="footer-section"> <!-- class="column" -->
 
@@ -24,11 +24,10 @@ const insertFooter = (footer)=>{
       <div class="footer-section"> <!-- class="column" -->
         <h3>Enlaces Rápidos</h3>
         <ul>
-          <li><a href="#">Inicio</a></li>
-          <li><a href="#">Productos</a></li>
-          <li><a href="#">Ofertas</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Contacto</a></li>
+          <li><a href="/index.html">Inicio</a></li>
+          <li><a href="/src/pages/productos/productos.html">Productos</a></li>
+          <li><a href="/src/pages/productos/productos.html">Ofertas</a></li>
+          <li><a href="/src/pages/contacto/contacto.html">Contacto</a></li>
         </ul>
       </div>
       <br>
@@ -53,7 +52,26 @@ const insertFooter = (footer)=>{
   
     `;
 
+  // Back to Top Button
+  const backToTopBtn = document.getElementById('back-to-top');
+
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 300) {
+      backToTopBtn.style.display = 'flex';
+    } else {
+      backToTopBtn.style.display = 'none';
+    }
+  });
+
+  backToTopBtn.addEventListener('click', function () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
 }
 
 
-export{insertFooter};
+
+export { insertFooter };

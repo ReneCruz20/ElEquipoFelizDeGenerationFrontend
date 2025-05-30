@@ -8,7 +8,7 @@ const insertHeader = () =>{
     header.innerHTML = 
     `<nav class="navbar navbar-expand-lg" style="background-color: #118A4D">
       <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center" href="#">
+        <a class="navbar-brand d-flex align-items-center" href="/index.html">
           <img src="/resources/images/navBar/logo.png" alt="Logo HTA" width="60" height="60"
             class="ms-4 rounded-circle">
           <span class="d-none d-sm-inline ms-3">HTA Greenhouses & Supplies</span>
@@ -24,9 +24,7 @@ const insertHeader = () =>{
               <a class="nav-link" href="/index.html">Inicio</a>
             </li>
 
-             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/src/pages/nosotros/nosotros.html">Nosotros</a>
-            </li>
+            
         
             <li class="nav-item dropdown px-3">
               <a
@@ -40,12 +38,18 @@ const insertHeader = () =>{
                 Productos
               </a>
               <ul class="dropdown-menu bg-success" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item text-light" href="#">Productos para invernadero</a></li>
-                <li><a class="dropdown-item text-light" href="#">Mallas sombra</a></li>
-                <li><a class="dropdown-item text-light" href="#">Mallas decorativas</a></li>
-                <li><a class="dropdown-item text-light" href="#">Accesorios hidroponia</a></li>
+                <li><a class="dropdown-item text-light" href="/src/pages/productos/productos.html">Productos para invernadero</a></li>
+                <li><a class="dropdown-item text-light" href="/src/pages/productos/productos.html">Mallas sombra</a></li>
+                <li><a class="dropdown-item text-light" href="/src/pages/productos/productos.html">Mallas decorativas</a></li>
+                <li><a class="dropdown-item text-light" href="/src/pages/productos/productos.html">Accesorios hidroponia</a></li>
               </ul>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/src/pages/nosotros/nosotros.html">Nosotros</a>
+            </li>
+
+            
             <li class="nav-item">
               <a class="nav-link" href="/src/pages/contacto/contacto.html">Contacto</a>
             </li>
