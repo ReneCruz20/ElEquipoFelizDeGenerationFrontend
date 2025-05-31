@@ -4,6 +4,9 @@
   font-family: 'Merriweather';
   font-size: 180%;
   color: #F5F5DC;
+  flex-shrink: 1;
+  flex-grow: 1;
+  min-width: 0;
 }
 
 .navbar-collapse {
@@ -19,7 +22,7 @@
 
 @media (max-width: 576px) {
   .navbar-brand {
-    font-size: 120%;
+    font-size: 110%;
 
   }
   .nav-link {
@@ -61,7 +64,23 @@
 
 .navbar-brand span {
   white-space: nowrap;
-  max-width: 180px;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 100%; 
+  display: inline-block;
+}
+
+
+@media (max-width: 576px) {
+  .navbar-brand span.d-sm-inline {
+    display: none !important;
+  }
+
+  .navbar-brand span.d-sm-none {
+    display: inline !important;
+  }
+
+  .navbar-brand {
+    font-size: 1rem;
+  }
 }
