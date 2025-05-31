@@ -25,7 +25,6 @@ const insertHeader = () =>{
             </li>
 
             
-        
             <li class="nav-item dropdown px-3">
               <a
                 class="nav-link dropdown-toggle"
@@ -49,25 +48,28 @@ const insertHeader = () =>{
               <a class="nav-link" aria-current="page" href="/src/pages/nosotros/nosotros.html">Nosotros</a>
             </li>
 
-            
             <li class="nav-item">
               <a class="nav-link" href="/src/pages/contacto/contacto.html">Contacto</a>
             </li>
              <li class="nav-item">
               <a class="nav-link" href="/src/pages/formulario/formulario.html">Regístrate</a>
             </li>
+             <li class="nav-item d-flex align-items-center px-2">
+              <a href="/busqueda">
+                <img src="/resources/images/navBar/lupa.png" alt="Buscar" width="32" height="32">
+              </a>
+            </li>
+            <li class="nav-item d-flex align-items-center px-2">
+              <a href="/carrito">
+                <img src="/resources/images/navBar/carrito.png" alt="Carrito" width="32" height="32">
+              </a>
+            </li>
           </ul>
         </div>
-        <span class="navbar-text d-flex align-items-center me-4">
-        <a href="/carrito">
-          <img src="/resources/images/navBar/carrito.png" alt="Logo HTA" width="40" height="40" class="me-2" href="#">
-          </a>
-          <a href="/busqueda">
-          <img src="/resources/images/navBar/lupa.png" alt="Logo HTA" width="40" height="40">
-          </a>
-        </span>
       </div>
     </nav>`;
+
+         
 }
 insertHeader();
 

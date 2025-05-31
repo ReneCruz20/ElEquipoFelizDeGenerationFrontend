@@ -6,10 +6,36 @@
   color: #F5F5DC;
 }
 
+.navbar-collapse {
+  flex-wrap: wrap;
+}
+
 .nav-link{
   font-family: 'Nunito Sans';
   font-size: 130%;
   color: #F5F5DC;
+  padding: 0.5rem 1rem;
+}
+
+@media (max-width: 576px) {
+  .navbar-brand {
+    font-size: 120%;
+
+  }
+  .nav-link {
+    font-size: 110%;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-nav {
+    margin-right: 0.5rem !important;
+  }
+}
+
+.navbar-text {
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 /* Menu productos */
@@ -21,4 +47,21 @@
 .dropdown-menu.bg-success .dropdown-item:hover {
   background-color: #0d6e3f !important; /* color más oscuro al pasar el mouse */
   color: #fff !important;
+}
+
+/* Iconos*/
+
+@media (max-width: 576px) {
+  .navbar img {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+
+.navbar-brand span {
+  white-space: nowrap;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
