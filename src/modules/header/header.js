@@ -51,17 +51,23 @@ const insertHeader = () =>{
             <li class="nav-item">
               <a class="nav-link" href="/src/pages/contacto/contacto.html">Contacto</a>
             </li>
-             <li class="nav-item">
-              <a class="nav-link" href="/src/pages/formulario/formulario.html">Regístrate</a>
+
+             <li class="nav-item d-flex align-items-center px-2 position-relative">
+              <button class="btn p-0 border-0 bg-transparent" id="searchToggle">
+                  <img src="/resources/images/navBar/lupa.png" alt="Icono de Buscar" width="32" height="32">
+              </button>
+              <input type="text" id="navbarSearch" class="form-control search-input" placeholder="Buscar..." />
+              <div id="searchResults" class="search-results"></div>
             </li>
-             <li class="nav-item d-flex align-items-center px-2">
-              <a href="/busqueda">
-                <img src="/resources/images/navBar/lupa.png" alt="Buscar" width="32" height="32">
+
+            <li class="nav-item d-flex align-items-center px-2">
+              <a href="/src/pages/carrito/carrito.html">
+                <img src="/resources/images/navBar/carrito.png" alt="Icono de Carrito" width="32" height="32">
               </a>
             </li>
             <li class="nav-item d-flex align-items-center px-2">
-              <a href="/carrito">
-                <img src="/resources/images/navBar/carrito.png" alt="Carrito" width="32" height="32">
+              <a href="/src/pages/perfilDeUsuario/perfilDeUsurario.html">
+                <img src="/resources/images/navBar/user.png" alt="Icono de Usuario" width="32" height="32">
               </a>
             </li>
           </ul>
@@ -74,3 +80,70 @@ const insertHeader = () =>{
 insertHeader();
 
 
+document.addEventListener('DOMContentLoaded', () => {
+  const searchToggle = document.getElementById('searchToggle');
+  const searchInput = document.getElementById('navbarSearch');
+  const resultsContainer = document.getElementById('searchResults');
+
+  const searchLinks = {
+    "Invernadero": "/src/pages/productos/productos.html#invernadero",
+    "Malla sombra": "/src/pages/productos/productos.html#malla-sombra",
+    "Malla decorativa": "/src/pages/productos/productos.html#malla-decorativa",
+    "Accesorios hidroponía": "/src/pages/productos/productos.html#accesorios-hidroponia",
+    "Fertilizantes": "/src/pages/productos/productos.html#fertilizantes",
+    "Sustratos": "/src/pages/productos/productos.html#sustratos",
+    "Semillas": "/src/pages/productos/productos.html#semillas"
+  };
+
+  searchToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    searchInput.classList.toggle('show');
+
+    if (searchInput.classList.contains('show')) {
+      searchInput.focus();
+    } else {
+      searchInput.value = '';
+      resultsContainer.classList.remove('show');
+    }
+  });
+
+  searchInput.addEventListener('click', (e) => e.stopPropagation());
+
+  document.addEventListener('click', () => {
+    searchInput.classList.remove('show');
+    searchInput.value = '';
+    resultsContainer.classList.remove('show');
+  });
+
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase().trim();
+    resultsContainer.innerHTML = '';
+
+    if (query === '') {
+      resultsContainer.classList.remove('show');
+      return;
+    }
+
+    const filtered = Object.keys(searchLinks).filter(item =>
+      item.toLowerCase().includes(query)
+    );
+
+    if (filtered.length > 0) {
+      resultsContainer.classList.add('show');
+      resultsContainer.innerHTML = filtered
+        .map(item => `<li data-url="${searchLinks[item]}">${item}</li>`)
+        .join('');
+    } else {
+      resultsContainer.classList.remove('show');
+    }
+  });
+
+  resultsContainer.addEventListener('click', (e) => {
+    if (e.target.tagName === 'LI') {
+      const url = e.target.getAttribute('data-url');
+      if (url) {
+        window.location.href = url;
+      }
+    }
+  });
+});
