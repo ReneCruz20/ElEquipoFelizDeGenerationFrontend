@@ -4,7 +4,6 @@
 
 /* carrusel */
 .hero-carousel {
-    margin-top: 180px;
     position: relative;
     overflow: hidden;
     height: 500px; /* Altura fija para el contenedor */
@@ -324,9 +323,7 @@
         justify-content: center;
     }
     
-    .hero-carousel {
-        margin-top: 220px;
-    }
+    
     
     .about-section {
         flex-direction: column;
@@ -387,14 +384,10 @@
         margin-left: 1rem;
     }
     
-    .hero-carousel {
-        margin-top: 180px;
-    }
+    
     
     .carousel-caption {
-        position: static;
-        background-color: transparent;
-        color: var(--british-racing-green);
+        color: var(--pale-tea-green);
         padding: 1rem;
     }
     
