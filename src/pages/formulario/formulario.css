@@ -21,3 +21,22 @@ h1, h2, h3 {
     font-family: 'Merriweather', serif;
     color: var(--british-racing-green);
 }
+
+
+form {
+    background: var(--tea-green);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.alert {
+    margin-bottom: 1rem;
+}
+
+
+p{
+    font-family: 'Work Sans';
+    color: var(--british-racing-green);
+    font-size: 100%;
+}
