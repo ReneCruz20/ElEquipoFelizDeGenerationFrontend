@@ -52,3 +52,66 @@
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 1.5rem;
     }
+
+
+    /* Títulos de sección dentro del formulario */
+.section-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: #198754; /* Verde Bootstrap */
+  border-bottom: 1px solid #19875433;
+  padding-bottom: 4px;
+}
+
+/* Inputs y selects personalizados */
+#formAgregarProducto .form-control,
+#formAgregarProducto .form-select {
+  border-radius: 0.5rem;
+  box-shadow: none;
+  border: 1px solid #ced4da;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#formAgregarProducto .form-control:focus,
+#formAgregarProducto .form-select:focus {
+  border-color: #198754;
+  box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+}
+
+/* Botones del modal */
+#formAgregarProducto .modal-footer .btn-primary {
+  background-color: #198754;
+  border-color: #198754;
+  border-radius: 0.5rem;
+}
+
+#formAgregarProducto .modal-footer .btn-secondary {
+  border-radius: 0.5rem;
+}
+
+/* Vista previa de imagen */
+.image-preview {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.image-preview img {
+  max-height: 200px;
+  border-radius: 10px;
+  border: 1px solid #dee2e6;
+  padding: 5px;
+}
+
+/* Modal general */
+#productoModal .modal-content {
+  border-radius: 1rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+}
+
+#productoModal .modal-header,
+#productoModal .modal-footer {
+  border: none;
+}
