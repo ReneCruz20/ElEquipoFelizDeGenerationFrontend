@@ -47,42 +47,47 @@ document.addEventListener("DOMContentLoaded", () => {
   descuentoInput.addEventListener("input", calcularPrecioFinal);
 
   // Crear tarjeta producto con botones editar y eliminar
-  function crearTarjeta(producto) {
-    const tarjeta = document.createElement("div");
-    tarjeta.className = "product-card card p-3 mb-3";
-    if (producto.stock < 50) tarjeta.classList.add("low-stock");
+function crearTarjeta(producto) {
+  const tarjeta = document.createElement("div");
+  tarjeta.className = "product-card card p-3 mb-3";
+  if (producto.stock < 50) tarjeta.classList.add("low-stock");
 
-    tarjeta.innerHTML = `
-      <img src="${producto.imagen}" alt="${producto.nombre}" class="img-fluid mb-2" style="max-height: 150px; object-fit: contain;">
-      <p><strong>Código:</strong> ${producto.codigo}</p>
-      <p><strong>Nombre:</strong> ${producto.nombre}</p>
-      <p><strong>Descripción:</strong> ${producto.descripcion}</p>
-      <p>
-        <strong>Precio:</strong> <span class="text-success fw-bold">$${producto.precio.toFixed(2)}</span>
-        ${producto.precioOriginal && producto.precioOriginal > producto.precio
-          ? `<br><small class="text-muted text-decoration-line-through">$${producto.precioOriginal.toFixed(2)}</small>`
-          : ""
-        }
-      </p>
-      <p class="stock-info ${producto.stock < 50 ? 'text-danger' : ''}">Disponibles: ${producto.stock}</p>
-      <p><strong>Categoría:</strong> ${producto.categoria || '-'}</p>
-      <button class="btn btn-outline-primary btn-sm me-2 editar-btn">Editar</button>
-      <br></br>
-      <button class="btn btn-outline-danger btn-sm eliminar-btn">Eliminar</button>
-    `;
+  // Asegurar que los precios sean números
+  const precio = parseFloat(producto.precio);
+  const precioOriginal = parseFloat(producto.precioOriginal);
 
-    tarjeta.querySelector(".eliminar-btn").addEventListener("click", () => {
-      if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
-        eliminarProducto(producto.codigo);
+  tarjeta.innerHTML = `
+    <img src="${producto.imagen}" alt="${producto.nombre}" class="img-fluid mb-2" style="max-height: 150px; object-fit: contain;">
+    <p><strong>Código:</strong> ${producto.codigo}</p>
+    <p><strong>Nombre:</strong> ${producto.nombre}</p>
+    <p><strong>Descripción:</strong> ${producto.descripcion}</p>
+    <p>
+      <strong>Precio:</strong> <span class="text-success fw-bold">$${!isNaN(precio) ? precio.toFixed(2) : 'N/A'}</span>
+      ${!isNaN(precioOriginal) && precioOriginal > precio
+        ? `<br><small class="text-muted text-decoration-line-through">$${precioOriginal.toFixed(2)}</small>`
+        : ""
       }
-    });
+    </p>
+    <p class="stock-info ${producto.stock < 50 ? 'text-danger' : ''}">Disponibles: ${producto.stock}</p>
+    <p><strong>Categoría:</strong> ${producto.categoria || '-'}</p>
+    <button class="btn btn-outline-primary btn-sm me-2 editar-btn">Editar</button>
+    <br></br>
+    <button class="btn btn-outline-danger btn-sm eliminar-btn">Eliminar</button>
+  `;
 
-    tarjeta.querySelector(".editar-btn").addEventListener("click", () => {
-      abrirEditarProducto(producto);
-    });
+  tarjeta.querySelector(".eliminar-btn").addEventListener("click", () => {
+    if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
+      eliminarProducto(producto.codigo);
+    }
+  });
 
-    return tarjeta;
-  }
+  tarjeta.querySelector(".editar-btn").addEventListener("click", () => {
+    abrirEditarProducto(producto);
+  });
+
+  return tarjeta;
+}
+
 
   // Renderizar productos
   function renderizarProductos() {
@@ -170,9 +175,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const codigo = form.codigo.value.trim();
     const nombre = form.nombre.value.trim();
     const descripcion = form.descripcion.value.trim();
-    const precio = parseFloat(form.precio.value);
-    const descuento = parseFloat(form.descuento.value);
-    const precioOriginal = precio / (1 - (isNaN(descuento) ? 0 : descuento) / 100);
+const precioOriginal = parseFloat(form.precio.value); // Este es el campo que el usuario llena
+const descuento = parseFloat(form.descuento.value);
+
+const precio = !isNaN(descuento) && descuento >= 0 && descuento <= 100
+  ? precioOriginal * (1 - descuento / 100)
+  : precioOriginal;
+
     const stock = parseInt(form.stock.value);
     const imagen = form.imagen.value.trim();
     const categoria = form.categoria.value.trim();
@@ -193,16 +202,20 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    const nuevoProducto = {
-      codigo,
-      nombre,
-      descripcion,
-      precio,
-      precioOriginal,
-      stock,
-      imagen,
-      categoria
-    };
+  
+
+const nuevoProducto = {
+  codigo,
+  nombre,
+  descripcion,
+  precio,             // Precio final con descuento
+  precioOriginal,    
+  descuento,         
+  stock,
+  imagen,
+  categoria
+};
+
 
     if (editando) {
       // Actualizar producto existente
