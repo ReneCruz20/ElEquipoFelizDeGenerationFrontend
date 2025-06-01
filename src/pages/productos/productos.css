@@ -186,7 +186,7 @@ body{
   right: 0;
   top: 0;
   transform-origin: center;
-  trsnsform: scale(1) translateZ(0);
+  transform: scale(1) translateZ(0);
   transition: 
     filter 200ms linear,
     transform 200ms linear;
@@ -308,4 +308,40 @@ body{
   flex-wrap: wrap;
 }
 
+
+/* ------------------------------ */
+/* Prueba */
+
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;              /* un poco más de espacio entre tarjetas */
+  padding: 24px;          /* más espacio interior para que no se pegue */
+}
+
+.product-card {
+  background-color: #ffffff;
+  border: 1px solid #ddd; /* borde un poco más suave que #ccc */
+  border-radius: 16px;    /* un poco más redondeado */
+  padding: 20px;          /* más espacio interior */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* sombra más suave y profunda */
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;        /* indicador de que es interactivo */
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* sombra más pronunciada al hover */
+}
+
+.product-card img {
+  max-width: 100%;
+  height: 160px;           /* un poco más alto para mejor presencia */
+  object-fit: contain;
+  margin-bottom: 16px;     /* más espacio debajo de la imagen */
+  border-radius: 12px;     /* bordes redondeados a la imagen */
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05); /* sutil sombra interna */
+}
 

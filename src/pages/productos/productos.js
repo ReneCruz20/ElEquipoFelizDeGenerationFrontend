@@ -166,3 +166,58 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarProductos();
   cargarOfertas();
 });
+
+
+
+
+/* Codigo importante desempaqueta el archivo JSON del localstorage */
+
+/* Para que funcione esta parte del codigo, primero tienen que cargar productos de la pagina productosInventario
+  1.- Ingresan a la pagina de productosInventario.
+  2.- Le dan en añadir productos, añaden sus 10 
+  3.- Se van a las herramientas de desarrollador, despues se van al apartado de aplications
+  4.- Y seleccionan local storage, les debe guardar un objeto llamado Productos. 
+  5.- Lo revisan que tenga el formato de un JSON y listo
+  6.- Ahora cambian en su VS a la pagina de productos y abren un nuevo servidor.
+  
+
+*/
+
+
+/* Prueba productos inventario */
+
+
+const productos = JSON.parse(localStorage.getItem("productos")) || [];
+const contenedor = document.getElementById("product-list");
+
+contenedor.innerHTML = ""; // Limpiar contenido previo por si acaso
+
+productos.forEach(({ imagen, nombre, descripcion, precio, precioOriginal }) => {
+  // Validar datos mínimos
+  if (!nombre || !precio) return;
+
+  const card = document.createElement("div");
+  card.className = "product-card";
+
+  // Construcción del contenido HTML con template literals más legible
+  card.innerHTML = `
+    <img src="${imagen || 'https://via.placeholder.com/150'}" alt="${nombre}" />
+    <p><strong>${nombre}</strong></p>
+    <p>${descripcion || "Sin descripción disponible."}</p>
+    <p>
+      <strong>Precio:</strong> 
+      <span class="text-success">$${precio.toFixed(2)}</span>
+      ${
+        precioOriginal && precioOriginal > precio
+          ? `<br><span class="text-muted text-decoration-line-through">$${precioOriginal.toFixed(2)}</span>`
+          : ""
+      }
+    </p>
+  `;
+
+  contenedor.appendChild(card);
+});
+
+
+
+/* ------------------------------------------ */
