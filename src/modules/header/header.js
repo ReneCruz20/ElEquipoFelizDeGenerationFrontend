@@ -7,7 +7,7 @@ const insertHeader = () => {
     
     const header = document.getElementById("navBar");
     header.innerHTML = 
-    `<nav class="navbar navbar-expand-lg" style="background-color: #118A4D">
+    `<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #118A4D">
       <div class="container-fluid">
         <div class="navbar-brand d-flex align-items-center">
           <a href="/index.html">
@@ -99,7 +99,18 @@ const insertHeader = () => {
     </nav>`;
 };
 
+adjustBodyPadding();
+window.addEventListener('resize', adjustBodyPadding);
+
 insertHeader();
+
+function adjustBodyPadding() {
+    const header = document.getElementById('navBar');
+    if (header) {
+        const headerHeight = header.offsetHeight;
+        document.body.style.paddingTop = `${headerHeight}px`;
+    }
+}
 
 // busqueda
 function setupSearch(toggleId, inputId, resultsId) {
