@@ -1,0 +1,210 @@
+/**********************************************
+  ESTILOS BASE Y RESET (complementando Bootstrap)
+***********************************************/
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+a {
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/**********************************************
+  COMPONENTES PRINCIPALES
+***********************************************/
+
+/* Header */
+.user-header {
+  background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Navegación */
+.user-nav .nav-link {
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.user-nav .nav-link.active {
+  font-weight: 600;
+}
+
+.user-nav .nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background-color: #1abc9c;
+}
+
+/* Secciones */
+.user-section {
+  animation: fadeIn 0.5s ease;
+}
+
+/**********************************************
+  SECCIÓN DE PERFIL
+***********************************************/
+.profile-card {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border: none;
+}
+
+.profile-card .card-header {
+  background-color: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.form-control:focus {
+  border-color: #1abc9c;
+  box-shadow: 0 0 0 0.25rem rgba(26, 188, 156, 0.25);
+}
+
+#guardar-perfil {
+  transition: transform 0.2s ease;
+}
+
+#guardar-perfil:hover {
+  transform: translateY(-2px);
+}
+
+/**********************************************
+  SECCIÓN DE DIRECCIONES
+***********************************************/
+.address-card {
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.address-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.address-card .badge {
+  font-size: 0.75em;
+}
+
+.address-actions .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+}
+
+/**********************************************
+  SECCIÓN DE PEDIDOS
+***********************************************/
+.order-card {
+  border-left: 4px solid #1abc9c;
+  transition: all 0.3s ease;
+}
+
+.order-card:hover {
+  background-color: #f8f9fa;
+}
+
+.order-status {
+  font-size: 0.8rem;
+  padding: 0.35rem 0.7rem;
+}
+
+.status-delivered {
+  background-color: #2ecc71;
+}
+
+.status-shipped {
+  background-color: #f39c12;
+}
+
+.status-processing {
+  background-color: #3498db;
+}
+
+.status-cancelled {
+  background-color: #e74c3c;
+}
+
+.order-products img {
+  border: 1px solid #dee2e6;
+  transition: transform 0.3s ease;
+}
+
+.order-products img:hover {
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+/**********************************************
+  MODALES
+***********************************************/
+.address-modal .modal-header {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #1abc9c;
+}
+
+/**********************************************
+  EFECTOS Y ANIMACIONES
+***********************************************/
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/**********************************************
+  MEDIA QUERIES (Responsive)
+***********************************************/
+@media (max-width: 992px) {
+  .user-avatar img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .user-nav .nav-link {
+    padding: 0.5rem;
+    text-align: center;
+  }
+  
+  .user-nav .nav-link i {
+    display: block;
+    margin: 0 auto 0.25rem;
+  }
+  
+  .address-card, .order-card {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .user-avatar img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .form-section {
+    padding: 1rem;
+  }
+}
