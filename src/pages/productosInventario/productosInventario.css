@@ -115,3 +115,27 @@
 #productoModal .modal-footer {
   border: none;
 }
+
+
+/* Responsividad */
+
+    @media (max-width: 768px) {
+      .contenedor-inventario {
+        flex-direction: column;
+      }
+
+      .sidebar-filtros {
+        width: 100%;
+        margin-bottom: 1.5rem;
+      }
+
+      .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+      }
+    }
+    /* Ocultar la sidebar en pantallas pequeñas */
+@media (max-width: 767px) {
+  .sidebar-filtros {
+    display: none;
+  }
+}

@@ -185,39 +185,61 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* Prueba productos inventario */
-
-
 const productos = JSON.parse(localStorage.getItem("productos")) || [];
 const contenedor = document.getElementById("product-list");
 
-contenedor.innerHTML = ""; // Limpiar contenido previo por si acaso
+contenedor.innerHTML = "";
 
-productos.forEach(({ imagen, nombre, descripcion, precio, precioOriginal }) => {
-  // Validar datos mínimos
+productos.forEach(producto => {
+  const { imagen, nombre, descripcion, precio, precioOriginal } = producto;
   if (!nombre || !precio) return;
 
   const card = document.createElement("div");
-  card.className = "product-card";
+  card.className = "producto-card";
 
-  // Construcción del contenido HTML con template literals más legible
   card.innerHTML = `
-    <img src="${imagen || 'https://via.placeholder.com/150'}" alt="${nombre}" />
-    <p><strong>${nombre}</strong></p>
-    <p>${descripcion || "Sin descripción disponible."}</p>
-    <p>
-      <strong>Precio:</strong> 
-      <span class="text-success">$${precio.toFixed(2)}</span>
+    <img src="${imagen || 'https://via.placeholder.com/150'}" alt="${nombre}" class="producto-img" />
+    <h3 class="producto-nombre">${nombre}</h3>
+    <p class="producto-descripcion">${descripcion || "Sin descripción disponible."}</p>
+    <p class="producto-precio">
+      <span class="precio-actual">$${precio.toFixed(2)}</span>
       ${
         precioOriginal && precioOriginal > precio
-          ? `<br><span class="text-muted text-decoration-line-through">$${precioOriginal.toFixed(2)}</span>`
+          ? `<span class="precio-original">$${precioOriginal.toFixed(2)}</span>`
           : ""
       }
     </p>
+    <button class="btn-agregar-carrito">Agregar al carrito</button>
   `;
 
+  // Aquí, *NO* extraemos precio del DOM, usamos directamente la variable `precio` del objeto
+  const boton = card.querySelector(".btn-agregar-carrito");
+  boton.addEventListener("click", () => {
+    const nuevoProducto = {
+      nombre,
+      precio,  // precio directo desde el objeto, seguro que es number
+      imagen,
+      cantidad: 1,
+    };
+
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const existente = carrito.find(p => p.nombre === nombre);
+
+    if (existente) {
+      existente.cantidad += 1;
+    } else {
+      carrito.push(nuevoProducto);
+    }
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    alert("Producto añadido al carrito ✅");
+  });
+
   contenedor.appendChild(card);
+
+  console.log(precio);
 });
 
 
 
-/* ------------------------------------------ */
+/* ------------------------------------------  */

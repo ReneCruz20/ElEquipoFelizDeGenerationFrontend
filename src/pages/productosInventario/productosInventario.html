@@ -11,175 +11,148 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet"/>
-
-  
   <link rel="stylesheet" href="../../modules/footer/footer.css"/>
   <link rel="stylesheet" href="productosInventario.css"/>
-  
 
 
 </head>
 <body>
-
-  <!-- Barra de navegación -->
   <header id="navBar"></header>
 
-  <!-- Contenido principal -->
-  <section class="contenedor-inventario">
+  <main class="container-fluid mt-4">
+    <section class="contenedor-inventario d-flex flex-wrap gap-3">
 
-    <!-- Sidebar de Filtros -->
-    <aside class="sidebar-filtros">
-      <img class="img-fluid mb-3" src="https://cdn-icons-png.flaticon.com/512/6327/6327423.png" alt="Invernadero"/>
-      <h2 class="h5">Filtros</h2>
-      <div id="filtros-container">
-        <!-- Agregar aquí los filtros dinámicos o estáticos -->
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="bajoStock">
-          <label class="form-check-label" for="bajoStock"> Solo stock bajo </label>
-
+      <!-- Sidebar de Filtros -->
+      <aside class="sidebar-filtros">
+        <img class="img-fluid mb-3" src="https://cdn-icons-png.flaticon.com/512/6327/6327423.png" alt="Invernadero"/>
+        <h2 class="h5">Filtros</h2>
+        <div id="filtros-container">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="bajoStock">
+            <label class="form-check-label" for="bajoStock">Solo stock bajo</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="descuentos">
+            <label class="form-check-label" for="descuentos">Descuentos</label>
+          </div>
         </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="descuentos">
-          <label class="form-check-label" for="descuentos"> Descuentos </label>
+      </aside>
+
+      <!-- Productos -->
+      <section class="productos-inventario flex-grow-1">
+
+        <!-- Buscador y categoría -->
+        <div class="mb-3 d-flex flex-wrap gap-3">
+          <input type="text" id="buscador" class="form-control flex-grow-1" placeholder="Buscar producto por código o nombre...">
+          <select id="filtroCategoria" class="form-select" style="min-width: 200px;">
+            <option value="">Todas las categorías</option>
+            <option value="Mallas decorativas">Mallas decorativas</option>
+            <option value="Malla sombra">Malla sombra</option>
+            <option value="Accesorios Hidroponia">Accesorios Hidroponia</option>
+            <option value="Productos para invernadero">Productos para invernadero</option>
+          </select>
         </div>
 
-      </div>
-    </aside>
-
-
-
-    
-
-
-    <!-- Listado de Productos -->
-    <main class="productos-inventario">
-
-
-<!-- Filtros -->
-
-<div class="mb-3 d-flex gap-3">
-  <input type="text" id="buscador" class="form-control" placeholder="Buscar producto por código o nombre...">
-  
-  <select id="filtroCategoria" class="form-select" style="max-width: 200px;">
-    <option value="">Todas las categorías</option>
-    <option value="Mallas decorativas">Mallas decorativas</option>
-    <option value="Malla sombra">Malla sombra</option>
-    <option value="Accesorios Hidroponia">Accesorios Hidroponia</option>
-    <option value="Productos para invernadero">Productos para invernadero</option>
-    <!-- Añade más categorías según necesites -->
-  </select>
-</div>
-
-
-
-
-
-      <!-- Formulario para agregar productos -->
-<!-- Formulario para agregar productos -->
-<!-- Botón para abrir el modal -->
-<div class="mb-4">
-  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#productoModal">
-    Agregar Producto
-  </button>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="productoModal" tabindex="-1" aria-labelledby="productoModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <form id="formAgregarProducto">
-        <div class="modal-header">
-          <h5 class="modal-title" id="productoModalLabel">Agregar/Editar Producto</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        <!-- Botón Modal -->
+        <div class="mb-4">
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#productoModal">
+            Agregar Producto
+          </button>
         </div>
-        <div class="modal-body">
 
-          <!-- Información básica -->
-          <div class="section-title">Información Básica</div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="nombre" class="form-label">Nombre del Producto</label>
-              <input type="text" class="form-control" id="nombre" name="nombre" required>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="codigo" class="form-label">Código</label>
-              <input type="text" class="form-control" id="codigo" name="codigo" required>
-            </div>
-            <div class="col-12 mb-3">
-              <label for="descripcion" class="form-label">Descripción</label>
-              <textarea class="form-control" id="descripcion" name="descripcion" rows="2" required></textarea>
+        <!-- Modal -->
+        <div class="modal fade" id="productoModal" tabindex="-1" aria-labelledby="productoModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+              <form id="formAgregarProducto">
+                <div class="modal-header">
+                  <h5 class="modal-title">Agregar/Editar Producto</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                  <!-- Información básica -->
+                  <div class="section-title">Información Básica</div>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="nombre" class="form-label">Nombre del Producto</label>
+                      <input type="text" class="form-control" id="nombre" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="codigo" class="form-label">Código</label>
+                      <input type="text" class="form-control" id="codigo" required>
+                    </div>
+                    <div class="col-12 mb-3">
+                      <label for="descripcion" class="form-label">Descripción</label>
+                      <textarea class="form-control" id="descripcion" rows="2" required></textarea>
+                    </div>
+                  </div>
+
+                  <!-- Imagen -->
+                  <div class="section-title">Media</div>
+                  <div class="row">
+                    <div class="col-12 mb-3">
+                      <label for="imagen" class="form-label">URL de Imagen</label>
+                      <input type="url" class="form-control" id="imagen" required>
+                    </div>
+                    <div class="col-12 image-preview">
+                      <img id="previewImage" class="d-none img-fluid" alt="Vista previa"/>
+                    </div>
+                  </div>
+
+                  <!-- Precios -->
+                  <div class="section-title">Información del Precio</div>
+                  <div class="row">
+                    <div class="col-md-4 mb-3">
+                      <label for="precio" class="form-label">Precio</label>
+                      <input type="number" class="form-control" id="precio" step="0.01" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label for="descuento" class="form-label">Descuento (%)</label>
+                      <input type="number" class="form-control" id="descuento" min="0" max="100">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label class="form-label">Precio Final</label>
+                      <input type="text" class="form-control" id="precioFinal" readonly>
+                    </div>
+                  </div>
+
+                  <!-- Inventario -->
+                  <div class="section-title">Inventario</div>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="stock" class="form-label">Stock</label>
+                      <input type="number" class="form-control" id="stock" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="categoria" class="form-label">Categoría</label>
+                      <select class="form-select" id="categoria" required>
+                        <option value="">Selecciona una categoría</option>
+                        <option value="Mallas decorativas">Mallas decorativas</option>
+                        <option value="Malla sombra">Malla sombra</option>
+                        <option value="Accesorios Hidroponia">Accesorios Hidroponia</option>
+                        <option value="Productos para invernadero">Productos para invernadero</option>
+                      </select>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+              </form>
             </div>
           </div>
-
-          <!-- Media -->
-          <div class="section-title">Media</div>
-          <div class="row">
-            <div class="col-12 mb-3">
-              <label for="imagen" class="form-label">URL de Imagen</label>
-              <input type="url" class="form-control" id="imagen" name="imagen" required>
-            </div>
-            <div class="col-12 image-preview">
-              <img id="previewImage" src="" alt="Vista previa" class="d-none img-fluid" />
-            </div>
-          </div>
-
-          <!-- Información de precio -->
-          <div class="section-title">Información del Precio</div>
-          <div class="row">
-            <div class="col-md-4 mb-3">
-              <label for="precio" class="form-label">Precio</label>
-              <input type="number" class="form-control" id="precio" name="precio" step="0.01" required>
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="descuento" class="form-label">Descuento (%)</label>
-              <input type="number" class="form-control" id="descuento" name="descuento" min="0" max="100">
-            </div>
-            <div class="col-md-4 mb-3">
-              <label class="form-label">Precio Final</label>
-              <input type="text" class="form-control" id="precioFinal" name="precioFinal" readonly>
-            </div>
-          </div>
-
-          <!-- Inventario -->
-          <div class="section-title">Inventario</div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="stock" class="form-label">Stock</label>
-              <input type="number" class="form-control" id="stock" name="stock" required>
-            </div>
-         <div class="col-md-6 mb-3">
-  <label for="categoria" class="form-label">Categoría</label>
-  <select class="form-select" id="categoria" name="categoria" required>
-    <option value="">Selecciona una categoría</option>
-    <option value="Mallas decorativas">Mallas decorativas</option>
-    <option value="Malla sombra">Malla sombra</option>
-    <option value="Accesorios Hidroponia">Accesorios Hidroponia</option>
-    <option value="Productos para invernadero">Productos para invernadero</option>
-    <!-- Puedes agregar más categorías si lo necesitas -->
-  </select>
-</div>
-
-          </div>
-
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary">Guardar</button>
+
+        <h1 class="titulo-principal">Inventario de Productos</h1>
+        <div id="product-grid" class="card-grid">
+          <!-- Tarjetas dinámicas con JS -->
         </div>
-      </form>
-    </div>
-  </div>
-</div>
+      </section>
+    </section>
+  </main>
 
-
-      <h1 class="titulo-principal">Inventario de Productos</h1>
-      <div id="product-grid" class="card-grid">
-        <!-- Las tarjetas se insertan dinámicamente con JS -->
-      </div>
-    </main>
-
-  </section>
-  <!-- Footer -->
   <footer id="footer" class="main-footer"></footer>
 
   <!-- Scripts -->

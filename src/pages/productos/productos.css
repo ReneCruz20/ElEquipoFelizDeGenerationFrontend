@@ -313,35 +313,77 @@ body{
 /* Prueba */
 
 
-.card-grid {
+
+
+
+
+/* Prueba 2 tarjetas */
+
+#product-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 24px;              /* un poco más de espacio entre tarjetas */
-  padding: 24px;          /* más espacio interior para que no se pegue */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
 }
 
-.product-card {
-  background-color: #ffffff;
-  border: 1px solid #ddd; /* borde un poco más suave que #ccc */
-  border-radius: 16px;    /* un poco más redondeado */
-  padding: 20px;          /* más espacio interior */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* sombra más suave y profunda */
+.producto-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1rem;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;        /* indicador de que es interactivo */
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
 }
 
-.product-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* sombra más pronunciada al hover */
+.producto-card:hover {
+  transform: translateY(-4px);
 }
 
-.product-card img {
+.producto-img {
   max-width: 100%;
-  height: 160px;           /* un poco más alto para mejor presencia */
-  object-fit: contain;
-  margin-bottom: 16px;     /* más espacio debajo de la imagen */
-  border-radius: 12px;     /* bordes redondeados a la imagen */
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05); /* sutil sombra interna */
+  height: auto;
+  border-radius: 8px;
 }
 
+.producto-nombre {
+  font-size: 1.2rem;
+  margin-top: 0.75rem;
+  color: #333;
+}
+
+.producto-descripcion {
+  font-size: 0.95rem;
+  color: #555;
+  margin: 0.5rem 0;
+}
+
+.producto-precio {
+  margin: 0.75rem 0;
+  font-size: 1.1rem;
+}
+
+.precio-actual {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.precio-original {
+  margin-left: 0.5rem;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.btn-agregar-carrito {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.btn-agregar-carrito:hover {
+  background-color: #218838;
+}
