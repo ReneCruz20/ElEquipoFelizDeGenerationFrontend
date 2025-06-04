@@ -10,93 +10,97 @@
     <link rel="stylesheet" href="/src/modules/header/header.css">
     <link rel="stylesheet" href="/src/modules/footer/footer.css">
     <link rel="stylesheet" href="/src/modules/globales/globales.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 </head>
 
 <body>
     <!-- header -->
     <header id="navBar"></header>
 
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-8 col-lg-6">
+    <main class="main-content">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
 
 
-                <!-- Alert container para mensajes de error -->
-                <div id="alertContainer"></div>
+                    <!-- Alert container para mensajes de error -->
+                    <div id="alertContainer"></div>
 
-                <!-- Cuerpo formulario de registro -->
-                <form id="registerForm" novalidate>
-                    <div class="mb-3">
-                        <h2 class="text-center mb-4">Crea una cuenta</h2>
-                        <label for="fullName" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="name" required>
-                        <div class="invalid-feedback" id="nameError"></div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="fullName" class="form-label">Apellidos</label>
-                        <input type="text" class="form-control" id="lastName" required>
-                        <div class="invalid-feedback" id="lastNameError"></div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Número de teléfono (10 digitos)</label>
-                        <input type="tel" class="form-control" id="phone">
-                        <div class="invalid-feedback" id="phoneError"></div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" required placeholder="tucorreo@email.com">
-                        <div class="invalid-feedback" id="emailError"></div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" required>
-                        <div class="form-text">
-                            La contraseña debe tener al menos 8 carácteres <br>
-                            Una mayúscula <br>
-                            Un número <br>
-                            Un carácter especial (#, $, %, &)
-                            <div class="invalid-feedback" id="passwordError"></div>
+                    <!-- Cuerpo formulario de registro -->
+                    <form id="registerForm" novalidate>
+                        <div class="mb-3">
+                            <h2 class="titulos text-center mb-4">Crea una cuenta</h2>
+                            <label for="fullName" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="name" required>
+                            <div class="invalid-feedback" id="nameError"></div>
                         </div>
-                    </div>
 
-                    <div class="mb-3">
-                        <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
-                        <input type="password" class="form-control" id="confirmPassword" required>
-                        <div class="invalid-feedback" id="confirmPasswordError"></div>
-                    </div>
-                    <label>
-                        <input type="checkbox" id="terminos" name="terminos" required>
-                        He leído y acepto el <a href=""> Aviso de Privacidad y los Términos y Condiciones </a>
-                    </label><br><br>
-                    <div id="alertaTerminos" class="alert alert-danger d-none">
-  Debes aceptar los términos y condiciones
-</div>
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label">Apellidos</label>
+                            <input type="text" class="form-control" id="lastName" required>
+                            <div class="invalid-feedback" id="lastNameError"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Número de teléfono (10 digitos)</label>
+                            <input type="tel" class="form-control" id="phone">
+                            <div class="invalid-feedback" id="phoneError"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" required
+                                placeholder="tucorreo@email.com">
+                            <div class="invalid-feedback" id="emailError"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="password" required>
+                            <div class="form-text">
+                                La contraseña debe tener al menos 8 carácteres <br>
+                                Una mayúscula <br>
+                                Un número <br>
+                                Un carácter especial (#, $, %, &)
+                                <div class="invalid-feedback" id="passwordError"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
+                            <input type="password" class="form-control" id="confirmPassword" required>
+                            <div class="invalid-feedback" id="confirmPasswordError"></div>
+                        </div>
+                        <label>
+                            <input type="checkbox" id="terminos" name="terminos" required>
+                            He leído y acepto el <a href=""> Aviso de Privacidad y los Términos y Condiciones </a>
+                        </label><br><br>
+                        <div id="alertaTerminos" class="alert alert-danger d-none">
+                            Debes aceptar los términos y condiciones
+                        </div>
                         <!--Boton de alerta-->
-                    <button type="submit" class="btn btn-success w-100">Registrarse</button>
-                    <div id="successMessage" class="alert alert-success d-none text-center mx-auto w-75" role="alert">
-                        Usuario registrado exitosamente.  
-                    </div>
+                        <button type="submit" class="btn btn-success w-100">Registrarse</button>
+                        <div id="successMessage" class="alert alert-success d-none text-center mx-auto w-75"
+                            role="alert">
+                            Usuario registrado exitosamente.
+                        </div>
 
-            </div>
-            </form>
-
-
-
+                </div>
+                </form>
 
 
-            <!-- JSON Output -->
-            <!--<div id="jsonOutput" class="mt-4 d-none">
+
+
+
+                <!-- JSON Output -->
+                <!--<div id="jsonOutput" class="mt-4 d-none">
                     <h4>Usuario registrado (JSON):</h4>
                     <pre id="jsonResult" class="p-3 bg-light rounded"></pre>
                 </div>-->
+            </div>
         </div>
-    </div>
-    </div>
-
+        </div>
+    </main>
     <!-- footer -->
     <footer id="footer" class="main-footer"></footer>
 

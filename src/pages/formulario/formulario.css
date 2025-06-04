@@ -17,10 +17,15 @@ body {
     padding: 0;
 }
 
-h1, h2, h3 {
+.titulos {
     font-family: 'Merriweather', serif;
     color: var(--british-racing-green);
 }
+
+.main-content{
+    padding-top: 90px;
+}
+
 
 
 form {
@@ -34,9 +39,3 @@ form {
     margin-bottom: 1rem;
 }
 
-
-p{
-    font-family: 'Work Sans';
-    color: var(--british-racing-green);
-    font-size: 100%;
-}

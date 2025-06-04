@@ -89,7 +89,7 @@ const insertHeader = () => {
               </a>
             </div>
             <div class="nav-item d-flex align-items-center px-2">
-              <a href="/src/pages/perfilDeUsuario/perfilDeUsurario.html">
+              <a href="/src/pages/login/login.html">
                 <img src="/resources/images/navBar/user.png" alt="Icono de Usuario" width="32" height="32">
               </a>
             </div>
