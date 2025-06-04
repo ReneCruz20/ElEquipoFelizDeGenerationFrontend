@@ -7,6 +7,11 @@
 }
 
 /*Sobre Nosotros */
+
+.encabezado{
+  padding-top: 100px;
+}
+
 .titulo-nosotros{
   text-align: center;
   font-size: 25px;

@@ -1,4 +1,8 @@
 
+.encabezado{
+    padding-top: 100px;
+}
+
 .container {
     justify-content: space-between;
     padding: 20px;
