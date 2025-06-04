@@ -1,0 +1,136 @@
+/* Estilos base */
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #F5F5DC;
+}
+
+/* Header del carrito */
+#contador-items {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+/* Lista de productos */
+#lista-carrito {
+  min-height: 300px;
+}
+
+.item-carrito {
+  display: flex;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #eee;
+  align-items: center;
+}
+
+.item-carrito:last-child {
+  border-bottom: none;
+}
+
+.item-imagen {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 1.5rem;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-titulo {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.item-precio-unitario {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.item-precio-total {
+  font-weight: 600;
+  color: var(--verde-principal);
+}
+
+.contador-cantidad {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.btn-cantidad {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  background: white;
+}
+
+.input-cantidad {
+  width: 50px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-left: none;
+  border-right: none;
+  height: 30px;
+}
+
+.btn-eliminar {
+  color: #dc3545;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  margin-left: 1rem;
+}
+
+/* Carrito vacío */
+#carrito-vacio {
+  display: none;
+}
+
+.carrito-vacio #lista-carrito {
+  display: none;
+}
+
+.carrito-vacio #carrito-vacio {
+  display: block;
+}
+
+.carrito-vacio #resumen-compra {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Resumen de compra */
+#resumen-compra .card-header {
+  border-radius: 8px 8px 0 0 !important;
+}
+
+#btn-pagar {
+  transition: all 0.3s ease;
+}
+
+#btn-pagar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  #resumen-compra {
+    position: static !important;
+  }
+  
+  .item-carrito {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .item-imagen {
+    margin-bottom: 1rem;
+  }
+}
