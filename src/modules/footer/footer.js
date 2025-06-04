@@ -75,3 +75,13 @@ const insertFooter = (footer) => {
 
 
 export { insertFooter };
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const footer = document.getElementById('footer');
+    if (footer) {
+        insertFooter(footer);
+    } else {
+        console.error("Footer element not found");
+    }
+});
