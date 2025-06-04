@@ -1,334 +1,199 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. Inicialización general
-    initBootstrapComponents();
-    setupSectionNavigation();
-    setupLogout();
-    
-    // 2. Cargar datos iniciales
-    loadInitialData();
-    
-    // 3. Configurar eventos específicos
-    setupProfileForm();
-    setupAddressEvents();
-    setupOrderEvents();
+// =====================
+// PERFIL
+// =====================
+
+// Esperar a que el DOM esté cargado
+window.addEventListener("DOMContentLoaded", () => {
+  // Si no existe perfil, creamos uno con teléfono también
+  if (!localStorage.getItem("perfil")) {
+    const perfilEjemplo = {
+      nombre: "Mariana López",
+      email: "mariana@example.com",
+      telefono: "5512345678"
+    };
+    localStorage.setItem("perfil", JSON.stringify(perfilEjemplo));
+  }
+
+  cargarPerfil();
 });
 
-// ----------------------------
-// FUNCIONES GENERALES
-// ----------------------------
+const nombreInput = document.getElementById("nombre");
+const emailInput = document.getElementById("email");
+const telefonoInput = document.getElementById("telefono");
+const perfilForm = document.getElementById("perfilForm");
+const editarBtn = document.getElementById("editarBtn");
 
-function initBootstrapComponents() {
-    // Tooltips
-    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    tooltipTriggerList.map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+function cargarPerfil() {
+  const perfilGuardado = JSON.parse(localStorage.getItem("perfil"));
+  const saludoDiv = document.getElementById("saludoPerfil");
+  const vistaNombre = document.getElementById("vistaNombre");
+  const vistaEmail = document.getElementById("vistaEmail");
+  const vistaTelefono = document.getElementById("vistaTelefono");
+
+  if (perfilGuardado && perfilGuardado.nombre) {
+    saludoDiv.textContent = `¡Hola, ${perfilGuardado.nombre}!`;
+    vistaNombre.textContent = perfilGuardado.nombre;
+    vistaEmail.textContent = perfilGuardado.email || "";
+    vistaTelefono.textContent = perfilGuardado.telefono || "";
+
+    nombreInput.value = perfilGuardado.nombre;
+    emailInput.value = perfilGuardado.email || "";
+    telefonoInput.value = perfilGuardado.telefono || "";
+  } else {
+    saludoDiv.textContent = "Hola, usuario";
+    vistaNombre.textContent = "";
+    vistaEmail.textContent = "";
+    vistaTelefono.textContent = "";
+
+    nombreInput.value = "";
+    emailInput.value = "";
+    telefonoInput.value = "";
+  }
 }
 
-function setupSectionNavigation() {
-    const navButtons = document.querySelectorAll('.nav-link[data-section]');
-    const sections = document.querySelectorAll('.user-section');
-    
-    navButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Remover clase active
-            navButtons.forEach(btn => btn.classList.remove('active'));
-            sections.forEach(section => section.classList.remove('active', 'show'));
-            
-            // Agregar clase active
-            this.classList.add('active');
-            
-            // Mostrar sección
-            const sectionId = this.getAttribute('data-section');
-            document.getElementById(`${sectionId}-section`).classList.add('active', 'show');
-        });
-    });
-    
-    // Activar primera sección
-    if (navButtons.length > 0) navButtons[0].click();
+// Mostrar formulario para editar perfil
+editarBtn.addEventListener("click", () => {
+  perfilForm.style.display = "block";
+  document.getElementById("vistaPerfil").style.display = "none";
+});
+
+// Validar y guardar datos
+perfilForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const nombre = nombreInput.value.trim();
+  const email = emailInput.value.trim();
+  const telefono = telefonoInput.value.trim();
+
+  if (nombre.length < 3) {
+    alert("El nombre debe tener al menos 3 caracteres.");
+    return;
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    alert("Por favor, ingresa un correo válido.");
+    return;
+  }
+
+  // Validar teléfono: 10 dígitos numéricos (puedes adaptar según formato)
+  const telRegex = /^\d{10}$/;
+  if (!telRegex.test(telefono)) {
+    alert("Ingresa un número de teléfono válido de 10 dígitos.");
+    return;
+  }
+
+  const perfil = { nombre, email, telefono };
+  localStorage.setItem("perfil", JSON.stringify(perfil));
+  alert("Perfil actualizado.");
+
+  cargarPerfil();
+
+  perfilForm.style.display = "none";
+  document.getElementById("vistaPerfil").style.display = "block";
+});
+
+
+
+// =====================
+// DIRECCIONES
+// =====================
+
+// Obtener referencias del formulario de direcciones
+const direccionForm = document.getElementById("direccionForm");
+const calleInput = document.getElementById("calle");
+const coloniaInput = document.getElementById("colonia");
+const cpInput = document.getElementById("cp");
+const direccionesUl = document.getElementById("direccionesUl");
+
+let direcciones = [];
+let editandoIndex = null;
+
+function mostrarListaDirecciones() {
+  direcciones = JSON.parse(localStorage.getItem("direcciones")) || [];
+  direccionesUl.innerHTML = "";
+
+  direcciones.forEach((dir, index) => {
+    const li = document.createElement("li");
+    li.className = "list-group-item d-flex justify-content-between align-items-center";
+
+    li.innerHTML = `
+      ${dir.calle}, Colonia ${dir.colonia}, CP ${dir.cp}
+      <div>
+        <button class="btn btn-sm btn-outline-secondary me-2" onclick="editarDireccion(${index})">Editar</button>
+        <button class="btn btn-sm btn-outline-danger" onclick="eliminarDireccion(${index})">Eliminar</button>
+      </div>
+    `;
+    direccionesUl.appendChild(li);
+  });
 }
 
-function setupLogout() {
-    document.querySelector('.logout-btn')?.addEventListener('click', function(e) {
-        e.preventDefault();
-        if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
-            alert('Sesión cerrada. Redirigiendo...');
-            // window.location.href = '/logout';
-        }
-    });
-}
+direccionForm.addEventListener("submit", function (e) {
+  e.preventDefault();
 
-function loadInitialData() {
-    // Cargar avatar
-    document.getElementById('user-avatar-img').src = 'https://via.placeholder.com/80?text=Usuario';
-}
+  const calle = calleInput.value.trim();
+  const colonia = coloniaInput.value.trim();
+  const cp = cpInput.value.trim();
 
-// ----------------------------
-// SECCIÓN DE PERFIL
-// ----------------------------
+  if (!calle || !colonia || !cp.match(/^\d{5}$/)) {
+    alert("Completa los campos correctamente. El CP debe tener 5 dígitos.");
+    return;
+  }
 
-let profileChanged = false;
+  const nuevaDireccion = { calle, colonia, cp };
 
-function setupProfileForm() {
-    const profileForm = document.getElementById('profile-form');
-    if (!profileForm) return;
-    
-    // Detectar cambios
-    const inputs = profileForm.querySelectorAll('input');
-    inputs.forEach(input => {
-        input.addEventListener('input', () => {
-            profileChanged = true;
-        });
-    });
-    
-    // Manejar envío
-    document.getElementById('guardar-perfil').addEventListener('click', saveProfile);
-}
+  if (editandoIndex !== null) {
+    direcciones[editandoIndex] = nuevaDireccion;
+    editandoIndex = null;
+  } else {
+    direcciones.push(nuevaDireccion);
+  }
 
-function saveProfile() {
-    if (!profileChanged) {
-        showAlert('No hay cambios para guardar', 'info');
-        return;
-    }
-    
-    // Validación
-    const nombre = document.getElementById('nombre').value.trim();
-    const email = document.getElementById('email').value.trim();
-    
-    if (!nombre || !email) {
-        showAlert('Nombre y email son obligatorios', 'danger');
-        return;
-    }
-    
-    if (!validateEmail(email)) {
-        showAlert('Email inválido', 'danger');
-        return;
-    }
-    
-    // Mostrar loading
-    const saveBtn = document.getElementById('guardar-perfil');
-    const originalText = saveBtn.innerHTML;
-    saveBtn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Guardando...';
-    saveBtn.disabled = true;
-    
-    // Simular guardado
-    setTimeout(() => {
-        showAlert('Perfil actualizado', 'success');
-        profileChanged = false;
-        saveBtn.innerHTML = originalText;
-        saveBtn.disabled = false;
-    }, 1500);
-}
+  localStorage.setItem("direcciones", JSON.stringify(direcciones));
+  direccionForm.reset();
+  mostrarListaDirecciones();
+});
 
-function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
+// Funciones globales para botones
+window.editarDireccion = function(index) {
+  const dir = direcciones[index];
+  calleInput.value = dir.calle;
+  coloniaInput.value = dir.colonia;
+  cpInput.value = dir.cp;
+  editandoIndex = index;
+};
 
-// ----------------------------
-// SECCIÓN DE DIRECCIONES
-// ----------------------------
+window.eliminarDireccion = function(index) {
+  if (confirm("¿Deseas eliminar esta dirección?")) {
+    direcciones.splice(index, 1);
+    localStorage.setItem("direcciones", JSON.stringify(direcciones));
+    mostrarListaDirecciones();
+  }
+};
 
-let addresses = [];
-let editingAddressId = null;
+// =====================
+// INICIALIZACIÓN
+// =====================
 
-function setupAddressEvents() {
-    // Delegación de eventos
-    document.querySelector('.address-list')?.addEventListener('click', function(e) {
-        const card = e.target.closest('.address-card');
-        if (!card) return;
-        
-        const addressId = parseInt(card.dataset.id);
-        
-        if (e.target.closest('.delete-btn')) {
-            deleteAddress(addressId);
-        } else if (e.target.closest('.edit-btn')) {
-            editAddress(addressId);
-        }
-    });
-    
-    // Agregar dirección
-    document.getElementById('agregar-direccion')?.addEventListener('click', () => {
-        editingAddressId = null;
-        resetAddressForm();
-        new bootstrap.Modal(document.getElementById('addressModal')).show();
-    });
-    
-    // Guardar dirección
-    document.getElementById('save-address-btn')?.addEventListener('click', saveAddress);
-}
+window.addEventListener("DOMContentLoaded", () => {
+  // Simulación inicial si no hay datos
+  if (!localStorage.getItem("perfil")) {
+    const perfilEjemplo = {
+      nombre: "Mariana López",
+      email: "mariana@example.com"
+    };
+    localStorage.setItem("perfil", JSON.stringify(perfilEjemplo));
+  }
 
-function deleteAddress(id) {
-    if (!confirm('¿Eliminar esta dirección?')) return;
-    
-    const card = document.querySelector(`.address-card[data-id="${id}"]`);
-    if (card) {
-        card.style.opacity = '0.5';
-        card.querySelector('.delete-btn').innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
-        card.querySelector('.delete-btn').disabled = true;
-    }
-    
-    setTimeout(() => {
-        addresses = addresses.filter(addr => addr.id !== id);
-        renderAddresses();
-        showAlert('Dirección eliminada', 'success');
-    }, 800);
-}
+  if (!localStorage.getItem("direcciones")) {
+    const direccionesEjemplo = [
+      { calle: "Av. Reforma 123", colonia: "Centro", cp: "06000" },
+      { calle: "Calle Falsa 742", colonia: "Springfield", cp: "12345" }
+    ];
+    localStorage.setItem("direcciones", JSON.stringify(direccionesEjemplo));
+  }
 
-function editAddress(id) {
-    const address = addresses.find(addr => addr.id === id);
-    if (!address) return;
-    
-    editingAddressId = id;
-    document.getElementById('address-title').value = address.title;
-    document.getElementById('address-street').value = address.street;
-    document.getElementById('address-city').value = address.city.split(',')[0].trim();
-    document.getElementById('address-zip').value = address.zip;
-    
-    new bootstrap.Modal(document.getElementById('addressModal')).show();
-}
-
-function saveAddress() {
-    const title = document.getElementById('address-title').value.trim();
-    const street = document.getElementById('address-street').value.trim();
-    const city = document.getElementById('address-city').value.trim();
-    const zip = document.getElementById('address-zip').value.trim();
-    
-    if (!title || !street || !city || !zip) {
-        showAlert('Todos los campos son obligatorios', 'danger');
-        return;
-    }
-    
-    const saveBtn = document.getElementById('save-address-btn');
-    const originalText = saveBtn.innerHTML;
-    saveBtn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
-    saveBtn.disabled = true;
-    
-    setTimeout(() => {
-        const newAddress = {
-            id: editingAddressId || Date.now(),
-            title,
-            street,
-            city: `${city}, Argentina`,
-            zip
-        };
-        
-        if (editingAddressId) {
-            addresses = addresses.map(addr => addr.id === editingAddressId ? newAddress : addr);
-        } else {
-            addresses.push(newAddress);
-        }
-        
-        renderAddresses();
-        bootstrap.Modal.getInstance(document.getElementById('addressModal')).hide();
-        showAlert(editingAddressId ? 'Dirección actualizada' : 'Dirección agregada', 'success');
-        
-        saveBtn.innerHTML = originalText;
-        saveBtn.disabled = false;
-        editingAddressId = null;
-    }, 800);
-}
-
-function renderAddresses() {
-    const addressList = document.querySelector('.address-list');
-    if (!addressList) return;
-    
-    addressList.innerHTML = '';
-    
-    // Datos de ejemplo (en una app real vendrían de una API)
-    if (addresses.length === 0) {
-        addresses = [
-            {
-                id: 1,
-                title: 'Casa',
-                street: 'Calle Falsa 123, Piso 4, Depto B',
-                city: 'Buenos Aires, Argentina',
-                zip: '1234'
-            },
-            {
-                id: 2,
-                title: 'Trabajo',
-                street: 'Avenida Siempreviva 742',
-                city: 'Buenos Aires, Argentina',
-                zip: '5678'
-            }
-        ];
-    }
-    
-    addresses.forEach(address => {
-        const col = document.createElement('div');
-        col.className = 'col-md-6';
-        col.innerHTML = `
-            <div class="card h-100 shadow-sm address-card" data-id="${address.id}">
-                <div class="card-body">
-                    <h3 class="h5 card-title">${address.title}</h3>
-                    <p class="card-text">${address.street}</p>
-                    <p class="card-text">${address.city}</p>
-                    <p class="card-text">Código Postal: ${address.zip}</p>
-                </div>
-                <div class="card-footer bg-white border-top-0">
-                    <div class="d-flex justify-content-end gap-2">
-                        <button class="btn btn-sm btn-warning edit-btn">
-                            <i class="bi bi-pencil-fill me-1"></i>Editar
-                        </button>
-                        <button class="btn btn-sm btn-danger delete-btn">
-                            <i class="bi bi-trash-fill me-1"></i>Eliminar
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
-        addressList.appendChild(col);
-    });
-}
-
-function resetAddressForm() {
-    document.getElementById('address-title').value = '';
-    document.getElementById('address-street').value = '';
-    document.getElementById('address-city').value = '';
-    document.getElementById('address-zip').value = '';
-}
-
-// ----------------------------
-// SECCIÓN DE PEDIDOS
-// ----------------------------
-
-function setupOrderEvents() {
-    document.querySelectorAll('.order-detail-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const orderId = this.dataset.order || 'ORD-12345'; // Ejemplo
-            viewOrderDetails(orderId);
-        });
-    });
-}
-
-function viewOrderDetails(orderId) {
-    const btn = document.querySelector(`.order-detail-btn[data-order="${orderId}"]`) || 
-                document.querySelector('.order-detail-btn');
-    const originalText = btn.innerHTML;
-    btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
-    btn.disabled = true;
-    
-    setTimeout(() => {
-        alert(`Mostrando detalles del pedido ${orderId}`);
-        btn.innerHTML = originalText;
-        btn.disabled = false;
-    }, 800);
-}
-
-// ----------------------------
-// FUNCIONES UTILITARIAS
-// ----------------------------
-
-function showAlert(message, type) {
-    const alertDiv = document.createElement('div');
-    alertDiv.className = `alert alert-${type} mt-3`;
-    alertDiv.textContent = message;
-    
-    const container = document.querySelector('main.container') || document.body;
-    container.prepend(alertDiv);
-    
-    setTimeout(() => {
-        alertDiv.remove();
-    }, 5000);
-}
+  // Cargar datos en formularios
+  cargarPerfil();
+  mostrarListaDirecciones();
+});
