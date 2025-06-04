@@ -2,21 +2,6 @@
 // PERFIL
 // =====================
 
-// Esperar a que el DOM esté cargado
-window.addEventListener("DOMContentLoaded", () => {
-  // Si no existe perfil, creamos uno con teléfono también
-  if (!localStorage.getItem("perfil")) {
-    const perfilEjemplo = {
-      nombre: "Mariana López",
-      email: "mariana@example.com",
-      telefono: "5512345678"
-    };
-    localStorage.setItem("perfil", JSON.stringify(perfilEjemplo));
-  }
-
-  cargarPerfil();
-});
-
 const nombreInput = document.getElementById("nombre");
 const emailInput = document.getElementById("email");
 const telefonoInput = document.getElementById("telefono");
@@ -179,16 +164,15 @@ window.addEventListener("DOMContentLoaded", () => {
   // Simulación inicial si no hay datos
   if (!localStorage.getItem("perfil")) {
     const perfilEjemplo = {
-      nombre: "Mariana López",
-      email: "mariana@example.com"
+      nombre: " ",
+      email: " "
     };
     localStorage.setItem("perfil", JSON.stringify(perfilEjemplo));
   }
 
   if (!localStorage.getItem("direcciones")) {
     const direccionesEjemplo = [
-      { calle: "Av. Reforma 123", colonia: "Centro", cp: "06000" },
-      { calle: "Calle Falsa 742", colonia: "Springfield", cp: "12345" }
+      { calle: " ", colonia: " ", cp: " " },
     ];
     localStorage.setItem("direcciones", JSON.stringify(direccionesEjemplo));
   }

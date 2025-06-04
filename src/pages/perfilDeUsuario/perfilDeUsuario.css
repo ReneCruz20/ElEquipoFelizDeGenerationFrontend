@@ -10,6 +10,10 @@
     --pale-tea-green: #d3e4cd;
 }
 
+.main-content{
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
 
 .container {
   background-color: var(--tea-green);
