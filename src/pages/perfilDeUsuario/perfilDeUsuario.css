@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --sea-green: #118A4D;
+    --cambridge-blue: #8FAF8A;
+    --british-racing-green: #0D3B1E;
+    --tea-green: #C1D7AE;
+    --beige: #F5F5DC;
+    --cinereous: #8D6E63;
+    --pale-tea-green: #d3e4cd;
+}
+
+.main-content{
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.container {
+  background-color: var(--tea-green);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#saludoPerfil{
+  font-family: 'Work Sans', sans-serif;
+  color: var(--british-racing-green);
+}
+
+#vistaPerfil{
+  font-family: 'Work Sans', sans-serif;
+  color: var(--british-racing-green);
+}
+
+
+/* Estilo base */
+.custom-tabs .custom-tab-link {
+  color: var(--british-racing-green);
+  background-color: white;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+.custom-tabs .custom-tab-link:hover {
+  color: var(--sea-green);
+  background-color: var(--tea-green);
+  border-color: var(--cambridge-blue);
+}
+
+/* Activo (seleccionado) */
+.custom-tabs .custom-tab-link.active {
+  color: white;
+  background-color: var(--sea-green);
+  border-color: var(--cambridge-blue) var(--cambridge-blue) var(--beige);
+  font-weight: 600;
+}
+
+/* Botón estilo primario */
+.custom-btn-primary {
+  background-color: var(--sea-green);
+  color: white;
+  border: 1px solid var(--sea-green);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-family: 'Nunito Sans';
+}
+
+.custom-btn-primary:hover {
+  background-color: var(--british-racing-green);
+  border-color: var(--british-racing-green);
+  transform: scale(1.03);
+}
+
+/* Botón estilo secundario */
+.custom-btn-secondary {
+  background-color: var(--cambridge-blue);
+  color: var(--british-racing-green);
+  border: 1px solid var(--cambridge-blue);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-family: 'Nunito Sans';
+}
+
+.custom-btn-secondary:hover {
+  background-color: var(--pale-tea-green);
+  color: var(--sea-green);
+  transform: scale(1.03);
+}
+
+
