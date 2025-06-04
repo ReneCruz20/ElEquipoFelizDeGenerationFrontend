@@ -1,10 +1,16 @@
-
+document.addEventListener('DOMContentLoaded', () => {
+    const footer = document.getElementById('footer');
+    if (footer) {
+        insertFooter(footer);
+    } else {
+        console.error("Footer element not found");
+    }
+});
 
 const insertFooter = (footer) => {
 
-
   footer.innerHTML = `
-    <div class="footer-container" class="main-footer"> <!-- class="flex" -->
+    <div class="footer-container main-footer"> <!-- class="flex" -->
       <div class="footer-section"> <!-- class="column" -->
 
         <h3>HTA</h3>
@@ -72,16 +78,6 @@ const insertFooter = (footer) => {
 
 }
 
-
-
 export { insertFooter };
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    const footer = document.getElementById('footer');
-    if (footer) {
-        insertFooter(footer);
-    } else {
-        console.error("Footer element not found");
-    }
-});
