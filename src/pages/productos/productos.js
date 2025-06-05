@@ -65,6 +65,8 @@ function cargarFiltros() {
   ));
 }
 
+
+
 // Mostrar productos
 function cargarProductos() {
   const productos = [
@@ -137,7 +139,7 @@ function cargarOfertas() {
   const contenedor = document.getElementById("ofertas-flash");
   ofertas.forEach(o => {
     const col = document.createElement("div");
-    col.className = "col-md-4";
+    col.className = "col-md-5 col-lg-4";
     col.innerHTML = `
       <figure class="snip1418">
         <img src="${o.imagen}" alt="${o.nombre}" />
