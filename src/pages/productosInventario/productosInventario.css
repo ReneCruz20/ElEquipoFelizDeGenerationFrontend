@@ -25,7 +25,7 @@
     .contenedor-inventario {
       display: flex;
       gap: 2rem;
-      padding: 2rem;
+      padding: 5rem;
     }
 
     .sidebar-filtros {
