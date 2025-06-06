@@ -76,10 +76,13 @@
                     <div class="col-md-6 mb-3">
                       <label for="nombre" class="form-label">Nombre del Producto</label>
                       <input type="text" class="form-control" id="nombre" required>
+                      <!-- validacion caracteres especiales en nombre del  producto -->
+                      <span id="errorNombre" class="text-danger small d-none">El nombre no debe contener caracteres especiales.</span>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="codigo" class="form-label">Código</label>
                       <input type="text" class="form-control" id="codigo" required>
+                      <span id="errorCodigo" class="text-danger small d-none">El código no debe contener caracteres especiales.</span>
                     </div>
                     <div class="col-12 mb-3">
                       <label for="descripcion" class="form-label">Descripción</label>
