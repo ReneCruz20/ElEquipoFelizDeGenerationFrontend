@@ -49,7 +49,7 @@ form.addEventListener('submit', async (e) => {
         return;
     }
 
-    if (foundUser.password !== hashedPassword) {
+    if (foundUser.password !== hashedPassword) { //señala si elcorreo ya está registrado
         showError(passInput, passErrorDiv, 'Contraseña incorrecta.');
         return;
     }
@@ -59,8 +59,8 @@ form.addEventListener('submit', async (e) => {
     // Guardar sesión activa
     localStorage.setItem('usuarioActivo', JSON.stringify(foundUser));
 
-    // Redirigir a página perfil de usurio
-     window.location.href = "/index.html";
+    // Redirigir a página de incio "indez"
+     window.location.href = "/index.html"; // 
 
 
 });
