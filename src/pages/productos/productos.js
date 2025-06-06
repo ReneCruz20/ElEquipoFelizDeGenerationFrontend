@@ -71,7 +71,7 @@ function cargarFiltros() {
 function cargarProductos() {
   const productos = [
     {
-      categoria: "INVERNADERO HTA",
+      categoria: "INVERNADEROS HTA",
       titulo: "Productos para invernadero",
       imagen: "https://images.pexels.com/photos/32236848/pexels-photo-32236848.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
       
