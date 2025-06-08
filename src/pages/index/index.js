@@ -1,11 +1,13 @@
 
 
 import { insertFooter } from "../../modules/footer/footer.js";
-
 insertFooter(document.getElementById("footer"));
 
 
+
+
 document.addEventListener('DOMContentLoaded', function() {
+    
     
 
     // carrusel
@@ -86,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchBtn = document.querySelector('.search-btn');
     const searchInputContainer = document.querySelector('.search-container');
     
-    searchBtn.addEventListener('click', function() {
+    searchBtn.addEventListener('click', function() { //Línea de eror
         searchInputContainer.style.display = searchInputContainer.style.display === 'flex' ? 'none' : 'flex';
     });
 

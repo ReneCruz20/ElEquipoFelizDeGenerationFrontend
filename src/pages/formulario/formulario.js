@@ -88,9 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const alertaTerminos = document.getElementById('alertaTerminos');
       alertaTerminos.classList.remove('d-none');
       isValid = false;
-      setTimeout(() => { //Elimna la alerta despues de 2 segundos
+      setTimeout(() => { //Elimna la alerta despues de 3 segundos
         alertaTerminos.classList.add('d-none');
-      }, 2000);
+      }, 3000);
     }
 
     if (isValid) {
@@ -100,16 +100,17 @@ document.addEventListener('DOMContentLoaded', () => {
         apellidos: lastName,
         telefono: phone,
         email: email,
-        password: hashedPassword // Aquí guardas la contraseña hasheada
+        password: hashedPassword // Aquí guarda la contraseña hasheada
       };
 
       const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
       const usuarioExistente = usuarios.find(u => u.email === email);
 
-      if (usuarioExistente) {
-        showErrors(["Este correo ya está registrado."]);
-        return;
-      }
+      if (usuarioExistente) { // Error si ese correo ya está registrado
+         showFieldError('email', 'Este correo ya está registrado.');
+  isValid = false;
+  return;
+}
 
       // Guardar en localStorage
       usuarios.push(userData);
@@ -147,7 +148,7 @@ function showFieldError(fieldId, message) {
   errorDiv.textContent = message;
 }
 
-// muestra alartas de bootstrap de error
+// muestra alertas de bootstrap de error
 function showErrors(errors) {
     const alertContainer = document.getElementById('alertContainer');
     alertContainer.innerHTML = ''; // limpiar anteriores
