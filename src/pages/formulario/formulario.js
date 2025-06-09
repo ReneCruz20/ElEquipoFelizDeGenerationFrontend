@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
       isValid = false;
     }
     //Validación contraseña
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[#$%&]).{8,}$/; //requisitos
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[#$%&.-_]).{8,}$/; //requisitos
     if (!password) {
       showFieldError('password', 'La contraseña es requerida');
       isValid = false;
