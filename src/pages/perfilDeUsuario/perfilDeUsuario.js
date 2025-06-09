@@ -1,91 +1,162 @@
+
+// =====================
+// UTILIDADES
+// =====================
+
+function obtenerDesdeLocalStorage(clave, valorDefault) {
+  try {
+    return JSON.parse(localStorage.getItem(clave)) || valorDefault;
+  } catch {
+    return valorDefault;
+  }
+}
+
+function guardarEnLocalStorage(clave, valor) {
+  localStorage.setItem(clave, JSON.stringify(valor));
+}
+
+function mostrarMensaje(mensaje, tipo = "success") {
+  const mensajeDiv = document.getElementById("mensaje");
+  mensajeDiv.textContent = mensaje;
+  mensajeDiv.className = `alert mt-3 alert-${tipo === "error" || tipo === "danger" ? "danger" : "success"}`;
+  mensajeDiv.style.display = "block";
+
+  // Ocultar después de 3 segundos (3000 milisegundos)
+  setTimeout(() => {
+    mensajeDiv.style.display = "none";
+  }, 3000);
+}
+
+function showFieldError(fieldId, message) {
+  const input = document.getElementById(fieldId);
+  const errorDiv = document.getElementById(fieldId + 'Error');
+  input.classList.add('is-invalid');
+  errorDiv.textContent = message;
+}
+
+function clearFieldErrors(fieldIds) {
+  fieldIds.forEach(fieldId => {
+    const input = document.getElementById(fieldId);
+    const errorDiv = document.getElementById(fieldId + 'Error');
+    input.classList.remove('is-invalid');
+    errorDiv.textContent = '';
+  });
+}
+
+
+// ===========================
+// OBTENCIÓN DE DATOS PERFIL
+// ===========================
+
+// Obtener referencias a los elementos del DOM
+const nombreInput = document.getElementById("nombre");
+const apellidoInput = document.getElementById("apellido");
+const emailInput = document.getElementById("email");
+const telefonoInput = document.getElementById("telefono");
+const formularioPerfil = document.getElementById("perfilForm");
+const editarBtn = document.getElementById("editarBtn");
+
+//Saludo perfil
+function mostrarPerfilVista(perfil) {
+  document.getElementById("saludoPerfil").textContent = perfil.nombre
+    ? `¡Hola, ${perfil.nombre}!`
+    : "Hola, usuario";
+
+  document.getElementById("vistaNombre").textContent = ((perfil.nombre || "") + " " + (perfil.apellido || "")).trim();
+  document.getElementById("vistaEmail").textContent = perfil.email || "";
+  document.getElementById("vistaTelefono").textContent = perfil.telefono || "";
+}
+
+function cargarPerfil() {
+  const perfil = obtenerDesdeLocalStorage("perfil", {});
+  mostrarPerfilVista(perfil);
+  nombreInput.value = perfil.nombre || "";
+  apellidoInput.value = perfil.apellido || "";
+  emailInput.value = perfil.email || "";
+  telefonoInput.value = perfil.telefono || "";
+}
+
+editarBtn.addEventListener("click", () => {
+  formularioPerfil.style.display = "block";
+  document.getElementById("vistaPerfil").style.display = "none";
+});
+
+
 // =====================
 // PERFIL
 // =====================
 
-const nombreInput = document.getElementById("nombre");
-const emailInput = document.getElementById("email");
-const telefonoInput = document.getElementById("telefono");
-const perfilForm = document.getElementById("perfilForm");
-const editarBtn = document.getElementById("editarBtn");
-
-function cargarPerfil() {
-  const perfilGuardado = JSON.parse(localStorage.getItem("perfil"));
-  const saludoDiv = document.getElementById("saludoPerfil");
-  const vistaNombre = document.getElementById("vistaNombre");
-  const vistaEmail = document.getElementById("vistaEmail");
-  const vistaTelefono = document.getElementById("vistaTelefono");
-
-  if (perfilGuardado && perfilGuardado.nombre) {
-    saludoDiv.textContent = `¡Hola, ${perfilGuardado.nombre}!`;
-    vistaNombre.textContent = perfilGuardado.nombre;
-    vistaEmail.textContent = perfilGuardado.email || "";
-    vistaTelefono.textContent = perfilGuardado.telefono || "";
-
-    nombreInput.value = perfilGuardado.nombre;
-    emailInput.value = perfilGuardado.email || "";
-    telefonoInput.value = perfilGuardado.telefono || "";
-  } else {
-    saludoDiv.textContent = "Hola, usuario";
-    vistaNombre.textContent = "";
-    vistaEmail.textContent = "";
-    vistaTelefono.textContent = "";
-
-    nombreInput.value = "";
-    emailInput.value = "";
-    telefonoInput.value = "";
-  }
-}
-
-// Mostrar formulario para editar perfil
-editarBtn.addEventListener("click", () => {
-  perfilForm.style.display = "block";
-  document.getElementById("vistaPerfil").style.display = "none";
-});
-
-// Validar y guardar datos
-perfilForm.addEventListener("submit", function (e) {
+formularioPerfil.addEventListener("submit", function (e) {
   e.preventDefault();
+ 
+  const fieldIds = ['nombre', 'apellido', 'email', 'telefono'];
+  clearFieldErrors(fieldIds); // limpia errores previos
 
+  // Obtener valores
   const nombre = nombreInput.value.trim();
+  const apellido = apellidoInput.value.trim();
   const email = emailInput.value.trim();
   const telefono = telefonoInput.value.trim();
 
-  if (nombre.length < 3) {
-    alert("El nombre debe tener al menos 3 caracteres.");
-    return;
+  let isValid = true;
+
+  // Validar Nombre
+  if (!nombre) {
+    showFieldError('nombre', 'El nombre es requerido');
+    isValid = false;
+  } else if (nombre.length < 3 || !nombre.replace(/\s/g, '')) {
+    showFieldError('nombre', 'Debe tener al menos 3 caracteres y sin espacios');
+    isValid = false;
   }
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    alert("Por favor, ingresa un correo válido.");
-    return;
+  // Validar Apellido
+  if (!apellido) {
+    showFieldError('apellido', 'El apellido es requerido');
+    isValid = false;
+  } else if (apellido.length < 3 || !apellido.replace(/\s/g, '')) {
+    showFieldError('apellido', 'Debe tener al menos 3 caracteres y no solo espacios');
+    isValid = false;
   }
 
-  // Validar teléfono: 10 dígitos numéricos (puedes adaptar según formato)
-  const telRegex = /^\d{10}$/;
-  if (!telRegex.test(telefono)) {
-    alert("Ingresa un número de teléfono válido de 10 dígitos.");
-    return;
+  // Validar Email
+  if (!email) {
+    showFieldError('email', 'El correo electrónico es requerido');
+    isValid = false;
+  } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+    showFieldError('email', 'El correo electrónico no es válido');
+    isValid = false;
   }
 
-  const perfil = { nombre, email, telefono };
-  localStorage.setItem("perfil", JSON.stringify(perfil));
-  alert("Perfil actualizado.");
+  // Validar Teléfono
+  const phoneDigits = telefono.replace(/\D/g, '');
+  if (!telefono) {
+    showFieldError('telefono', 'El número de teléfono es requerido');
+    isValid = false;
+  } else if (phoneDigits.length !== 10) {
+    showFieldError('telefono', 'El número debe tener 10 dígitos');
+    isValid = false;
+  }
 
-  cargarPerfil();
+  // Si todo es válido
+  if (isValid) {
+    const perfil = { nombre, apellido, email, telefono };
+    guardarEnLocalStorage("perfil", perfil);
+    cargarPerfil();
 
-  perfilForm.style.display = "none";
-  document.getElementById("vistaPerfil").style.display = "block";
+    formularioPerfil.style.display = "none";
+    document.getElementById("vistaPerfil").style.display = "block";
+    mostrarMensaje("Perfil actualizado correctamente.");
+  } else {
+    mostrarMensaje("Por favor corrige los campos marcados.", "error");
+  }
 });
 
 
+// =================================
+// OBTENCIÓN DE DATOS DIRECCIONES
+// =================================
 
-// =====================
-// DIRECCIONES
-// =====================
-
-// Obtener referencias del formulario de direcciones
-const direccionForm = document.getElementById("direccionForm");
+const formularioDireccion = document.getElementById("direccionForm");
 const calleInput = document.getElementById("calle");
 const coloniaInput = document.getElementById("colonia");
 const cpInput = document.getElementById("cp");
@@ -95,7 +166,7 @@ let direcciones = [];
 let editandoIndex = null;
 
 function mostrarListaDirecciones() {
-  direcciones = JSON.parse(localStorage.getItem("direcciones")) || [];
+  direcciones = obtenerDesdeLocalStorage("direcciones", []);
   direccionesUl.innerHTML = "";
 
   direcciones.forEach((dir, index) => {
@@ -105,26 +176,64 @@ function mostrarListaDirecciones() {
     li.innerHTML = `
       ${dir.calle}, Colonia ${dir.colonia}, CP ${dir.cp}
       <div>
-        <button class="btn btn-sm btn-outline-secondary me-2" onclick="editarDireccion(${index})">Editar</button>
-        <button class="btn btn-sm btn-outline-danger" onclick="eliminarDireccion(${index})">Eliminar</button>
+        <button class="btn btn-sm btn-outline-secondary me-2" data-edit="${index}">Editar</button>
+        <button class="btn btn-sm btn-outline-danger" data-delete="${index}">Eliminar</button>
       </div>
     `;
     direccionesUl.appendChild(li);
   });
 }
 
-direccionForm.addEventListener("submit", function (e) {
+// =====================
+// DIRECCIONES
+// =====================
+
+formularioDireccion.addEventListener("submit", function (e) {
   e.preventDefault();
+
+  const fieldIds = ["calle", "colonia", "cp"];
+  clearFieldErrors(fieldIds);
 
   const calle = calleInput.value.trim();
   const colonia = coloniaInput.value.trim();
   const cp = cpInput.value.trim();
 
-  if (!calle || !colonia || !cp.match(/^\d{5}$/)) {
-    alert("Completa los campos correctamente. El CP debe tener 5 dígitos.");
+  let isValid = true;
+
+  // Validar Calle
+  if (!calle) {
+    showFieldError("calle", "La calle es requerida");
+    isValid = false;
+  } else if (calle.length < 3 || !calle.replace(/\s/g, '')) {
+    showFieldError("calle", "Debe tener al menos 3 caracteres y no solo espacios");
+    isValid = false;
+  }
+
+  // Validar Colonia
+  if (!colonia) {
+    showFieldError("colonia", "La colonia es requerida");
+    isValid = false;
+  } else if (colonia.length < 3 || !colonia.replace(/\s/g, '')) {
+    showFieldError("colonia", "Debe tener al menos 3 caracteres y no solo espacios");
+    isValid = false;
+  }
+
+  // Validar CP
+  if (!cp) {
+    showFieldError("cp", "El código postal es requerido");
+    isValid = false;
+  } else if (!/^\d{5}$/.test(cp)) {
+    showFieldError("cp", "El código postal debe tener 5 dígitos");
+    isValid = false;
+  }
+
+  // Si no es válido, salimos
+  if (!isValid) {
+    mostrarMensaje("Por favor corrige los campos marcados.", "danger");
     return;
   }
 
+  // Dirección válida
   const nuevaDireccion = { calle, colonia, cp };
 
   if (editandoIndex !== null) {
@@ -134,50 +243,50 @@ direccionForm.addEventListener("submit", function (e) {
     direcciones.push(nuevaDireccion);
   }
 
-  localStorage.setItem("direcciones", JSON.stringify(direcciones));
-  direccionForm.reset();
+  guardarEnLocalStorage("direcciones", direcciones);
+  formularioDireccion.reset();
   mostrarListaDirecciones();
+  mostrarMensaje("Dirección guardada con éxito.");
 });
 
-// Funciones globales para botones
-window.editarDireccion = function(index) {
-  const dir = direcciones[index];
-  calleInput.value = dir.calle;
-  coloniaInput.value = dir.colonia;
-  cpInput.value = dir.cp;
-  editandoIndex = index;
-};
 
-window.eliminarDireccion = function(index) {
-  if (confirm("¿Deseas eliminar esta dirección?")) {
-    direcciones.splice(index, 1);
-    localStorage.setItem("direcciones", JSON.stringify(direcciones));
-    mostrarListaDirecciones();
+//Editar o eliminar una direccion
+direccionesUl.addEventListener("click", function (e) {
+  if (e.target.dataset.edit !== undefined) {
+    const index = parseInt(e.target.dataset.edit, 10);
+    const dir = direcciones[index];
+    calleInput.value = dir.calle;
+    coloniaInput.value = dir.colonia;
+    cpInput.value = dir.cp;
+    editandoIndex = index;
   }
-};
+
+  if (e.target.dataset.delete !== undefined) {
+    const index = parseInt(e.target.dataset.delete, 10);
+    if (confirm("¿Deseas eliminar esta dirección?")) {
+      direcciones.splice(index, 1);
+      guardarEnLocalStorage("direcciones", direcciones);
+      mostrarListaDirecciones();
+      mostrarMensaje("Dirección eliminada.");
+    }
+  }
+});
+
 
 // =====================
 // INICIALIZACIÓN
 // =====================
 
 window.addEventListener("DOMContentLoaded", () => {
-  // Simulación inicial si no hay datos
   if (!localStorage.getItem("perfil")) {
-    const perfilEjemplo = {
-      nombre: " ",
-      email: " "
-    };
-    localStorage.setItem("perfil", JSON.stringify(perfilEjemplo));
+    guardarEnLocalStorage("perfil", { nombre: "", apellido: "", email: "", telefono: "" });
   }
 
   if (!localStorage.getItem("direcciones")) {
-    const direccionesEjemplo = [
-      { calle: " ", colonia: " ", cp: " " },
-    ];
-    localStorage.setItem("direcciones", JSON.stringify(direccionesEjemplo));
+    guardarEnLocalStorage("direcciones", []);
   }
 
-  // Cargar datos en formularios
   cargarPerfil();
   mostrarListaDirecciones();
 });
+
