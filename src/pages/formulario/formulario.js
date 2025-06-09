@@ -4,12 +4,12 @@ insertFooter(document.getElementById("footer"));
 
 // Función para hashear la contraseña (debe ir antes de su uso)
 async function hashPassword(password) {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(password);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-    return hashHex;
+  const encoder = new TextEncoder();
+  const data = encoder.encode(password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  return hashHex;
 }
 
 //Validaciones Formulario//
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', async function (e) { //se agrega async 
     e.preventDefault();
-  
+
     const name = document.getElementById('name').value.trim();
     const lastName = document.getElementById('lastName').value.trim();
     const phone = document.getElementById('phone').value.trim();
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     clearFieldErrors(fieldIds);
 
     let isValid = true;
-//Validacion nombre
+    //Validacion nombre
     if (!name) {
       showFieldError('name', 'El nombre es requerido');
       isValid = false;
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
       showFieldError('name', 'El nombre debe tener al menos 3 caracteres y no solo espacios');
       isValid = false;
     }
-//Validacion apellidos
+    //Validacion apellidos
     if (!lastName) {
       showFieldError('lastName', 'Los apellidos son requeridos');
       isValid = false;
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
       showFieldError('lastName', 'El apellido debe tener al menos 3 caracteres y no solo espacios');
       isValid = false;
     }
-//Validación número de télefono
+    //Validación número de télefono
     const phoneDigits = phone.replace(/\D/g, ''); //borra espacios
     if (!phone) {
       showFieldError('phone', 'El número de teléfono es requerido');
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
       showFieldError('phone', 'El número debe tener exactamente 10 dígitos');
       isValid = false;
     }
-//Validacion correo electrónico
+    //Validacion correo electrónico
     if (!email) {
       showFieldError('email', 'El correo electrónico es requerido');
       isValid = false;
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
       showFieldError('email', 'El correo electrónico no es válido');
       isValid = false;
     }
-//Validación contraseña
+    //Validación contraseña
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[#$%&]).{8,}$/; //requisitos
     if (!password) {
       showFieldError('password', 'La contraseña es requerida');
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
       showFieldError('password', 'La contraseña no cumple con los requisitos');
       isValid = false;
     }
-//Validacion confirmar contraseña
+    //Validacion confirmar contraseña
     if (!confirmPassword) {
       showFieldError('confirmPassword', 'Debes confirmar la contraseña');
       isValid = false;
@@ -107,10 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const usuarioExistente = usuarios.find(u => u.email === email);
 
       if (usuarioExistente) { // Error si ese correo ya está registrado
-         showFieldError('email', 'Este correo ya está registrado.');
-  isValid = false;
-  return;
-}
+        showFieldError('email', 'Este correo ya está registrado.');
+        isValid = false;
+        return;
+      }
 
       // Guardar en localStorage
       usuarios.push(userData);
@@ -120,6 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log("Usuario registrado (JSON):", JSON.stringify(userData, null, 2));
       showSuccess('¡Usuario registrado correctamente!');
       this.reset();
+
+      // Redirigir a la página de perfil después del registro exitoso
+      setTimeout(() => {
+        window.location.href = "/src/pages/perfilDeUsuario/perfilDeUsuario.html";
+      }, 1000); // Redirige después de 1 segundo para mostrar el mensaje
     }
   });
 });
@@ -150,17 +155,17 @@ function showFieldError(fieldId, message) {
 
 // muestra alertas de bootstrap de error
 function showErrors(errors) {
-    const alertContainer = document.getElementById('alertContainer');
-    alertContainer.innerHTML = ''; // limpiar anteriores
-    errors.forEach(error => {
-        const alert = document.createElement('div');
-        alert.className = 'alert alert-danger alert-dismissible fade show';
-        alert.innerHTML = `
+  const alertContainer = document.getElementById('alertContainer');
+  alertContainer.innerHTML = ''; // limpiar anteriores
+  errors.forEach(error => {
+    const alert = document.createElement('div');
+    alert.className = 'alert alert-danger alert-dismissible fade show';
+    alert.innerHTML = `
             ${error}
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         `;
-        alertContainer.appendChild(alert);
-    });
+    alertContainer.appendChild(alert);
+  });
 }
 
 /*function showSuccess(message) {
@@ -188,8 +193,8 @@ function showSuccess(message) {
 
 //limpiar el contenido HTML del contenedor de alertas.
 function clearAlerts() {
-    const alertContainer = document.getElementById('alertContainer');
-    alertContainer.innerHTML = '';
+  const alertContainer = document.getElementById('alertContainer');
+  alertContainer.innerHTML = '';
 }
 
 
