@@ -116,6 +116,16 @@ document.addEventListener('DOMContentLoaded', () => {
       usuarios.push(userData);
       localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
+      // Bloque para guardar perfil
+      const perfil = {
+        nombre: name,
+        apellido: lastName,
+        email: email,
+        telefono: phone
+      };
+      localStorage.setItem("perfil", JSON.stringify(perfil));
+
+
       // Mostrar mensaje y limpiar formulario
       console.log("Usuario registrado (JSON):", JSON.stringify(userData, null, 2));
       showSuccess('¡Usuario registrado correctamente!');

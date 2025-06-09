@@ -279,7 +279,8 @@ direccionesUl.addEventListener("click", function (e) {
 
 window.addEventListener("DOMContentLoaded", () => {
   if (!localStorage.getItem("perfil")) {
-    guardarEnLocalStorage("perfil", { nombre: "", apellido: "", email: "", telefono: "" });
+    const usuarios = obtenerDesdeLocalStorage("usuarios", {});
+    guardarEnLocalStorage("perfil", usuarios); // <-- usar usuarios para inicializar perfil
   }
 
   if (!localStorage.getItem("direcciones")) {
@@ -290,3 +291,6 @@ window.addEventListener("DOMContentLoaded", () => {
   mostrarListaDirecciones();
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  cargarPerfil();
+});
