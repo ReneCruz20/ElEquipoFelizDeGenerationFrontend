@@ -152,11 +152,12 @@ body{
   align-items: flex-start;
   background-image: linear-gradient(15deg, #F5F5DC 0%, #F5F5DC 150%);
   padding: 1rem;
-  display: flex;
+  display: contents;
   min-height: 20%;
   justify-content: center;
 
 }
+
 
 .card-grid {
   display: grid;
@@ -164,10 +165,10 @@ body{
   gap: 1.5rem;
   padding-left: 1rem;
   padding: 1.5rem;
-  grid-column-gap: var(--spacing-l);
-  grid-row-gap: var(--spacing-l);
+  grid-column-gap: var(--spacing-xxl);
+  grid-row-gap: var(--spacing-xxl);
   max-width: clamp(40rem, 80vw, 75rem);
-  width: 100%;
+  
 }
 
 @media(min-width: 540px){
@@ -331,11 +332,15 @@ body{
 
   /* Estilo para el título de productos */
 .titulo-principal {
-  text-align: center;
-  font-size: 2.8rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
-  color: #1f3f1f;
+text-align: center;
+    font-size: 2rem;
+    font-family: 'Merriweather', serif;
+    font-weight: bold;
+    color: #1f3f1f;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    margin: 0rem 0 1.5rem;
 }
 
 /* Fondo verde para la barra lateral */
@@ -374,74 +379,88 @@ body{
 /* Prueba */
 
 /* Prueba 2 tarjetas */
-
-#product-list {
+/* Aplica el grid a todos los contenedores con clase grid y #product-list */
+#product-list, .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1.5rem;
 }
+
+/* Estilo para cada tarjeta */
 
 .producto-card {
   border: 1px solid #ddd;
   border-radius: 12px;
   padding: 1rem;
   text-align: center;
-  background-color: #F5F5DC;
+  background-color: #ffffff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  max-width: 250px;
+  flex: 1 1 250px;
 }
 
 .producto-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  cursor: pointer;
 }
 
 .producto-img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  user-select: none;
 }
 
 .producto-nombre {
   font-size: 1.2rem;
-  margin-top: 0.75rem;
-  color: #333;
+  font-weight: 600;
+  margin: 0;
 }
 
 .producto-descripcion {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #555;
-  margin: 0.5rem 0;
+  min-height: 50px;
 }
 
 .producto-precio {
-  margin: 0.75rem 0;
-  font-size: 1.1rem;
-}
-
-.precio-actual {
+  font-size: 1rem;
+  font-weight: 700;
   color: #28a745;
-  font-weight: bold;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: baseline;
 }
 
 .precio-original {
-  margin-left: 0.5rem;
-  color: #999;
   text-decoration: line-through;
+  color: #999;
+  font-weight: 400;
+  font-size: 0.85rem;
 }
 
 .btn-agregar-carrito {
   background-color: #28a745;
-  color: white;
   border: none;
+  color: white;
   padding: 0.6rem 1.2rem;
   border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  user-select: none;
 }
 
 .btn-agregar-carrito:hover {
-  background-color: #218838;
+  background-color: #21867a;
+  cursor: pointer;
 }
 
 .btn-agregar-carrito:focus {
@@ -449,19 +468,38 @@ body{
 }
 
 
+#ofertas-flash {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+
+#ofertas-flash > div {
+  flex: 0 0 auto;
+}
+
+.oferta-wrapper {
+  display: flex;
+  justify-content: center; /* centra la tarjeta internamente si es más chica */
+}
+
+
+
 /* Filtros y responsividad del contenido */
 
 .layout-productos {
-  display: flex;
-  flex-direction: row;
-  min-height: 100vh;
+  width: 100%;
+  align-items: flex-start;
 }
+
 
 .sidebar-filtros {
   width: 230px;
   max-height: 90vh;
   position: sticky;
-  top: 2rem;
+  top: 10rem;
   overflow-y: auto;
   background: #118A4D;
   color: white;
@@ -474,6 +512,8 @@ body{
   padding: 2rem;
   overflow-x: hidden;
 }
+
+
 
 main.productos > section {
   margin-bottom: 2rem; /* espacio más leve entre secciones */
@@ -511,4 +551,158 @@ main.productos > section {
 
 .btn-inventario:hover {
   background-color: #45a049; 
+}
+
+
+/* Nuevo boton restablecer catalogo */
+#volverCatalogoContainer {
+  display: none;
+}
+.btn-volver {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-volver:hover {
+  background-color: #1b5e20;
+}
+
+
+
+/* Responsive: En pantallas menores a 768px */
+@media (max-width: 767.98px) {
+  .layout-productos {
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+  .sidebar-filtros {
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: auto;
+    border-radius: 0;
+    margin-bottom: 1rem;
+  }
+  main.productos {
+    width: 100%;
+  }
+}
+
+#ofertas-flash {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+#ofertas-flash > div {
+  flex: 1 1 220px; /* ancho base 220px, puede crecer o reducir */
+  max-width: 300px;
+  border-radius: 8px;
+  padding: 1rem;
+  
+  text-align: center;
+}
+
+
+/*  Responsividad tarjetas desempaquetadas LocaslStorage*/
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.grid > div {
+  flex: 1 1 220px;
+  max-width: 300px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* Responsividad Tarjetas productosCategoria */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  justify-content: center;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+section h2 {
+  text-align: center;
+  margin: 3rem 0 1.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d2d2d;
+}
+
+/* Secciones de productos destacadas */
+section#productos-invernadero,
+section#malla-sombra,
+section#mallas-decorativas,
+section#accesorios-hidroponia,
+section#ofertas,
+.titulo-principal
+{
+background-color: #118a4d5c;
+    padding: 3rem 2rem;
+    margin-top: 4rem;
+    border-top: 44px solid var(--sea-green);
+    border-radius: 35px;
+}
+
+/* Encabezados de secciones */
+section h2 {
+text-align: center;
+    font-size: 2rem;
+    font-family: 'Merriweather', serif;
+    font-weight: bold;
+    color: #1f3f1f;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    margin: 0rem 0 1.5rem;
+}
+
+
+
+/* Grid de tarjetas */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+
+.producto-card {
+  border: 1px solid var(--cambridge-blue);
+  border-radius: 12px;
+  padding: 1rem;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.producto-card img {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
 }
