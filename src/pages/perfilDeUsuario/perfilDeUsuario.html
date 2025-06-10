@@ -21,7 +21,7 @@
     <main class="main-content">
         <div class="container mt-5 col-11 col-md-6 col-lg-6">
             <h2 class="mb-4">Mi Cuenta</h2>
-            
+
             <ul class="nav nav-tabs custom-tabs" id="userTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link custom-tab-link active" id="perfil-tab" data-bs-toggle="tab"
@@ -82,21 +82,67 @@
                     <form id="direccionForm">
                         <div class="mb-3">
                             <label for="calle" class="form-label">Calle y número</label>
-                            <input type="text" class="form-control" id="calle" placeholder="Ejemplo: Av. Reforma 123"
+                            <input type="text" class="form-control" id="calle" placeholder="Ej: Av. Reforma 123"
                                 required />
                             <div id="calleError" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                             <label for="colonia" class="form-label">Colonia</label>
-                            <input type="text" class="form-control" id="colonia" placeholder="Ejemplo: Centro"
+                            <input type="text" class="form-control" id="colonia" placeholder="Ej: Centro"
                                 required />
                             <div id="coloniaError" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                             <label for="cp" class="form-label">Código Postal</label>
-                            <input type="text" class="form-control" id="cp" placeholder="Ejemplo: 55005" required />
+                            <input type="text" class="form-control" id="cp" placeholder="Ej: 55005" required />
                             <div id="cpError" class="invalid-feedback"></div>
                         </div>
+                        <div class="mb-3">
+                            <label for="localidad" class="form-label">Alcaldía/Municipio</label>
+                            <input type="text" class="form-control" id="localidad" placeholder="Ej: Miguel Hidalgo"
+                                required />
+                            <div id="localidadError" class="invalid-feedback"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="estado" class="form-label">Estado</label>
+                            <select class="form-select" id="estado" required>
+                                <option value="" selected disabled>Selecciona tu estado</option>
+                                <option value="AGS">Aguascalientes</option>
+                                <option value="BC">Baja California</option>
+                                <option value="BCS">Baja California Sur</option>
+                                <option value="CAMP">Campeche</option>
+                                <option value="CHIS">Chiapas</option>
+                                <option value="CHIH">Chihuahua</option>
+                                <option value="CDMX">Ciudad de México</option>
+                                <option value="COAH">Coahuila</option>
+                                <option value="COL">Colima</option>
+                                <option value="DGO">Durango</option>
+                                <option value="GTO">Guanajuato</option>
+                                <option value="GRO">Guerrero</option>
+                                <option value="HGO">Hidalgo</option>
+                                <option value="JAL">Jalisco</option>
+                                <option value="MEX">Estado de México</option>
+                                <option value="MICH">Michoacán</option>
+                                <option value="MOR">Morelos</option>
+                                <option value="NAY">Nayarit</option>
+                                <option value="NL">Nuevo León</option>
+                                <option value="OAX">Oaxaca</option>
+                                <option value="PUE">Puebla</option>
+                                <option value="QRO">Querétaro</option>
+                                <option value="QROO">Quintana Roo</option>
+                                <option value="SLP">San Luis Potosí</option>
+                                <option value="SIN">Sinaloa</option>
+                                <option value="SON">Sonora</option>
+                                <option value="TAB">Tabasco</option>
+                                <option value="TAMPS">Tamaulipas</option>
+                                <option value="TLAX">Tlaxcala</option>
+                                <option value="VER">Veracruz</option>
+                                <option value="YUC">Yucatán</option>
+                                <option value="ZAC">Zacatecas</option>
+                            </select>
+                            <div id="estadoError" class="invalid-feedback"></div>
+                        </div>
+
                         <button type="submit" class="btn custom-btn-primary">Agregar Dirección</button>
                     </form>
 

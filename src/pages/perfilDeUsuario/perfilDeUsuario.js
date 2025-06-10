@@ -160,6 +160,8 @@ const formularioDireccion = document.getElementById("direccionForm");
 const calleInput = document.getElementById("calle");
 const coloniaInput = document.getElementById("colonia");
 const cpInput = document.getElementById("cp");
+const localidadInput = document.getElementById("localidad");
+const estadoSelect = document.getElementById("estado");
 const direccionesUl = document.getElementById("direccionesUl");
 
 let direcciones = [];
@@ -174,7 +176,7 @@ function mostrarListaDirecciones() {
     li.className = "list-group-item d-flex justify-content-between align-items-center";
 
     li.innerHTML = `
-      ${dir.calle}, Colonia ${dir.colonia}, CP ${dir.cp}
+      ${dir.calle}, Col. ${dir.colonia}, CP ${dir.cp}, ${dir.localidad}, ${dir.estado} México
       <div>
         <button class="btn btn-sm btn-outline-secondary me-2" data-edit="${index}">Editar</button>
         <button class="btn btn-sm btn-outline-danger" data-delete="${index}">Eliminar</button>
@@ -191,12 +193,14 @@ function mostrarListaDirecciones() {
 formularioDireccion.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const fieldIds = ["calle", "colonia", "cp"];
+  const fieldIds = ["calle", "colonia", "cp", "localidad", "estado"];
   clearFieldErrors(fieldIds);
 
   const calle = calleInput.value.trim();
   const colonia = coloniaInput.value.trim();
   const cp = cpInput.value.trim();
+  const localidad = localidadInput.value.trim();
+  const estado = estadoSelect.value;
 
   let isValid = true;
 
@@ -226,6 +230,15 @@ formularioDireccion.addEventListener("submit", function (e) {
     showFieldError("cp", "El código postal debe tener 5 dígitos");
     isValid = false;
   }
+  
+  // Validar Colonia
+  if (!localidad) {
+    showFieldError("localidad", "La alcaldía/municipio es requerido");
+    isValid = false;
+  } else if (localidad.length < 3 || !localidad.replace(/\s/g, '')) {
+    showFieldError("localidad", "Debe tener al menos 3 caracteres y no solo espacios");
+    isValid = false;
+  }
 
   // Si no es válido, salimos
   if (!isValid) {
@@ -234,7 +247,7 @@ formularioDireccion.addEventListener("submit", function (e) {
   }
 
   // Dirección válida
-  const nuevaDireccion = { calle, colonia, cp };
+  const nuevaDireccion = { calle, colonia, cp, localidad, estado };
 
   if (editandoIndex !== null) {
     direcciones[editandoIndex] = nuevaDireccion;
@@ -258,6 +271,8 @@ direccionesUl.addEventListener("click", function (e) {
     calleInput.value = dir.calle;
     coloniaInput.value = dir.colonia;
     cpInput.value = dir.cp;
+    localidadInput.value = dir.localidad;
+    estadoSelect.value = dir.estado;
     editandoIndex = index;
   }
 
@@ -291,6 +306,3 @@ window.addEventListener("DOMContentLoaded", () => {
   mostrarListaDirecciones();
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  cargarPerfil();
-});
