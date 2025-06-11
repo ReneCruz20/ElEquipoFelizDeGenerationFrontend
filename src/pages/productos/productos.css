@@ -657,10 +657,10 @@ section#accesorios-hidroponia,
 section#ofertas,
 .titulo-principal
 {
-background-color: #118a4d5c;
+background-color:#f1f1f100;
     padding: 3rem 2rem;
     margin-top: 4rem;
-    border-top: 44px solid var(--sea-green);
+    border-top: 44px solid var(#f1f1f100);
     border-radius: 35px;
 }
 
