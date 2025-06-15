@@ -305,4 +305,3 @@ window.addEventListener("DOMContentLoaded", () => {
   cargarPerfil();
   mostrarListaDirecciones();
 });
-

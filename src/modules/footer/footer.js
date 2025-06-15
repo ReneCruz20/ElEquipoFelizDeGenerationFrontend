@@ -31,9 +31,9 @@ const insertFooter = (footer) => {
         <h3>Enlaces Rápidos</h3>
         <ul>
           <li><a href="../../../index.html">Inicio</a></li>
-          <li><a href="../../src/pages/productos/productos.html">Productos</a></li>
-          <li><a href="../../src/pages/productos/productos.html">Ofertas</a></li>
-          <li><a href="../../src/pages/contacto/contacto.html">Contacto</a></li>
+          <li><a href="../../../src/pages/productos/productos.html">Productos</a></li>
+          <li><a href="../../../src/pages/productos/productos.html">Ofertas</a></li>
+          <li><a href="../../../src/pages/contacto/contacto.html">Contacto</a></li>
         </ul>
       </div>
       <br>
@@ -79,5 +79,3 @@ const insertFooter = (footer) => {
 }
 
 export { insertFooter };
-
-

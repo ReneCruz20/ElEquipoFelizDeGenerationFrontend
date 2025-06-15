@@ -46,7 +46,7 @@ function insertHeader() {
             </li>
 
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="../../src/pages/productos/productos.html"
+              <a class="nav-link dropdown-toggle" href="../../../src/pages/productos/productos.html"
                 id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Productos
               </a>
@@ -54,11 +54,11 @@ function insertHeader() {
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="../../src/pages/nosotros/nosotros.html">Nosotros</a>
+              <a class="nav-link" aria-current="page" href="../../../src/pages/nosotros/nosotros.html">Nosotros</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="../../src/pages/contacto/contacto.html">Contacto</a>
+              <a class="nav-link" href="../../../src/pages/contacto/contacto.html">Contacto</a>
             </li>
           </ul>
 
