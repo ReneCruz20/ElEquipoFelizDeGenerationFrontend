@@ -18,8 +18,8 @@ function insertHeader() {
     <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #118A4D">
       <div class="container-fluid">
         <div class="navbar-brand d-flex align-items-center">
-          <a href="/index.html">
-            <img src="/resources/images/navBar/logo.png" alt="Logo HTA" width="60" height="60"
+          <a href="../../../index.html">
+            <img src="../../../resources/images/navBar/logo.png" alt="Logo HTA" width="60" height="60"
               class="ms-2 ms-md-4 rounded-circle">
           </a>
           <span class="company-name"> 
@@ -42,11 +42,11 @@ function insertHeader() {
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/index.html">Inicio</a>
+              <a class="nav-link" href="../../../index.html">Inicio</a>
             </li>
 
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="/src/pages/productos/productos.html"
+              <a class="nav-link dropdown-toggle" href="../../src/pages/productos/productos.html"
                 id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Productos
               </a>
@@ -54,11 +54,11 @@ function insertHeader() {
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/src/pages/nosotros/nosotros.html">Nosotros</a>
+              <a class="nav-link" aria-current="page" href="../../src/pages/nosotros/nosotros.html">Nosotros</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="/src/pages/contacto/contacto.html">Contacto</a>
+              <a class="nav-link" href="../../src/pages/contacto/contacto.html">Contacto</a>
             </li>
           </ul>
 
