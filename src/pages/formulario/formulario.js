@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const hashedPassword = await hashPassword(password);
       const userData = {
         nombre: name,
-        apellidos: lastName,
+        apellido: lastName,
         telefono: phone,
         email: email,
         password: hashedPassword // Aquí guarda la contraseña hasheada
@@ -116,19 +116,11 @@ document.addEventListener('DOMContentLoaded', () => {
       usuarios.push(userData);
       localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-      // Bloque para guardar perfil
-      const perfil = {
-        nombre: name,
-        apellido: lastName,
-        email: email,
-        telefono: phone
-      };
-      localStorage.setItem("perfil", JSON.stringify(perfil));
-
       localStorage.setItem('usuarioActivo', JSON.stringify({
         email: email,
         nombre: name,
-        apellidos: lastName
+        apellido: lastName,
+        telefono: phone
       }));
       window.dispatchEvent(new Event('storage')); // Notifica a otras pestañas
 

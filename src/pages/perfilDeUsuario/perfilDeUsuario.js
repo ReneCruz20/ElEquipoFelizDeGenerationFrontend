@@ -68,7 +68,7 @@ function mostrarPerfilVista(perfil) {
 }
 
 function cargarPerfil() {
-  const perfil = obtenerDesdeLocalStorage("perfil", {});
+  const perfil = JSON.parse(localStorage.getItem("usuarioActivo") || "{}");
   mostrarPerfilVista(perfil);
   nombreInput.value = perfil.nombre || "";
   apellidoInput.value = perfil.apellido || "";
@@ -150,7 +150,7 @@ formularioPerfil.addEventListener("submit", function (e) {
   // Si todo es válido
   if (isValid) {
     const perfil = { nombre, apellido, email, telefono };
-    guardarEnLocalStorage("perfil", perfil);
+    localStorage.setItem("usuarioActivo", JSON.stringify(perfil));
     cargarPerfil();
 
     formularioPerfil.style.display = "none";
@@ -312,11 +312,6 @@ direccionesUl.addEventListener("click", function (e) {
 // =====================
 
 window.addEventListener("DOMContentLoaded", () => {
-  if (!localStorage.getItem("perfil")) {
-    const usuarios = obtenerDesdeLocalStorage("usuarios", {});
-    guardarEnLocalStorage("perfil", usuarios); // <-- usar usuarios para inicializar perfil
-  }
-
   cargarPerfil();
   mostrarListaDirecciones();
 });
