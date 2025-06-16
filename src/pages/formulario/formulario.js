@@ -125,6 +125,12 @@ document.addEventListener('DOMContentLoaded', () => {
       };
       localStorage.setItem("perfil", JSON.stringify(perfil));
 
+      localStorage.setItem('usuarioActivo', JSON.stringify({
+        email: email,
+        nombre: name,
+        apellidos: lastName
+      }));
+      window.dispatchEvent(new Event('storage')); // Notifica a otras pestañas
 
       // Mostrar mensaje y limpiar formulario
       console.log("Usuario registrado (JSON):", JSON.stringify(userData, null, 2));
@@ -138,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
 
 // Funciones de erores /limpiar campos
 function clearFieldErrors(fieldIds) {
@@ -177,17 +184,6 @@ function showErrors(errors) {
     alertContainer.appendChild(alert);
   });
 }
-
-/*function showSuccess(message) {
-    const alertContainer = document.getElementById('alertContainer');
-    const alert = document.createElement('div');
-    alert.className = 'alert alert-success alert-dismissible fade show';
-    alert.innerHTML = `
-        ${message}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    `;
-    alertContainer.appendChild(alert);
-}*/
 
 // Mensaje de usuario registrado con exito 
 function showSuccess(message) {

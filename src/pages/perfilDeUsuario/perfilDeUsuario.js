@@ -74,6 +74,16 @@ function cargarPerfil() {
   apellidoInput.value = perfil.apellido || "";
   emailInput.value = perfil.email || "";
   telefonoInput.value = perfil.telefono || "";
+
+  const logoutBtn = document.getElementById("cerrarBtn");
+  logoutBtn.addEventListener('click', () => {
+    localStorage.removeItem('usuarioActivo');
+    window.dispatchEvent(new Event('storage'));
+    window.location.href = "../../../../index.html";
+  });
+  
+  const vistaPerfil = document.getElementById("vistaPerfil");
+  vistaPerfil.appendChild(logoutBtn);
 }
 
 editarBtn.addEventListener("click", () => {
@@ -168,13 +178,16 @@ let direcciones = [];
 let editandoIndex = null;
 
 function mostrarListaDirecciones() {
-  direcciones = obtenerDesdeLocalStorage("direcciones", []);
+  const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo") || "null");
+  if (!usuarioActivo) return;
+
+  const claveDirecciones = `direcciones_${usuarioActivo.email}`;
+  direcciones = obtenerDesdeLocalStorage(claveDirecciones, []);
   direccionesUl.innerHTML = "";
 
   direcciones.forEach((dir, index) => {
     const li = document.createElement("li");
     li.className = "list-group-item d-flex justify-content-between align-items-center";
-
     li.innerHTML = `
       ${dir.calle}, Col. ${dir.colonia}, CP ${dir.cp}, ${dir.localidad}, ${dir.estado} México
       <div>
@@ -256,7 +269,10 @@ formularioDireccion.addEventListener("submit", function (e) {
     direcciones.push(nuevaDireccion);
   }
 
-  guardarEnLocalStorage("direcciones", direcciones);
+  const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo") || "null");
+  const claveDirecciones = `direcciones_${usuarioActivo.email}`;
+  guardarEnLocalStorage(claveDirecciones, direcciones);
+
   formularioDireccion.reset();
   mostrarListaDirecciones();
   mostrarMensaje("Dirección guardada con éxito.");
@@ -280,7 +296,10 @@ direccionesUl.addEventListener("click", function (e) {
     const index = parseInt(e.target.dataset.delete, 10);
     if (confirm("¿Deseas eliminar esta dirección?")) {
       direcciones.splice(index, 1);
-      guardarEnLocalStorage("direcciones", direcciones);
+
+      const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo") || "null");
+      const claveDirecciones = `direcciones_${usuarioActivo.email}`;
+      guardarEnLocalStorage(claveDirecciones, direcciones);
       mostrarListaDirecciones();
       mostrarMensaje("Dirección eliminada.");
     }
@@ -296,10 +315,6 @@ window.addEventListener("DOMContentLoaded", () => {
   if (!localStorage.getItem("perfil")) {
     const usuarios = obtenerDesdeLocalStorage("usuarios", {});
     guardarEnLocalStorage("perfil", usuarios); // <-- usar usuarios para inicializar perfil
-  }
-
-  if (!localStorage.getItem("direcciones")) {
-    guardarEnLocalStorage("direcciones", []);
   }
 
   cargarPerfil();
