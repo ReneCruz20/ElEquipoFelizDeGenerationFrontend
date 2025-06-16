@@ -206,7 +206,13 @@ function initHeader() {
   // Configuración de los buscadores
   const searchLinks = {
     "Invernadero": "../../../src/pages/productos/productos.html#invernadero",
-    // ... (tus otros enlaces)
+    "Invernadero": "../../../src/pages/productos/productos.html#invernadero",
+    "Malla sombra": "../../../src/pages/productos/productos.html#malla-sombra",
+    "Malla decorativa": "../../../src/pages/productos/productos.html#malla-decorativa",
+    "Accesorios hidroponía": "../../../src/pages/productos/productos.html#accesorios-hidroponia",
+    "Fertilizantes": "../../../src/pages/productos/productos.html#fertilizantes",
+    "Sustratos": "../../../src/pages/productos/productos.html#sustratos",
+    "Semillas": "../../../src/pages/productos/productos.html#semillas"
   };
   
   setupSearch('searchToggle', 'navbarSearch', 'searchResults', searchLinks);
