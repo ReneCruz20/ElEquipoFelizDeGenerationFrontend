@@ -1,6 +1,6 @@
 // Inserta el header completo en el elemento con id="navBar"
 function insertHeader() {
-  loadCSS('/src/modules/header/header.css'); // Carga el CSS del header dinámicamente
+  loadCSS('../../../src/modules/header/header.css'); // Carga el CSS del header dinámicamente
 
   const header = document.getElementById("navBar");
   if (!header) return;
@@ -30,8 +30,8 @@ function insertHeader() {
 
         <div class="d-flex d-lg-none align-items-center">
           ${createSearchBox('searchToggleMobile', 'navbarSearchMobile', 'searchResultsMobile')}
-          ${createNavIcon('/resources/images/navBar/carrito.png', 'Icono de Carrito', '/src/pages/carrito/carrito.html')}
-          ${createNavIcon('/resources/images/navBar/user.png', 'Icono de Usuario', '/src/pages/perfilDeUsuario/perfilDeUsurario.html')}
+          ${createNavIcon('../../../resources/images/navBar/carrito.png', 'Icono de Carrito', '../../../src/pages/carrito/carrito.html')}
+          ${createNavIcon('../../../resources/images/navBar/user.png', 'Icono de Usuario', '../../../src/pages/perfilDeUsuario/perfilDeUsurario.html')}
         </div>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -64,8 +64,8 @@ function insertHeader() {
 
           <div class="d-none d-lg-flex align-items-center">
             ${createSearchBox('searchToggle', 'navbarSearch', 'searchResults')}
-            ${createNavIcon('/resources/images/navBar/carrito.png', 'Icono de Carrito', '/src/pages/carrito/carrito.html')}
-            ${createNavIcon('/resources/images/navBar/user.png', 'Icono de Usuario', '/src/pages/login/login.html', 29)}
+            ${createNavIcon('../../../resources/images/navBar/carrito.png', 'Icono de Carrito', '../../../src/pages/carrito/carrito.html')}
+            ${createNavIcon('../../../resources/images/navBar/user.png', 'Icono de Usuario', '../../../src/pages/login/login.html', 29)}
           </div>
         </div>
       </div>
@@ -96,7 +96,7 @@ function createSearchBox(toggleId, inputId, resultsId) {
   return `
     <div class="nav-item d-flex align-items-center px-2 position-relative">
       <button class="btn p-0 border-0 bg-transparent" id="${toggleId}">
-          <img src="/resources/images/navBar/lupa.png" alt="Buscar" width="32" height="32">
+          <img src="../../../resources/images/navBar/lupa.png" alt="Buscar" width="32" height="32">
       </button>
       <input type="text" id="${inputId}" class="form-control search-input" placeholder="Buscar..." />
       <div id="${resultsId}" class="search-results"></div>
@@ -109,7 +109,7 @@ function createDropdownMenu(items) {
   return `
     <ul class="dropdown-menu bg-success" aria-labelledby="navbarDropdownMenuLink">
       ${items.map(item => `
-        <li><a class="dropdown-item text-light" href="/src/pages/productos/productos.html#${item.id}">${item.label}</a></li>
+        <li><a class="dropdown-item text-light" href="../../../src/pages/productos/productos.html#${item.id}">${item.label}</a></li>
       `).join('')}
     </ul>
   `;
@@ -191,13 +191,13 @@ window.addEventListener('resize', adjustBodyPadding);
 
 document.addEventListener('DOMContentLoaded', () => {
   const searchLinks = {
-    "Invernadero": "/src/pages/productos/productos.html#invernadero",
-    "Malla sombra": "/src/pages/productos/productos.html#malla-sombra",
-    "Malla decorativa": "/src/pages/productos/productos.html#malla-decorativa",
-    "Accesorios hidroponía": "/src/pages/productos/productos.html#accesorios-hidroponia",
-    "Fertilizantes": "/src/pages/productos/productos.html#fertilizantes",
-    "Sustratos": "/src/pages/productos/productos.html#sustratos",
-    "Semillas": "/src/pages/productos/productos.html#semillas"
+    "Invernadero": "../../../src/pages/productos/productos.html#invernadero",
+    "Malla sombra": "../../../src/pages/productos/productos.html#malla-sombra",
+    "Malla decorativa": "../../../src/pages/productos/productos.html#malla-decorativa",
+    "Accesorios hidroponía": "../../../src/pages/productos/productos.html#accesorios-hidroponia",
+    "Fertilizantes": "../../../src/pages/productos/productos.html#fertilizantes",
+    "Sustratos": "../../../src/pages/productos/productos.html#sustratos",
+    "Semillas": "../../../src/pages/productos/productos.html#semillas"
   };
   setupSearch('searchToggle', 'navbarSearch', 'searchResults', searchLinks);
   setupSearch('searchToggleMobile', 'navbarSearchMobile', 'searchResultsMobile', searchLinks);
