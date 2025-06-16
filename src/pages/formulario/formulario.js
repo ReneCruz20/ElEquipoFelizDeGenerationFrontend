@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Redirigir a la página de perfil después del registro exitoso
       setTimeout(() => {
-        window.location.href = "/src/pages/perfilDeUsuario/perfilDeUsuario.html";
+        window.location.href = "../../../src/pages/perfilDeUsuario/perfilDeUsuario.html";
       }, 1000); // Redirige después de 1 segundo para mostrar el mensaje
     }
   });
