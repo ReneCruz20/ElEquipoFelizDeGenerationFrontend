@@ -1,3 +1,11 @@
+//Detectar si hay un usuario activo
+function obtenerHrefUsuario() {
+  const usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo') || 'null');
+  return usuarioActivo
+    ? "../../../src/pages/perfilDeUsuario/perfilDeUsuario.html"
+    : "../../../src/pages/login/login.html";
+}
+
 // Inserta el header completo en el elemento con id="navBar"
 function insertHeader() {
   loadCSS('../../../src/modules/header/header.css'); // Carga el CSS del header dinámicamente
@@ -31,7 +39,9 @@ function insertHeader() {
         <div class="d-flex d-lg-none align-items-center">
           ${createSearchBox('searchToggleMobile', 'navbarSearchMobile', 'searchResultsMobile')}
           ${createNavIcon('../../../resources/images/navBar/carrito.png', 'Icono de Carrito', '../../../src/pages/carrito/carrito.html')}
-          ${createNavIcon('../../../resources/images/navBar/user.png', 'Icono de Usuario', '../../../src/pages/perfilDeUsuario/perfilDeUsurario.html')}
+          ${createNavIcon('../../../resources/images/navBar/user.png', 'Icono de Usuario', obtenerHrefUsuario(), 29, 'usuario-icono')}
+
+
         </div>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -65,7 +75,9 @@ function insertHeader() {
           <div class="d-none d-lg-flex align-items-center">
             ${createSearchBox('searchToggle', 'navbarSearch', 'searchResults')}
             ${createNavIcon('../../../resources/images/navBar/carrito.png', 'Icono de Carrito', '../../../src/pages/carrito/carrito.html')}
-            ${createNavIcon('../../../resources/images/navBar/user.png', 'Icono de Usuario', '../../../src/pages/login/login.html', 29)}
+            ${createNavIcon('../../../resources/images/navBar/user.png', 'Icono de Usuario', obtenerHrefUsuario(), 29, 'usuario-icono')}
+
+
           </div>
         </div>
       </div>
@@ -81,10 +93,11 @@ function loadCSS(href) {
 }
 
 // Crea conos del navbar con enlace
-function createNavIcon(src, alt, link, size = 32) {
+function createNavIcon(src, alt, link, size = 32, iconId = '') {
+  const idAttribute = iconId ? `id="${iconId}"` : '';
   return `
     <div class="nav-item d-flex align-items-center px-2">
-      <a href="${link}">
+      <a href="${link}" ${idAttribute}>
         <img src="${src}" alt="${alt}" width="${size}" height="${size}">
       </a>
     </div>
@@ -184,13 +197,15 @@ function setupSearch(toggleId, inputId, resultsId, searchLinks) {
   });
 }
 
-// Ejecuta todo al cargar
-insertHeader();
-adjustBodyPadding();
-window.addEventListener('resize', adjustBodyPadding);
 
-document.addEventListener('DOMContentLoaded', () => {
+// Inicialización mejorada
+function initHeader() {
+  insertHeader();
+  adjustBodyPadding();
+  
+  // Configuración de los buscadores
   const searchLinks = {
+    "Invernadero": "../../../src/pages/productos/productos.html#invernadero",
     "Invernadero": "../../../src/pages/productos/productos.html#invernadero",
     "Malla sombra": "../../../src/pages/productos/productos.html#malla-sombra",
     "Malla decorativa": "../../../src/pages/productos/productos.html#malla-decorativa",
@@ -199,6 +214,19 @@ document.addEventListener('DOMContentLoaded', () => {
     "Sustratos": "../../../src/pages/productos/productos.html#sustratos",
     "Semillas": "../../../src/pages/productos/productos.html#semillas"
   };
+  
   setupSearch('searchToggle', 'navbarSearch', 'searchResults', searchLinks);
   setupSearch('searchToggleMobile', 'navbarSearchMobile', 'searchResultsMobile', searchLinks);
+
+  // Actualiza el ícono después de que el header esté listo
+  setTimeout(updateUserIcon, 50);
+}
+
+// Event listeners
+window.addEventListener('storage', (e) => {
+  if (e.key === 'usuarioActivo') updateUserIcon();
 });
+
+document.addEventListener('DOMContentLoaded', initHeader);
+window.addEventListener('load', updateUserIcon);
+
