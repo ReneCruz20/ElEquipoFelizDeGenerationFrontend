@@ -1,13 +1,21 @@
+// Inserta el header completo en el elemento con id="navBar"
+function insertHeader() {
+  loadCSS('/src/modules/header/header.css'); // Carga el CSS del header dinámicamente
 
-const insertHeader = () => {
-    const link = document.createElement('link');
-    link.href = '/src/modules/header/header.css';
-    link.rel = 'stylesheet';
-    document.head.appendChild(link);
-    
-    const header = document.getElementById("navBar");
-    header.innerHTML = 
-    `<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #118A4D">
+  const header = document.getElementById("navBar");
+  if (!header) return;
+
+  // Menú desplegable de productos
+  const dropdownMenu = createDropdownMenu([
+    { id: 'invernadero', label: 'Productos para invernadero' },
+    { id: 'malla-sombra', label: 'Mallas sombra' },
+    { id: 'malla-decorativa', label: 'Mallas decorativas' },
+    { id: 'accesorios-hidroponia', label: 'Accesorios hidroponía' }
+  ]);
+
+  // HTML del header
+  header.innerHTML = `
+    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #118A4D">
       <div class="container-fluid">
         <div class="navbar-brand d-flex align-items-center">
           <a href="/index.html">
@@ -19,50 +27,30 @@ const insertHeader = () => {
             <span class="d-none d-md-inline d-lg-none ms-2 ms-md-3">HTA</span>
           </span>
         </div>
-        
+
         <div class="d-flex d-lg-none align-items-center">
-          <div class="nav-item d-flex align-items-center px-2 position-relative">
-            <button class="btn p-0 border-0 bg-transparent" id="searchToggleMobile">
-                <img src="/resources/images/navBar/lupa.png" alt="Icono de Buscar" width="32" height="32">
-            </button>
-            <input type="text" id="navbarSearchMobile" class="form-control search-input" placeholder="Buscar..." />
-            <div id="searchResultsMobile" class="search-results"></div>
-          </div>
-          
-          <div class="nav-item d-flex align-items-center px-2">
-            <a href="/src/pages/carrito/carrito.html">
-              <img src="/resources/images/navBar/carrito.png" alt="Icono de Carrito" width="32" height="32">
-            </a>
-          </div>
-          <div class="nav-item d-flex align-items-center px-2">
-            <a href="/src/pages/perfilDeUsuario/perfilDeUsurario.html">
-              <img src="/resources/images/navBar/user.png" alt="Icono de Usuario" width="32" height="32">
-            </a>
-          </div>
+          ${createSearchBox('searchToggleMobile', 'navbarSearchMobile', 'searchResultsMobile')}
+          ${createNavIcon('/resources/images/navBar/carrito.png', 'Icono de Carrito', '/src/pages/carrito/carrito.html')}
+          ${createNavIcon('/resources/images/navBar/user.png', 'Icono de Usuario', '/src/pages/perfilDeUsuario/perfilDeUsurario.html')}
         </div>
-        
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
           aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        
+
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link" href="/index.html">Inicio</a>
             </li>
-            
+
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="/src/pages/productos/productos.html"
                 id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Productos
               </a>
-              <ul class="dropdown-menu bg-success" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item text-light" href="/src/pages/productos/productos.html">Productos para invernadero</a></li>
-                <li><a class="dropdown-item text-light" href="/src/pages/productos/productos.html">Mallas sombra</a></li>
-                <li><a class="dropdown-item text-light" href="/src/pages/productos/productos.html">Mallas decorativas</a></li>
-                <li><a class="dropdown-item text-light" href="/src/pages/productos/productos.html">Accesorios hidroponia</a></li>
-              </ul>
+              ${dropdownMenu}
             </li>
 
             <li class="nav-item">
@@ -73,67 +61,80 @@ const insertHeader = () => {
               <a class="nav-link" href="/src/pages/contacto/contacto.html">Contacto</a>
             </li>
           </ul>
-          
-          <div class="d-none d-lg-flex align-items-center">
-            <div class="nav-item d-flex align-items-center px-2 position-relative">
-              <button class="btn p-0 border-0 bg-transparent" id="searchToggle">
-                  <img src="/resources/images/navBar/lupa.png" alt="Icono de Buscar" width="32" height="32">
-              </button>
-              <input type="text" id="navbarSearch" class="form-control search-input" placeholder="Buscar..." />
-              <div id="searchResults" class="search-results"></div>
-            </div>
 
-            <div class="nav-item d-flex align-items-center px-2">
-              <a href="/src/pages/carrito/carrito.html">
-                <img src="/resources/images/navBar/carrito.png" alt="Icono de Carrito" width="32" height="32">
-              </a>
-            </div>
-            <div class="nav-item d-flex align-items-center px-2">
-              <a href="/src/pages/login/login.html">
-                <img src="/resources/images/navBar/user.png" alt="Icono de Usuario" width="29" height="29">
-              </a>
-            </div>
+          <div class="d-none d-lg-flex align-items-center">
+            ${createSearchBox('searchToggle', 'navbarSearch', 'searchResults')}
+            ${createNavIcon('/resources/images/navBar/carrito.png', 'Icono de Carrito', '/src/pages/carrito/carrito.html')}
+            ${createNavIcon('/resources/images/navBar/user.png', 'Icono de Usuario', '/src/pages/login/login.html', 29)}
           </div>
         </div>
       </div>
     </nav>`;
-};
-
-adjustBodyPadding();
-window.addEventListener('resize', adjustBodyPadding);
-
-insertHeader();
-
-function adjustBodyPadding() {
-    const header = document.getElementById('navBar');
-    if (header) {
-        const headerHeight = header.offsetHeight;
-        document.body.style.paddingTop = `${headerHeight}px`;
-    }
 }
 
-// busqueda
-function setupSearch(toggleId, inputId, resultsId) {
+// Carga CSS dinámicamente
+function loadCSS(href) {
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = href;
+  document.head.appendChild(link);
+}
+
+// Crea conos del navbar con enlace
+function createNavIcon(src, alt, link, size = 32) {
+  return `
+    <div class="nav-item d-flex align-items-center px-2">
+      <a href="${link}">
+        <img src="${src}" alt="${alt}" width="${size}" height="${size}">
+      </a>
+    </div>
+  `;
+}
+
+// Crea buscador reutilizable
+function createSearchBox(toggleId, inputId, resultsId) {
+  return `
+    <div class="nav-item d-flex align-items-center px-2 position-relative">
+      <button class="btn p-0 border-0 bg-transparent" id="${toggleId}">
+          <img src="/resources/images/navBar/lupa.png" alt="Buscar" width="32" height="32">
+      </button>
+      <input type="text" id="${inputId}" class="form-control search-input" placeholder="Buscar..." />
+      <div id="${resultsId}" class="search-results"></div>
+    </div>
+  `;
+}
+
+// Crea menú desplegable con enlaces
+function createDropdownMenu(items) {
+  return `
+    <ul class="dropdown-menu bg-success" aria-labelledby="navbarDropdownMenuLink">
+      ${items.map(item => `
+        <li><a class="dropdown-item text-light" href="/src/pages/productos/productos.html#${item.id}">${item.label}</a></li>
+      `).join('')}
+    </ul>
+  `;
+}
+
+// Ajusta padding del body según el alto del navbar
+function adjustBodyPadding() {
+  const header = document.getElementById('navBar');
+  if (header) {
+    const headerHeight = header.offsetHeight;
+    document.body.style.paddingTop = `${headerHeight}px`;
+  }
+}
+
+// Configura buscador dinámico para escritorio y móvil
+function setupSearch(toggleId, inputId, resultsId, searchLinks) {
   const searchToggle = document.getElementById(toggleId);
   const searchInput = document.getElementById(inputId);
   const resultsContainer = document.getElementById(resultsId);
 
   if (!searchToggle || !searchInput || !resultsContainer) return;
 
-  const searchLinks = {
-    "Invernadero": "/src/pages/productos/productos.html#invernadero",
-    "Malla sombra": "/src/pages/productos/productos.html#malla-sombra",
-    "Malla decorativa": "/src/pages/productos/productos.html#malla-decorativa",
-    "Accesorios hidroponía": "/src/pages/productos/productos.html#accesorios-hidroponia",
-    "Fertilizantes": "/src/pages/productos/productos.html#fertilizantes",
-    "Sustratos": "/src/pages/productos/productos.html#sustratos",
-    "Semillas": "/src/pages/productos/productos.html#semillas"
-  };
-
   searchToggle.addEventListener('click', (e) => {
     e.stopPropagation();
     searchInput.classList.toggle('show');
-
     if (searchInput.classList.contains('show')) {
       searchInput.focus();
     } else {
@@ -183,7 +184,21 @@ function setupSearch(toggleId, inputId, resultsId) {
   });
 }
 
+// Ejecuta todo al cargar
+insertHeader();
+adjustBodyPadding();
+window.addEventListener('resize', adjustBodyPadding);
+
 document.addEventListener('DOMContentLoaded', () => {
-  setupSearch('searchToggle', 'navbarSearch', 'searchResults');
-  setupSearch('searchToggleMobile', 'navbarSearchMobile', 'searchResultsMobile');
+  const searchLinks = {
+    "Invernadero": "/src/pages/productos/productos.html#invernadero",
+    "Malla sombra": "/src/pages/productos/productos.html#malla-sombra",
+    "Malla decorativa": "/src/pages/productos/productos.html#malla-decorativa",
+    "Accesorios hidroponía": "/src/pages/productos/productos.html#accesorios-hidroponia",
+    "Fertilizantes": "/src/pages/productos/productos.html#fertilizantes",
+    "Sustratos": "/src/pages/productos/productos.html#sustratos",
+    "Semillas": "/src/pages/productos/productos.html#semillas"
+  };
+  setupSearch('searchToggle', 'navbarSearch', 'searchResults', searchLinks);
+  setupSearch('searchToggleMobile', 'navbarSearchMobile', 'searchResultsMobile', searchLinks);
 });
