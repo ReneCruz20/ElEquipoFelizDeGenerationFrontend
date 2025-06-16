@@ -8,8 +8,7 @@ function obtenerHrefUsuario() {
 
 // Inserta el header completo en el elemento con id="navBar"
 function insertHeader() {
-  loadCSS('../../../src/modules/header/header.css'); // Carga el CSS del header dinámicamente
-
+  
   const header = document.getElementById("navBar");
   if (!header) return;
 
@@ -82,14 +81,6 @@ function insertHeader() {
         </div>
       </div>
     </nav>`;
-}
-
-// Carga CSS dinámicamente
-function loadCSS(href) {
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = href;
-  document.head.appendChild(link);
 }
 
 // Crea conos del navbar con enlace
