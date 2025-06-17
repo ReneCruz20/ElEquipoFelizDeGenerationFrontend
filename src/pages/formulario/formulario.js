@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const hashedPassword = await hashPassword(password);
       const userData = {
         nombre: name,
-        apellidos: lastName,
+        apellido: lastName,
         telefono: phone,
         email: email,
         password: hashedPassword // Aquí guarda la contraseña hasheada
@@ -116,15 +116,13 @@ document.addEventListener('DOMContentLoaded', () => {
       usuarios.push(userData);
       localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-      // Bloque para guardar perfil
-      const perfil = {
+      localStorage.setItem('usuarioActivo', JSON.stringify({
+        email: email,
         nombre: name,
         apellido: lastName,
-        email: email,
         telefono: phone
-      };
-      localStorage.setItem("perfil", JSON.stringify(perfil));
-
+      }));
+      window.dispatchEvent(new Event('storage')); // Notifica a otras pestañas
 
       // Mostrar mensaje y limpiar formulario
       console.log("Usuario registrado (JSON):", JSON.stringify(userData, null, 2));
@@ -133,11 +131,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Redirigir a la página de perfil después del registro exitoso
       setTimeout(() => {
-        window.location.href = "/src/pages/perfilDeUsuario/perfilDeUsuario.html";
+        window.location.href = "../../../src/pages/perfilDeUsuario/perfilDeUsuario.html";
       }, 1000); // Redirige después de 1 segundo para mostrar el mensaje
     }
   });
 });
+
 
 // Funciones de erores /limpiar campos
 function clearFieldErrors(fieldIds) {
@@ -177,17 +176,6 @@ function showErrors(errors) {
     alertContainer.appendChild(alert);
   });
 }
-
-/*function showSuccess(message) {
-    const alertContainer = document.getElementById('alertContainer');
-    const alert = document.createElement('div');
-    alert.className = 'alert alert-success alert-dismissible fade show';
-    alert.innerHTML = `
-        ${message}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    `;
-    alertContainer.appendChild(alert);
-}*/
 
 // Mensaje de usuario registrado con exito 
 function showSuccess(message) {

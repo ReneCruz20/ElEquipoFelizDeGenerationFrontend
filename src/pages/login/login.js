@@ -58,9 +58,10 @@ form.addEventListener('submit', async (e) => {
     
     // Guardar sesión activa
     localStorage.setItem('usuarioActivo', JSON.stringify(foundUser));
+    window.dispatchEvent(new Event('storage'));
 
-    // Redirigir a página de incio "indez"
-     window.location.href = "/index.html"; // 
+    // Redirigir a página de incio "index"
+     window.location.href = "../../../index.html"; // 
 
 
 });
