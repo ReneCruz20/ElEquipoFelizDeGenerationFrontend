@@ -7,53 +7,50 @@
   <title>HTA de México</title>
 
 
-  <!--Bootstrap-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 
-  <!-- Estilos CSS -->
-  <link rel="stylesheet" href="/src/modules/globales/globales.css" />
+  <link rel="stylesheet" href="./src/modules/globales/globales.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="/src/modules/footer/footer.css">
-  <link rel="stylesheet" href="/src/pages/index/index.css">
+  <link rel="stylesheet" href="./src/modules/header/header.css">
+  <link rel="stylesheet" href="./src/modules/footer/footer.css">
+  <link rel="stylesheet" href="./src/pages/index/index.css">
 
 
 </head>
 
 <body>
 
-  <!-- Barra -->
   <header id="navBar"></header>
 
 
   <main>
-    <!-- Main Carousel -->
     <section class="topMargin hero-carousel">
       <div class="carousel-container">
         <div class="carousel-slide active">
-          <img src="/resources/images/PRUEBA_productos/mallasombra_muestras_1.jpg" alt="Promoción 1">
+          <img src="./resources/images/PRUEBA_productos/mallasombra_muestras_1.jpg" alt="Promoción 1">
           <div class="carousel-caption">
-            <h2>Oferta de Verano</h2>
-            <p>Hasta 50% de descuento en productos seleccionados</p>
-            <a href="/src/pages/productos/productos.html" class="carousel-btn">Ver Ofertas</a>
+            <h2>Nuestros Productos</h2>
+            <p>Explora nuestro catálogo completo de mallas y accesorios</p>
+            <a href="./src/pages/productos/productos.html" class="carousel-btn">Ver Catálogo</a>
           </div>
         </div>
         <div class="carousel-slide">
-          <img src="/resources/images/PRUEBA_productos/mallasombra_azul_1.webp" alt="Nuevos Productos">
+          <img src="./resources/images/PRUEBA_productos/mallasombra_azul_1.webp" alt="Nuevos Productos">
           <div class="carousel-caption">
-            <h2>Nueva Colección</h2>
-            <p>Descubre nuestros productos ecológicos</p>
-            <a href="#" class="carousel-btn">Explorar</a>
+            <h2>Contacto Directo</h2>
+            <p>Descubre nuestros números y redes sociales para una atención personalizada</p>
+            <a href="./src/pages/contacto/contacto.html" class="carousel-btn">Contactar</a>
           </div>
         </div>
         <div class="carousel-slide">
-          <img src="/resources/images/PRUEBA_productos/invernadero_pequeno_2.jpg" alt="Envío Gratis">
+          <img src="./resources/images/PRUEBA_productos/invernadero_pequeno_2.jpg" alt="Envío Gratis">
           <div class="carousel-caption">
-            <h2>Envío Gratis</h2>
-            <p>En compras superiores a $50</p>
-            <a href="#" class="carousel-btn">Comprar Ahora</a>
+            <h2>Calidad Garantizada</h2>
+            <p>Conoce nuestros principios, valores y la tecnología que nos respalda</p>
+            <a href="./src/pages/nosotros/nosotros.html" class="carousel-btn">Saber Más</a>
           </div>
         </div>
       </div>
@@ -68,66 +65,12 @@
       </div>
     </section>
 
-    <!-- Best Sellers -->
     <section class="best-sellers">
       <h2>Productos Más Vendidos</h2>
       <div class="products-carousel">
-        <div class="product-card">
-          <img src="/resources/images/PRUEBA_productos/mallasombra_negro_1.webp" alt="Producto 1">
-          <h3>Malla Sombra Raschel - Negro</h3>
-          <div class="product-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star-half-alt"></i>
-          </div>
-          <p class="product-price">$29.99</p>
-          <button class="add-to-cart">Añadir al Carrito</button>
-        </div>
-        <div class="product-card">
-          <img src="/resources/images/PRUEBA_productos/mallasombra_rojo_1.jpg" alt="Producto 2">
-          <h3>Malla Sombra Raschel - Rojo</h3>
-          <div class="product-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="far fa-star"></i>
-          </div>
-          <p class="product-price">$14.99</p>
-          <button class="add-to-cart">Añadir al Carrito</button>
-        </div>
-        <div class="product-card">
-          <img src="/resources/images/PRUEBA_productos/mallaantiafido_cristal_1.webp" alt="Producto 3">
-          <h3>Malla Antiáfido - Cristal</h3>
-          <div class="product-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <p class="product-price">$9.99</p>
-          <button class="add-to-cart">Añadir al Carrito</button>
-        </div>
-        <div class="product-card">
-          <img src="/resources/images/PRUEBA_productos/conector_diamante_1.jpg" alt="Producto 4">
-          <h3>Conector para Malla - Diamante</h3>
-          <div class="product-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star-half-alt"></i>
-          </div>
-          <p class="product-price">$39.99</p>
-          <button class="add-to-cart">Añadir al Carrito</button>
-        </div>
       </div>
     </section>
 
-    <!-- Testimonials -->
     <section class="testimonials">
       <h2>Lo que dicen nuestros clientes</h2>
       <div class="testimonials-container">
@@ -167,45 +110,28 @@
       </div>
     </section>
 
-    <!-- About Section -->
     <section class="about-section">
       <div class="about-image">
-        <img src="/resources/images/PRUEBA_productos/invernadero_pequeno_1.jpg" alt="Nuestra Historia">
+        <img src="./resources/images/PRUEBA_productos/invernadero_pequeno_1.jpg" alt="Nuestra Historia">
       </div>
       <div class="about-text">
         <h2>Sobre HTA</h2>
         <p>En HTA, transformamos invernaderos en ecosistemas de alto rendimiento con tecnología sostenible. Por 15 años, hemos unido innovación agrotecnológica (certificación ISO 9001), compromiso ecológico y soporte experto 360° - desde diseño personalizado hasta talleres prácticos. Trabajamos para que agricultores, investigadores y emprendedores superen desafíos climáticos, reduzcan costos y multipliquen cosechas. Descubre soluciones probadas por miles de productores: donde la precisión técnica honra la tierra.</p>
-        <button class="learn-more"><a href="/src/pages/nosotros/nosotros.html">Conoce Más</a></button>
+        <button class="learn-more"><a href="./src/pages/nosotros/nosotros.html">Conoce Más</a></button>
       </div>
     </section>
   </main>
 
-
-
-
-
-
-
-
-
-
-
-
-  <!-- Footer -->
   <footer id="footer" class="main-footer"></footer>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
     crossorigin="anonymous"></script>
-  <script type="module" src="/src/modules/header/header.js"></script>
-  <script type="module" src="/src/modules/footer/footer.js"></script>
-  <script type="module" src="/src/pages/index/index.js"></script>
-
-
+  <script type="module" src="./src/modules/header/header.js"></script>
+  <script type="module" src="./src/modules/footer/footer.js"></script>
+  <script type="module" src="./src/pages/index/index.js"></script>
 
 </body>
-
-
 
 </html>

@@ -166,6 +166,15 @@ function crearTarjeta(producto) {
     form.codigo.disabled = false;
     editando = false;
     codigoProductoEditando = null;
+
+    /* Limpiar errores visuales */
+
+     document.getElementById("errorNombre").classList.add("d-none");
+  document.getElementById("errorCodigo").classList.add("d-none");
+  form.nombre.classList.remove("is-invalid");
+  form.codigo.classList.remove("is-invalid");
+
+
   }
 
   // Al enviar formulario: añadir o editar producto
@@ -178,6 +187,8 @@ function crearTarjeta(producto) {
 const precioOriginal = parseFloat(form.precio.value); // Este es el campo que el usuario llena
 const descuento = parseFloat(form.descuento.value);
 
+
+/* Validaciones de la entrada de inputs */
 const precio = !isNaN(descuento) && descuento >= 0 && descuento <= 100
   ? precioOriginal * (1 - descuento / 100)
   : precioOriginal;
@@ -186,10 +197,37 @@ const precio = !isNaN(descuento) && descuento >= 0 && descuento <= 100
     const imagen = form.imagen.value.trim();
     const categoria = form.categoria.value.trim();
 
-    if (!codigo || !nombre || !descripcion || isNaN(precio) || isNaN(stock) || !imagen) {
-      alert("Por favor, completa todos los campos correctamente.");
-      return;
-    }
+   const errorNombre = document.getElementById("errorNombre");
+const errorCodigo = document.getElementById("errorCodigo");
+
+const nombreValido = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑ-]+$/.test(nombre);
+const codigoValido = /^[a-zA-Z0-9-_]+$/.test(codigo); // Solo letras, números, guiones y guiones bajos
+
+let hayErrores = false;
+/* Validacion input nombre */
+if (!nombreValido) {
+  errorNombre.classList.remove("d-none");
+  form.nombre.classList.add("is-invalid");
+  hayErrores = true;
+} else {
+  errorNombre.classList.add("d-none");
+  form.nombre.classList.remove("is-invalid");
+}
+/* Validacion input codigo */
+if (!codigoValido) {
+  errorCodigo.classList.remove("d-none");
+  form.codigo.classList.add("is-invalid");
+  hayErrores = true;
+} else {
+  errorCodigo.classList.add("d-none");
+  form.codigo.classList.remove("is-invalid");
+}
+
+if (!codigo || !nombre || !descripcion || isNaN(precio) || isNaN(stock) || !imagen || hayErrores) {
+  return;
+}
+
+
 
     const productosGuardados = JSON.parse(localStorage.getItem("productos")) || [];
 

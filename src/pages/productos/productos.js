@@ -1,37 +1,76 @@
 document.addEventListener("DOMContentLoaded", () => {
-  inicializarPagina();
+  cargarFiltros();
+  cargarProductosCategoria();
+  cargarProductosDesdeLocalStorage();
+
+ document.getElementById("btnVolverCatalogo").addEventListener("click", () => {
+  // Mostrar todas las secciones con todos los productos
+  const secciones = [
+    "productos-invernadero",
+    "malla-sombra",
+    "mallas-decorativas",
+    "accesorios-hidroponia"
+  ];
+  secciones.forEach(id => {
+    const sec = document.getElementById(id);
+    if (sec) sec.style.display = "block";
+  });
+
+
+  // Ocultar el botón "Volver al catálogo"
+  document.getElementById("volverCatalogoContainer").style.display = "none";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
 });
 
-function inicializarPagina() {
-  cargarFiltros();
-  cargarCategoriasVisuales();
-  // Eventos para los filtros
-  document.getElementById("filtros-container").addEventListener("change", aplicarFiltros);
-  cargarProductosDesdeLocalStorage();
-  configurarBotonVolver();
+/* ──────── UTILIDADES ──────── */
+function toggleSection(id) {
+  const section = document.getElementById(id);
+  section.style.display = section.style.display === "none" ? "block" : "none";
+}
+
+/* Crear tarjetas */
+
+function crearTarjetaProducto(producto, claseCard = "producto-card") {
+  const { imagen, nombre, descripcion, precio, precioOriginal } = producto;
+
+  const card = document.createElement("div");
+  card.className = claseCard;
+
+  card.innerHTML = `
+    <img src="${imagen}" alt="${nombre}" class="producto-img" />
+    <h3 class="producto-nombre">${nombre}</h3>
+    <p class="producto-descripcion">${descripcion || "Sin descripción disponible."}</p>
+    <p class="producto-precio">
+      <span class="precio-actual">$${precio.toFixed(2)}</span>
+      ${precioOriginal && precioOriginal > precio
+        ? `<span class="precio-original">$${precioOriginal.toFixed(2)}</span>`
+        : ""}
+    </p>
+    <button class="btn-agregar-carrito">Agregar al carrito</button>
+  `;
+
+  card.querySelector(".btn-agregar-carrito").addEventListener("click", () => {
+    const nuevoProducto = { nombre, precio, imagen, cantidad: 1 };
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const existente = carrito.find(p => p.nombre === nombre);
+
+    if (existente) {
+      existente.cantidad += 1;
+    } else {
+      carrito.push(nuevoProducto);
+    }
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    alert("Producto añadido al carrito ✅");
+  });
+
+  return card;
 }
 
 /* ──────── FILTROS ──────── */
-function cargarFiltros() {
-  const filtros = [
-    crearDefinicionFiltro("Precio", "precio", [
-      { value: "0-500", label: "$0 - $500" },
-      { value: "500-1000", label: "$500 - $1000" },
-      { value: "1000+", label: "Más de $1000" }
-    ]),
-    crearDefinicionFiltro("Descuento", "descuento", [
-      { value: "10", label: "10%" },
-      { value: "15", label: "15%" },
-      { value: "20", label: "20%" },
-      { value: "30", label: "30%" }
-    ])
-  ];
-
-  const contenedor = document.getElementById("filtros-container");
-  filtros.forEach(filtro => contenedor.appendChild(filtro));
-}
-
-function crearDefinicionFiltro(titulo, id, opciones) {
+function crearFiltro(titulo, id, opciones) {
   const contenedor = document.createElement("div");
   contenedor.classList.add("filtro");
 
@@ -44,10 +83,10 @@ function crearDefinicionFiltro(titulo, id, opciones) {
   contenido.classList.add("contenido-filtro");
   contenido.id = id;
 
-  opciones.forEach(({ value, label }) => {
-    const labelEl = document.createElement("label");
-    labelEl.innerHTML = `<input type="checkbox" name="${id}" value="${value}"> ${label}`;
-    contenido.appendChild(labelEl);
+  opciones.forEach(opcion => {
+    const label = document.createElement("label");
+    label.innerHTML = `<input type="checkbox" name="${id}" value="${opcion.value}"> ${opcion.label}`;
+    contenido.appendChild(label);
     contenido.appendChild(document.createElement("br"));
   });
 
@@ -57,236 +96,167 @@ function crearDefinicionFiltro(titulo, id, opciones) {
   return contenedor;
 }
 
-// ──────── FUNCION FILTRAR SIDE BAR ────────
-
-function aplicarFiltros() {
-  mostrarTodasLasSecciones();
-
-  const productos = JSON.parse(localStorage.getItem("productos")) || [];
-
-  // Obtener valores de filtros seleccionados
-  const filtrosPrecio = obtenerFiltrosSeleccionados("precio");
-  const filtrosDescuento = obtenerFiltrosSeleccionados("descuento");
-
-  const productosFiltrados = productos.filter(producto => {
-    // Filtro por precio
-    const cumplePrecio = filtrosPrecio.length === 0 || filtrosPrecio.some(rango => {
-      if (rango === "1000+") return producto.precio >= 1000;
-      const [min, max] = rango.split("-").map(Number);
-      return producto.precio >= min && producto.precio <= max;
-    });
-
-    const cumpleDescuento = filtrosDescuento.length === 0 || filtrosDescuento.some(desc => {
-      const descuentoCalculado = obtenerDescuento(producto);
-      return descuentoCalculado >= parseInt(desc);
-    });
-
-    return cumplePrecio && cumpleDescuento;
-  });
-
-  mostrarProductosFiltrados(productosFiltrados);
-}
-
-function obtenerFiltrosSeleccionados(nombre) {
-  return Array.from(document.querySelectorAll(`input[name="${nombre}"]:checked`))
-    .map(input => input.value);
-}
-
-function mostrarProductosFiltrados(productos) {
-  // Limpiar secciones visibles
-  const contenedores = [
-    "grid-invernadero",
-    "grid-malla-sombra",
-    "grid-mallas-decorativas",
-    "grid-accesorios"
+function cargarFiltros() {
+  const filtros = [
+    {
+      titulo: "Precio",
+      id: "precio",
+      opciones: [
+        { value: "0-500", label: "$0 - $500" },
+        { value: "500-1000", label: "$500 - $1000" },
+        { value: "1000+", label: "Más de $1000" }
+      ]
+    },
+    {
+      titulo: "Descuento",
+      id: "descuento",
+      opciones: [
+        { value: "10", label: "10%" },
+        { value: "15", label: "15%" },
+        { value: "20", label: "20%" },
+        { value: "30", label: "30%" }
+      ]
+    }
   ];
-  contenedores.forEach(id => {
-    const cont = document.getElementById(id);
-    if (cont) cont.innerHTML = "";
-  });
 
-  // Reutilizar el mapa de secciones
-  const secciones = {
-    "productos para invernadero": "grid-invernadero",
-    "malla sombra": "grid-malla-sombra",
-    "mallas decorativas": "grid-mallas-decorativas",
-    "accesorios hidroponia": "grid-accesorios"
-  };
-
-  productos.forEach(producto => {
-    const categoriaKey = producto.categoria.trim().toLowerCase();
-    const contenedorId = secciones[categoriaKey];
-    const contenedor = document.getElementById(contenedorId);
-    if (!contenedor) return;
-
-    const tarjeta = crearTarjetaProducto(producto);
-    contenedor.appendChild(tarjeta);
-  });
+  const contenedor = document.getElementById("filtros-container");
+  filtros.forEach(filtro =>
+    contenedor.appendChild(crearFiltro(filtro.titulo, filtro.id, filtro.opciones))
+  );
 }
 
-/* ──────── NAVEGACIÓN ENTRE CATEGORÍAS ──────── */
-function cargarCategoriasVisuales() {
-  const categorias = [
-    crearCategoria("INVERNADERO HTA", "Productos para invernadero", "productos-invernadero", "https://images.pexels.com/photos/32236848/pexels-photo-32236848.jpeg"),
-    crearCategoria("INVERNADEROS HTA", "Malla sombra", "malla-sombra", "https://images.pexels.com/photos/16702073/pexels-photo-16702073/free-photo-of-rojo-pared-muro-negro.jpeg"),
-    crearCategoria("INVERNADEROS HTA", "Mallas decorativas", "mallas-decorativas", "https://www.hta-agrotextil.com/.cm4all/iproc.php/MONOFILAMENTO/95%20MONOFILAMENTO%20CAFE%20CON%20RAYAS.jpg"),
-    crearCategoria("INVERNADEROS HTA", "Accesorios Hidroponia", "accesorios-hidroponia", "https://images.pexels.com/photos/6510867/pexels-photo-6510867.jpeg")
+/* ──────── CATEGORÍAS / NAVEGACIÓN ──────── */
+function cargarProductosCategoria() {
+  const productosCategoria = [
+    {
+      categoria: "INVERNADEROS HTA",
+      titulo: "Productos para invernadero",
+      imagen: "https://images.pexels.com/photos/32236848/pexels-photo-32236848.jpeg",
+      destinoId: "productos-invernadero"
+    },
+    {
+      categoria: "INVERNADEROS HTA",
+      titulo: "Malla sombra",
+      imagen: "https://images.pexels.com/photos/16702073/pexels-photo-16702073/free-photo-of-rojo-pared-muro-negro.jpeg",
+      destinoId: "malla-sombra"
+    },
+    {
+      categoria: "INVERNADEROS HTA",
+      titulo: "Mallas decorativas",
+      imagen: "https://www.hta-agrotextil.com/.cm4all/iproc.php/MONOFILAMENTO/95%20MONOFILAMENTO%20CAFE%20CON%20RAYAS.jpg",
+      destinoId: "mallas-decorativas"
+    },
+    {
+      categoria: "INVERNADEROS HTA",
+      titulo: "Accesorios Hidroponia",
+      imagen: "https://images.pexels.com/photos/6510867/pexels-photo-6510867.jpeg",
+      destinoId: "accesorios-hidroponia"
+    }
   ];
 
   const grid = document.getElementById("product-grid");
-  grid.innerHTML = "";
-  categorias.forEach(cat => grid.appendChild(cat));
-}
+  grid.innerHTML = "";  
+  productosCategoria.forEach(p => {
+    const card = document.createElement("a");
+    card.className = "card";
+    card.href = "#";
 
-function crearCategoria(categoria, titulo, destinoId, imagen) {
-  const card = document.createElement("a");
-  card.className = "card";
-  card.href = "#";
+    card.innerHTML = `
+      <div class="card__background" style="background-image: url(${p.imagen})"></div>
+      <div class="card__content">
+        <p class="card__category">${p.categoria}</p>
+        <h3 class="card__heading">${p.titulo}</h3>
+      </div>
+    `;
 
-  card.innerHTML = `
-    <div class="card__background" style="background-image: url(${imagen})"></div>
-    <div class="card__content">
-      <p class="card__category">${categoria}</p>
-      <h3 class="card__heading">${titulo}</h3>
-    </div>
-  `;
+    card.addEventListener("click", e => {
+      e.preventDefault();
 
-  card.addEventListener("click", e => {
-    e.preventDefault();
-    mostrarSoloSeccion(destinoId);
+      // Oculta todas las secciones de productos
+      const secciones = [
+        "productos-invernadero",
+        "malla-sombra",
+        "mallas-decorativas",
+        "accesorios-hidroponia"
+      ];
+      secciones.forEach(id => {
+        const sec = document.getElementById(id);
+        if (sec) sec.style.display = "none";
+      });
+
+      // Muestra solo la sección clickeada
+      const destino = document.getElementById(p.destinoId);
+      if (destino) destino.style.display = "block";
+
+
+
+      // Mostrar botón "Volver al catálogo"
+      document.getElementById("volverCatalogoContainer").style.display = "block";
+
+      window.scrollTo({ top: 0, behavior: "instant" });
+    });
+
+    grid.appendChild(card);
   });
 
-  return card;
+  // Al cargar la página, muestra solo el grid de categorías y oculta las secciones
+  // Ya lo hacemos al inicializar (más abajo)
 }
 
-function mostrarSoloSeccion(idVisible) {
-  const ids = [
+// Botón "Volver al catálogo"
+document.getElementById("btnVolverCatalogo").addEventListener("click", () => {
+  // Mostrar todas las secciones con todos los productos
+  const secciones = [
     "productos-invernadero",
     "malla-sombra",
     "mallas-decorativas",
     "accesorios-hidroponia"
   ];
-  ids.forEach(id => {
-    const sec = document.getElementById(id);
-    if (sec) sec.style.display = id === idVisible ? "block" : "none";
-  });
-
-  document.getElementById("volverCatalogoContainer").style.display = "block";
-  window.scrollTo({ top: 0, behavior: "instant" });
-}
-
-function configurarBotonVolver() {
-  const btn = document.getElementById("btnVolverCatalogo");
-  if (btn) {
-    btn.addEventListener("click", mostrarTodasLasSecciones);
-  }
-}
-
-function mostrarTodasLasSecciones() {
-  const ids = [
-    "productos-invernadero",
-    "malla-sombra",
-    "mallas-decorativas",
-    "accesorios-hidroponia"
-  ];
-  ids.forEach(id => {
+  secciones.forEach(id => {
     const sec = document.getElementById(id);
     if (sec) sec.style.display = "block";
   });
 
-  document.getElementById("volverCatalogoContainer").style.display = "none";
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
 
-/* ──────── CARGAR PRODUCTOS ──────── */
+  // Ocultar el botón "Mostrar catalogo"
+  document.getElementById("volverCatalogoContainer").style.display = "none";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+
+
+/* ──────── PRODUCTOS DESDE STORAGE ──────── */
 function cargarProductosDesdeLocalStorage() {
   const productos = JSON.parse(localStorage.getItem("productos")) || [];
 
-  const secciones = {
-    "productos para invernadero": "grid-invernadero",
-    "malla sombra": "grid-malla-sombra",
-    "mallas decorativas": "grid-mallas-decorativas",
-    "accesorios hidroponia": "grid-accesorios"
+  const contenedorOfertas = document.getElementById("ofertas-flash");
+  const contenedoresCategorias = {
+    "productos para invernadero": document.getElementById("grid-invernadero"),
+    "malla sombra": document.getElementById("grid-malla-sombra"),
+    "mallas decorativas": document.getElementById("grid-mallas-decorativas"),
+    "accesorios hidroponia": document.getElementById("grid-accesorios")
   };
 
-  const ofertas = document.getElementById("ofertas-flash");
-
   productos.forEach(producto => {
-    if (!producto.nombre || !producto.precio || !producto.categoria) return;
+    const { nombre, precio, categoria, precioOriginal } = producto;
+    if (!nombre || !precio || !categoria) return;
 
-    const categoriaKey = producto.categoria.trim().toLowerCase();
-    const contenedorId = secciones[categoriaKey];
-    const contenedor = document.getElementById(contenedorId);
-    if (!contenedor) return;
+    const cat = categoria.trim().toLowerCase();
+    const contenedorCategoria = contenedoresCategorias[cat];
+    if (!contenedorCategoria) return;
 
     const tarjeta = crearTarjetaProducto(producto);
-    contenedor.appendChild(tarjeta);
+    contenedorCategoria.appendChild(tarjeta);
 
-    if (producto.precioOriginal && producto.precioOriginal > producto.precio) {
-      const oferta = crearTarjetaProducto(producto, "producto-card oferta");
-      const col = document.createElement("div");
-      col.className = "oferta wrapper";
-      col.appendChild(oferta);
-      ofertas?.appendChild(col);
+    if (precioOriginal && precioOriginal > precio && contenedorOfertas) {
+      const ofertaCol = document.createElement("div");
+      ofertaCol.className = "oferta wrapper";
+      const tarjetaOferta = crearTarjetaProducto(producto, "producto-card oferta");
+      ofertaCol.appendChild(tarjetaOferta);
+      contenedorOfertas.appendChild(ofertaCol);
     }
   });
 }
 
-/* ──────── TARJETAS DE PRODUCTOS ──────── */
-function crearTarjetaProducto(producto, claseCard = "producto-card") {
-  const { imagen, nombre, descripcion, precio, precioOriginal } = producto;
 
-  const descuento = obtenerDescuento(producto);
-  const descuentoHTML = descuento > 0
-    ? `<span class="descuento">${descuento}% OFF</span>`
-    : "";
-
-  const card = document.createElement("div");
-  card.className = claseCard;
-  card.innerHTML = `
-    <img src="${imagen}" alt="${nombre}" class="producto-img" />
-    <h3 class="producto-nombre">${nombre}</h3>
-    <p class="producto-descripcion">${descripcion || "Sin descripción disponible."}</p>
-    <p class="producto-precio">
-      <span class="precio-actual">$${precio.toFixed(2)}</span>
-      ${precioOriginal && precioOriginal > precio
-        ? `<span class="precio-original">$${precioOriginal.toFixed(2)}</span>`
-        : ""}
-      ${descuentoHTML}
-    </p>
-    <button class="btn-agregar-carrito">Agregar al carrito</button>
-  `;
-
-  card.querySelector(".btn-agregar-carrito").addEventListener("click", () => agregarAlCarrito(producto));
-  return card;
-}
-
-/* ──────── UTILIDAD ──────── */
-function obtenerDescuento(producto) {
-  if (!producto.precioOriginal || producto.precioOriginal <= producto.precio) return 0;
-  return Math.round(((producto.precioOriginal - producto.precio) / producto.precioOriginal) * 100);
-}
-
-function agregarAlCarrito(producto) {
-  const { nombre, precio, imagen } = producto;
-  const nuevoProducto = { nombre, precio, imagen, cantidad: 1 };
-
-  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-  const existente = carrito.find(p => p.nombre === nombre);
-
-  if (existente) {
-    existente.cantidad += 1;
-  } else {
-    carrito.push(nuevoProducto);
-  }
-
-  localStorage.setItem("carrito", JSON.stringify(carrito));
-  alert("Producto añadido al carrito ✅");
-}
-
-function toggleSection(id) {
-  const section = document.getElementById(id);
-  if (section) {
-    section.style.display = section.style.display === "none" ? "block" : "none";
-  }
-}
