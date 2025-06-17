@@ -17,7 +17,9 @@ La aplicación permite a los usuarios:
 - 📦 Consultar detalles, disponibilidad y descripciones técnicas  
 - 🔒 Administrar su cuenta y sus compras en un entorno confiable  
 
-   [][https://elequipofelizdegenerationfrontend.netlify.app/] 
+ Visualizacion de pagina:
+
+ https://elequipofelizdegenerationfrontend.netlify.app/ 
 
 ---
  
@@ -66,37 +68,38 @@ SSH:
 ###   📁 2. Accede al directorio del proyecto
      cd ElEquipoFelizDeGenerationFrontend
 
-###   🚀 3. Instala las dependencias
-     npm install
+###   🚀 3. Habre en VSCode
+     code .
 
 ###  ▶️ 4. Ejecuta la aplicación
-     npm start
 
- ✨ La aplicación se abrirá automáticamente en tu navegador en http://localhost:3000. ✨
+     Go Live
 
-    [ Vista a inicio de pagina ][https://files.catbox.moe/zhllbj.mp4]
+
+ ✨ La aplicación se abrirá automáticamente en tu navegador en http://127.0.0.1:5507/index.html ✨
+
 
 ## 📊 Estructura del Proyecto
 
-ELQUIPOFELIZDEGENERATIONFRONTEND/
-├── .vscode/
-│ └── settings.json ### Configuraciones del entorno de VSCode
-├── resources/
-│ └── images/ ### Recursos visuales organizados por secciones
-│ ├── contacto/ ### Imagenes co
-│ ├── favicon_io/ ### Imagenes 
-│ ├── navBar/  ### Imagenes
-│ ├── nosotros/ ### Imagenes
-│ ├── PRUEBA_productos/ ### Imagenes
-│ ├── socials/ ### Imagenes .svg
-│ └── underconstruction1.jpg ### Imagen de "sitio en construcción"
-├── src/   ### código fuente del proyecto
-│ ├── css/ ### Hojas de estilo personalizadas
-│ ├── js/ ### Scripts JavaScript
-│ ├── modules/ ### Componentes o módulos reutilizables
-│ └── pages/ ### Vistas principales del sitio
-├── index.html ### Entrada principal del sitio web
-├── LICENSE ### Licencia del proyecto
+## ELQUIPOFELIZDEGENERATIONFRONTEND/
+├── .vscode/       
+│ └── settings.json ### Configuraciones del entorno de VSCode    
+├── resources/   
+│ └── images/ ### Recursos visuales organizados por secciones    
+│ ├── contacto/ ### Imagenes co   
+│ ├── favicon_io/ ### Imagenes    
+│ ├── navBar/  ### Imagenes                                                 
+│ ├── nosotros/ ### Imagenes     
+│ ├── PRUEBA_producto /##Imagenes                                                         
+│ ├── socials/ ### Imagenes .svg                                           
+│ └── underconstruction1.jpg ### Imagen de "sitio en construcción"        
+├── src/   ### código fuente del proyecto           
+│ ├── css/ ### Hojas de estilo personalizadas                  
+│ ├── js/ ### Scripts JavaScript        
+│ ├── modules/ ### Componentes o módulos reutilizables     
+│ └── pages/ ### Vistas principales del sitio             
+├── index.html ### Entrada principal del sitio web                           
+├── LICENSE ### Licencia del proyecto                     
 └── README.md ### Documentación del proyecto
 
    
