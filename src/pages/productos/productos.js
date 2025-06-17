@@ -6,7 +6,7 @@ function inicializarPagina() {
   cargarFiltros();
   cargarCategoriasVisuales();
   // Eventos para los filtros
-document.getElementById("filtros-container").addEventListener("change", aplicarFiltros);
+  document.getElementById("filtros-container").addEventListener("change", aplicarFiltros);
   cargarProductosDesdeLocalStorage();
   configurarBotonVolver();
 }
@@ -76,9 +76,9 @@ function aplicarFiltros() {
       return producto.precio >= min && producto.precio <= max;
     });
 
-    // Filtro por descuento
     const cumpleDescuento = filtrosDescuento.length === 0 || filtrosDescuento.some(desc => {
-      return producto.descuento && producto.descuento >= parseInt(desc);
+      const descuentoCalculado = obtenerDescuento(producto);
+      return descuentoCalculado >= parseInt(desc);
     });
 
     return cumplePrecio && cumpleDescuento;
@@ -91,6 +91,7 @@ function obtenerFiltrosSeleccionados(nombre) {
   return Array.from(document.querySelectorAll(`input[name="${nombre}"]:checked`))
     .map(input => input.value);
 }
+
 function mostrarProductosFiltrados(productos) {
   // Limpiar secciones visibles
   const contenedores = [
@@ -122,7 +123,6 @@ function mostrarProductosFiltrados(productos) {
     contenedor.appendChild(tarjeta);
   });
 }
-
 
 /* ──────── NAVEGACIÓN ENTRE CATEGORÍAS ──────── */
 function cargarCategoriasVisuales() {
@@ -236,6 +236,11 @@ function cargarProductosDesdeLocalStorage() {
 function crearTarjetaProducto(producto, claseCard = "producto-card") {
   const { imagen, nombre, descripcion, precio, precioOriginal } = producto;
 
+  const descuento = obtenerDescuento(producto);
+  const descuentoHTML = descuento > 0
+    ? `<span class="descuento">${descuento}% OFF</span>`
+    : "";
+
   const card = document.createElement("div");
   card.className = claseCard;
   card.innerHTML = `
@@ -245,13 +250,21 @@ function crearTarjetaProducto(producto, claseCard = "producto-card") {
     <p class="producto-precio">
       <span class="precio-actual">$${precio.toFixed(2)}</span>
       ${precioOriginal && precioOriginal > precio
-        ? `<span class="precio-original">$${precioOriginal.toFixed(2)}</span>` : ""}
+        ? `<span class="precio-original">$${precioOriginal.toFixed(2)}</span>`
+        : ""}
+      ${descuentoHTML}
     </p>
     <button class="btn-agregar-carrito">Agregar al carrito</button>
   `;
 
   card.querySelector(".btn-agregar-carrito").addEventListener("click", () => agregarAlCarrito(producto));
   return card;
+}
+
+/* ──────── UTILIDAD ──────── */
+function obtenerDescuento(producto) {
+  if (!producto.precioOriginal || producto.precioOriginal <= producto.precio) return 0;
+  return Math.round(((producto.precioOriginal - producto.precio) / producto.precioOriginal) * 100);
 }
 
 function agregarAlCarrito(producto) {
@@ -271,7 +284,6 @@ function agregarAlCarrito(producto) {
   alert("Producto añadido al carrito ✅");
 }
 
-/* ──────── UTILIDAD ──────── */
 function toggleSection(id) {
   const section = document.getElementById(id);
   if (section) {
