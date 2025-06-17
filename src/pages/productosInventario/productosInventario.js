@@ -240,7 +240,18 @@ if (!codigo || !nombre || !descripcion || isNaN(precio) || isNaN(stock) || !imag
       }
     }
 
-  
+  // Restricciones de caracteres en descripcion para el formulario de agregar productos
+const errorDescripcion = document.getElementById("errorDescripcion");
+if (errorDescripcion) {
+  if (!descripcion || descripcion.length > 200) {
+    errorDescripcion.classList.remove("d-none");
+    form.descripcion.classList.add("is-invalid");
+    hayErrores = true;
+  } else {
+    errorDescripcion.classList.add("d-none");
+    form.descripcion.classList.remove("is-invalid");
+  }
+}
 
 const nuevoProducto = {
   codigo,
@@ -281,4 +292,10 @@ const nuevoProducto = {
 
   // Inicializar
   renderizarProductos();
+  // Contador para la parte de restricciones de caracteres en el apartado de descricion del formulario
+  form.descripcion.addEventListener("input", () => {
+  const contador = document.getElementById("descripcionContador");
+  contador.textContent = `${form.descripcion.value.length} / 200 caracteres`;
+});
+
 });

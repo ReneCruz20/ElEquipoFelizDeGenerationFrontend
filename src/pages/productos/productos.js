@@ -232,3 +232,61 @@ function cargarProductosDesdeLocalStorage() {
   });
 }
 
+/* ──────── TARJETAS DE PRODUCTOS ──────── */
+function crearTarjetaProducto(producto, claseCard = "producto-card") {
+  const { imagen, nombre, descripcion, precio, precioOriginal } = producto;
+
+  const descuento = obtenerDescuento(producto);
+  const descuentoHTML = descuento > 0
+    ? `<span class="descuento">${descuento}% OFF</span>`
+    : "";
+
+  const card = document.createElement("div");
+  card.className = claseCard;
+  card.innerHTML = `
+    <img src="${imagen}" alt="${nombre}" class="producto-img" />
+    <h3 class="producto-nombre">${nombre}</h3>
+    <p class="producto-descripcion">${descripcion || "Sin descripción disponible."}</p>
+    <p class="producto-precio">
+      <span class="precio-actual">$${precio.toFixed(2)}</span>
+      ${precioOriginal && precioOriginal > precio
+        ? `<span class="precio-original">$${precioOriginal.toFixed(2)}</span>`
+        : ""}
+      ${descuentoHTML}
+    </p>
+    <button class="btn-agregar-carrito">Agregar al carrito</button>
+  `;
+
+  card.querySelector(".btn-agregar-carrito").addEventListener("click", () => agregarAlCarrito(producto));
+  return card;
+}
+
+/* ──────── UTILIDAD ──────── */
+function obtenerDescuento(producto) {
+  if (!producto.precioOriginal || producto.precioOriginal <= producto.precio) return 0;
+  return Math.round(((producto.precioOriginal - producto.precio) / producto.precioOriginal) * 100);
+}
+
+function agregarAlCarrito(producto) {
+  const { nombre, precio, imagen } = producto;
+  const nuevoProducto = { nombre, precio, imagen, cantidad: 1 };
+
+  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  const existente = carrito.find(p => p.nombre === nombre);
+
+  if (existente) {
+    existente.cantidad += 1;
+  } else {
+    carrito.push(nuevoProducto);
+  }
+
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+  alert("Producto añadido al carrito ✅");
+}
+
+function toggleSection(id) {
+  const section = document.getElementById(id);
+  if (section) {
+    section.style.display = section.style.display === "none" ? "block" : "none";
+  }
+}
