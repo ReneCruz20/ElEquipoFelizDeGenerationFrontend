@@ -31,7 +31,7 @@ function insertHeader() {
         <div class="d-flex d-lg-none align-items-center">
           ${createSearchBox('searchToggleMobile', 'navbarSearchMobile', 'searchResultsMobile')}
           ${createNavIcon('../../../resources/images/navBar/carrito.png', 'Icono de Carrito', '../../../src/pages/carrito/carrito.html')}
-          ${createNavIcon('../../../resources/images/navBar/user.png', 'Icono de Usuario', '../../../src/pages/perfilDeUsuario/perfilDeUsurario.html')}
+          ${createNavIcon('../../../resources/images/navBar/user.png', 'Icono de Usuario', '../../../src/pages/perfilDeUsuario/perfilDeUsuario.html')}
         </div>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
