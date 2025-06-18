@@ -127,10 +127,10 @@ function mostrarProductosFiltrados(productos) {
 /* ──────── NAVEGACIÓN ENTRE CATEGORÍAS ──────── */
 function cargarCategoriasVisuales() {
   const categorias = [
-    crearCategoria("INVERNADERO HTA", "Productos para invernadero", "productos-invernadero", "https://images.pexels.com/photos/32236848/pexels-photo-32236848.jpeg"),
-    crearCategoria("INVERNADEROS HTA", "Malla sombra", "malla-sombra", "https://images.pexels.com/photos/16702073/pexels-photo-16702073/free-photo-of-rojo-pared-muro-negro.jpeg"),
-    crearCategoria("INVERNADEROS HTA", "Mallas decorativas", "mallas-decorativas", "https://www.hta-agrotextil.com/.cm4all/iproc.php/MONOFILAMENTO/95%20MONOFILAMENTO%20CAFE%20CON%20RAYAS.jpg"),
-    crearCategoria("INVERNADEROS HTA", "Accesorios Hidroponia", "accesorios-hidroponia", "https://images.pexels.com/photos/6510867/pexels-photo-6510867.jpeg")
+    crearCategoria("INVERNADERO HTA", "Productos para invernadero", "productos-invernadero", "https://www.hta.mx/.cm4all/mediadb/HTA%20INICIO/CENITAL2.jpg"),
+    crearCategoria("INVERNADEROS HTA", "Malla sombra", "malla-sombra", "https://www.hta-agrotextil.com/.cm4all/mediadb/MALLA%20SOMBRA.jpg"),
+    crearCategoria("INVERNADEROS HTA", "Mallas decorativas", "mallas-decorativas", "https://www.hta-agrotextil.com/.cm4all/mediadb/RECIENTES/ESTRUCTURAL-CLARA-1024x683.jpg"),
+    crearCategoria("INVERNADEROS HTA", "Accesorios Hidroponia", "accesorios-hidroponia", "https://cdn.pixabay.com/photo/2019/06/06/08/00/hydroponics-4255401_1280.jpg")
   ];
 
   const grid = document.getElementById("product-grid");
