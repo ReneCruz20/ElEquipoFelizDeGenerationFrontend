@@ -26,7 +26,7 @@ function insertHeader() {
       <div class="container-fluid">
         <div class="navbar-brand d-flex align-items-center">
           <a href="../../../index.html">
-            <img src="../../../resources/images/navBar/logo.png" alt="Logo HTA" width="60" height="60"
+            <img src="/resources/images/navBar/logo.png" alt="Logo HTA" width="60" height="60"
               class="ms-2 ms-md-4 rounded-circle">
           </a>
           <span class="company-name"> 
@@ -37,8 +37,10 @@ function insertHeader() {
 
         <div class="d-flex d-lg-none align-items-center">
           ${createSearchBox('searchToggleMobile', 'navbarSearchMobile', 'searchResultsMobile')}
-          ${createNavIcon('../../../resources/images/navBar/carrito.png', 'Icono de Carrito', '../../../src/pages/carrito/carrito.html')}
-          ${createNavIcon('../../../resources/images/navBar/user.png', 'Icono de Usuario', '../../../src/pages/perfilDeUsuario/perfilDeUsuario.html')}
+          ${createNavIcon('/resources/images/navBar/carrito.png', 'Icono de Carrito', '../../../src/pages/carrito/carrito.html')}
+          ${createNavIcon('/resources/images/navBar/user.png', 'Icono de Usuario', obtenerHrefUsuario(), 29, 'usuario-icono')}
+
+
         </div>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -71,8 +73,8 @@ function insertHeader() {
 
           <div class="d-none d-lg-flex align-items-center">
             ${createSearchBox('searchToggle', 'navbarSearch', 'searchResults')}
-            ${createNavIcon('../../../resources/images/navBar/carrito.png', 'Icono de Carrito', '../../../src/pages/carrito/carrito.html')}
-            ${createNavIcon('../../../resources/images/navBar/user.png', 'Icono de Usuario', obtenerHrefUsuario(), 29, 'usuario-icono')}
+            ${createNavIcon('/resources/images/navBar/carrito.png', 'Icono de Carrito', '../../../src/pages/carrito/carrito.html')}
+            ${createNavIcon('/resources/images/navBar/user.png', 'Icono de Usuario', obtenerHrefUsuario(), 29, 'usuario-icono')}
 
 
           </div>
@@ -98,7 +100,7 @@ function createSearchBox(toggleId, inputId, resultsId) {
   return `
     <div class="nav-item d-flex align-items-center px-2 position-relative">
       <button class="btn p-0 border-0 bg-transparent" id="${toggleId}">
-          <img src="../../../resources/images/navBar/lupa.png" alt="Buscar" width="32" height="32">
+          <img src="/resources/images/navBar/lupa.png" alt="Buscar" width="32" height="32">
       </button>
       <input type="text" id="${inputId}" class="form-control search-input" placeholder="Buscar..." />
       <div id="${resultsId}" class="search-results"></div>
@@ -218,4 +220,3 @@ window.addEventListener('storage', (e) => {
 
 document.addEventListener('DOMContentLoaded', initHeader);
 window.addEventListener('load', updateUserIcon);
-
