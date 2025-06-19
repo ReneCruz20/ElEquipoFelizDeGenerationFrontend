@@ -54,38 +54,42 @@
                     <h3 class="mt-3">Teléfonos de contacto:</h3>
                 </figure>
                 <div class="contact-info">
-
                     <p>Desde la República Mexicana: 55 1801-8584, 55 1801-8586</p>
                     <p>Lada sin costo: 800 253 4978</p>
                     <p>Desde el extranjero: +52 (55) 8985-6486</p>
-
                 </div>
-
             </div>
             <div class="col-md-6 col-12 mt-4">
-                <div class="contact-form">
+                <!-- Formulario con ID -->
+                <form id="contactForm" class="contact-form">
                     <h2 class="text-center mb-4">¿Te interesa conocer más de nosotros?</h2>
-                    <input type="text" placeholder="Nombre(s)" id="nombre" class="form-control w-75 mx-auto mb-2">
-                    <div id="nombre-error" class="error-message"></div>
-                    <input type="text" placeholder="Apellidos" id="apellidos" class="form-control w-75 mx-auto mb-2">
-                    <div id="apellidos-error" class="error-message"></div>
-                    <input type="email" placeholder="Email" id="email" class="form-control w-75 mx-auto mb-2">
-                    <div id="email-error" class="error-message"></div>
-                    <input type="telefono" placeholder="Teléfono" id="telefono" class="form-control w-75 mx-auto mb-2">
-                    <div id="telefono-error" class="error-message"></div>
-                    <textarea placeholder="Dudas o sugerencias:" id="dudas"
-                        class="form-control w-75 mx-auto mb-2"></textarea>
-                    <div id="dudas-error" class="error-message mb-3"></div>
-                    <!-- Añado id para boton y elimino onclick para usar addEventListener-->
-                    <button id="btnEnviar" class="btn btn-primary d-block mx-auto">Enviar</button>
-                    <div id="mesaje-formulario" class="fw-bold mt-3"></div>
-                </div>
+                    
+                    <input type="text" placeholder="Nombre(s)" id="nombre" name="nombre" class="form-control w-75 mx-auto mb-2">
+                    <div id="nombre-error" class="error-message text-danger"></div>
+                    
+                    <input type="text" placeholder="Apellidos" id="apellidos" name="apellidos" class="form-control w-75 mx-auto mb-2">
+                    <div id="apellidos-error" class="error-message text-danger"></div>
+                    
+                    <input type="email" placeholder="Email" id="email" name="email" class="form-control w-75 mx-auto mb-2">
+                    <div id="email-error" class="error-message text-danger"></div>
+                    
+                    <input type="tel" placeholder="Teléfono" id="telefono" name="telefono" class="form-control w-75 mx-auto mb-2">
+                    <div id="telefono-error" class="error-message text-danger"></div>
+                    
+                    <textarea placeholder="Dudas o sugerencias:" id="dudas" name="dudas" class="form-control w-75 mx-auto mb-2"></textarea>
+                    <div id="dudas-error" class="error-message text-danger mb-3"></div>
+                    
+                    <button type="submit" class="btn btn-primary d-block mx-auto">Enviar</button>
+                    
+                    <div id="mensaje-formulario" class="fw-bold mt-3 text-center"></div>
+                </form>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
     <footer id="footer" class="main-footer"></footer>
+    
     <!-- libreria Bootstrap para correos emailsjs -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <!--Bootstrap-->
@@ -97,5 +101,4 @@
     <script type="module" src="../../modules/header/header.js"></script>
     <script type="module" src="../../modules/footer/footer.js"></script>
 </body>
-
 </html>
