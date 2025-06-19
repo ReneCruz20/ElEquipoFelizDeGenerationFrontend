@@ -25,7 +25,7 @@ function cargarProductosMasVendidos() {
         card.className = 'product-card';
 
         card.innerHTML = `
-            <img src="${imagen || '../../../resources/images/placeholder.png'}" alt="${nombre}">
+            <img src="${imagen || '/resources/images/placeholder.png'}" alt="${nombre}">
             <h3>${nombre}</h3>
             <!-- <div class="product-rating">
                 <i class="fas fa-star"></i>

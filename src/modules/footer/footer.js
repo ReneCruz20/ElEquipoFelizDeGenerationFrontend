@@ -18,11 +18,11 @@ const insertFooter = (footer) => {
 
         <div class="social-icons">
 
-          <a href="https://www.facebook.com/htamex" target="_blank"><img src="../../../resources/images/socials/facebook.svg"
+          <a href="https://www.facebook.com/htamex" target="_blank"><img src="/resources/images/socials/facebook.svg"
               alt="Facebook" /></a>
           <a href="https://api.whatsapp.com/send/?phone=5215583851010&text&type=phone_number&app_absent=0"
-            target="_blank"><img src="../../../resources/images/socials/whatsapp.svg" alt="WhatsApp" /></a>
-          <a href="https://maps.app.goo.gl/tM23jumG1VvATGD48" target="_blank"><img src="../../../resources/images/socials/google-maps.svg"
+            target="_blank"><img src="/resources/images/socials/whatsapp.svg" alt="WhatsApp" /></a>
+          <a href="https://maps.app.goo.gl/tM23jumG1VvATGD48" target="_blank"><img src="/resources/images/socials/google-maps.svg"
               alt="Gmaps" /></a>
         </div>
       </div>
