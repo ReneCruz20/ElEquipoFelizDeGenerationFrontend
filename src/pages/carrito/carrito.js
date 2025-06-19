@@ -1,148 +1,193 @@
-// Espera a que el DOM esté completamente cargado antes de ejecutar el código
-document.addEventListener("DOMContentLoaded", () => {
-// Objeto que agrupa todas las referencias del DOM relacionadas con el carrito
-  const UI = {
-    listaCarrito: document.getElementById("lista-carrito"),
-    carritoVacio: document.getElementById("carrito-vacio"),
-    subtotal: document.getElementById("subtotal"),
-    envio: document.getElementById("envio"),
-    total: document.getElementById("total"),
-    btnPagar: document.getElementById("btn-pagar"),
-    contadorItems: document.getElementById("contador-items"),
-  };
-  // Servicio de almacenamiento local, encapsula la lógica de localStorage
-  const StorageService = {
-  // Obtiene el carrito del localStorage de forma segura
-    getCarrito: () => {
-      try {
-        return JSON.parse(localStorage.getItem("carrito")) || [];
-      } catch (e) {
-        console.error("Error leyendo carrito:", e);
-        return [];
-      }
-    },
-     // Guarda el carrito en localStorage
-    setCarrito: (carrito) => {
-      localStorage.setItem("carrito", JSON.stringify(carrito));
-    },
-  };
+// Clase para manejar el almacenamiento (Single Responsibility Principle)
+class StorageService {
+  static getCarrito() {
+    try {
+      return JSON.parse(localStorage.getItem("carrito")) || [];
+    } catch (e) {
+      console.error("Error leyendo carrito:", e);
+      return [];
+    }
+  }
 
-  let carrito = StorageService.getCarrito();
- // Calcula los totales del carrito: subtotal, envío, total e ítems
-  function calcularTotales(carrito) {
-    let subtotal = 0;
-    let totalItems = 0;
+  static setCarrito(carrito) {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+  }
+}
 
-    carrito.forEach(p => {
-      if (!isNaN(p.precio) && !isNaN(p.cantidad)) {
-        subtotal += p.precio * p.cantidad;
-        totalItems += p.cantidad;
-      }
-    });
+// Clase para manejar la lógica del carrito (Open/Closed Principle)
+class CarritoService {
+  constructor() {
+    this.carrito = StorageService.getCarrito();
+  }
 
+  agregarProducto(producto) {
+    const existente = this.carrito.find(p => p.id === producto.id);
+    if (existente) {
+      existente.cantidad += producto.cantidad;
+    } else {
+      this.carrito.push({ ...producto });
+    }
+    this.guardar();
+  }
+
+  actualizarCantidad(index, cantidad) {
+    if (this.carrito[index]) {
+      this.carrito[index].cantidad = cantidad;
+      this.guardar();
+    }
+  }
+
+  eliminarProducto(index) {
+    this.carrito.splice(index, 1);
+    this.guardar();
+  }
+
+  incrementarCantidad(index) {
+    if (this.carrito[index]) {
+      this.carrito[index].cantidad++;
+      this.guardar();
+    }
+  }
+
+  decrementarCantidad(index) {
+    if (this.carrito[index] && this.carrito[index].cantidad > 1) {
+      this.carrito[index].cantidad--;
+      this.guardar();
+    }
+  }
+
+  vaciarCarrito() {
+    this.carrito = [];
+    this.guardar();
+  }
+
+  guardar() {
+    StorageService.setCarrito(this.carrito);
+  }
+
+  getCarrito() {
+    return [...this.carrito];
+  }
+}
+
+// Clase para cálculos (Single Responsibility Principle)
+class CalculadoraCarrito {
+  static calcularTotales(carrito) {
+    const subtotal = carrito.reduce((total, p) => 
+      total + (p.precio * p.cantidad), 0);
+    
     const envio = subtotal >= 100 ? 0 : 10;
     const total = subtotal + envio;
+    const totalItems = carrito.reduce((total, p) => total + p.cantidad, 0);
 
     return { subtotal, envio, total, totalItems };
   }
- // Genera el HTML para un producto del carrito
-  function renderProducto(producto, index) {
-    const { nombre, precio, imagen, cantidad } = producto;
-    const div = document.createElement("div");
-    div.className = "item-carrito";
-    div.innerHTML = `
-      <img src="${imagen}" alt="${nombre}" class="item-imagen">
-      <div class="item-info">
-        <h5 class="item-titulo">${nombre}</h5>
-        <div class="contador-cantidad">
-          <button class="btn-cantidad btn-restar" data-index="${index}"><i class="fas fa-minus"></i></button>
-          <input type="text" class="input-cantidad" value="${cantidad}" readonly>
-          <button class="btn-cantidad btn-sumar" data-index="${index}"><i class="fas fa-plus"></i></button>
-        </div>
-        <p class="item-precio-total">$${(precio * cantidad).toFixed(2)}</p>
-      </div>
-      <button class="btn-eliminar" data-index="${index}" title="Eliminar producto">
-        <i class="fas fa-trash-alt"></i>
-      </button>
-    `;
-    return div;
-  }
- // Actualiza toda la interfaz del carrito con los datos actuales
-  function actualizarUI() {
-    UI.listaCarrito.innerHTML = "";
+}
 
- // Si el carrito está vacío, mostrar mensaje y resetear totales
+// Clase para manejar la UI (Dependency Inversion Principle)
+class CarritoUI {
+  constructor(service) {
+    this.service = service;
+    this.cacheDOM();
+    this.bindEvents();
+    this.render();
+  }
+
+  cacheDOM() {
+    this.DOM = {
+      listaCarrito: document.getElementById("lista-carrito"),
+      carritoVacio: document.getElementById("carrito-vacio"),
+      subtotal: document.getElementById("subtotal"),
+      envio: document.getElementById("envio"),
+      total: document.getElementById("total"),
+      btnPagar: document.getElementById("btn-pagar"),
+      contadorItems: document.getElementById("contador-items")
+    };
+  }
+
+  bindEvents() {
+    // Delegación de eventos para mejor performance
+    this.DOM.listaCarrito.addEventListener('click', (e) => {
+      const btn = e.target.closest('.btn-cantidad, .btn-eliminar');
+      if (!btn) return;
+
+      const index = parseInt(btn.dataset.index);
+      if (isNaN(index)) return;
+
+      if (btn.classList.contains('btn-sumar')) {
+        this.service.incrementarCantidad(index);
+      } else if (btn.classList.contains('btn-restar')) {
+        this.service.decrementarCantidad(index);
+      } else if (btn.classList.contains('btn-eliminar')) {
+        this.service.eliminarProducto(index);
+      }
+
+      this.render();
+    });
+
+    this.DOM.btnPagar.addEventListener('click', () => this.pagar());
+  }
+
+  renderProducto(producto, index) {
+    return `
+      <div class="item-carrito">
+        <img src="${producto.imagen}" alt="${producto.nombre}" class="item-imagen">
+        <div class="item-info">
+          <h5 class="item-titulo">${producto.nombre}</h5>
+          <div class="contador-cantidad">
+            <button class="btn-cantidad btn-restar" data-index="${index}">
+              <i class="fas fa-minus"></i>
+            </button>
+            <input type="text" class="input-cantidad" value="${producto.cantidad}" readonly>
+            <button class="btn-cantidad btn-sumar" data-index="${index}">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+          <p class="item-precio-total">$${(producto.precio * producto.cantidad).toFixed(2)}</p>
+        </div>
+        <button class="btn-eliminar" data-index="${index}" title="Eliminar producto">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </div>
+    `;
+  }
+
+  render() {
+    const carrito = this.service.getCarrito();
+
     if (carrito.length === 0) {
-      UI.carritoVacio.style.display = "block";
-      UI.btnPagar.disabled = true;
-      UI.contadorItems.textContent = "0 items";
-      UI.subtotal.textContent = "$0.00";
-      UI.envio.textContent = "$0.00";
-      UI.total.textContent = "$0.00";
+      this.DOM.carritoVacio.style.display = "block";
+      this.DOM.btnPagar.disabled = true;
+      this.DOM.listaCarrito.innerHTML = "";
+      this.DOM.contadorItems.textContent = "0 Productos";
+      this.DOM.subtotal.textContent = "$0.00";
+      this.DOM.envio.textContent = "$0.00";
+      this.DOM.total.textContent = "$0.00";
       return;
     }
 
-  // Si hay productos, oculta el mensaje de vacío y activa el botón de pagar
-    UI.carritoVacio.style.display = "none";
-    UI.btnPagar.disabled = false;
+    this.DOM.carritoVacio.style.display = "none";
+    this.DOM.btnPagar.disabled = false;
+    this.DOM.listaCarrito.innerHTML = carrito.map((p, i) => this.renderProducto(p, i)).join('');
 
-  // Recorre y renderiza cada producto del carrito
-    carrito.forEach((producto, index) => {
-      const item = renderProducto(producto, index);
-      UI.listaCarrito.appendChild(item);
-    });
+    const { subtotal, envio, total, totalItems } = CalculadoraCarrito.calcularTotales(carrito);
 
-  // Calcula los totales y actualiza los valores en el DOM
-    const { subtotal, envio, total, totalItems } = calcularTotales(carrito);
-
-    UI.subtotal.textContent = `$${subtotal.toFixed(2)}`;
-    UI.envio.textContent = `$${envio.toFixed(2)}`;
-    UI.total.textContent = `$${total.toFixed(2)}`;
-    UI.contadorItems.textContent = `${totalItems} item${totalItems !== 1 ? "s" : ""}`;
-
-// Asocia los eventos a los botones dinámicos (sumar, restar, eliminar)
-    asignarEventos();
+    this.DOM.subtotal.textContent = `$${subtotal.toFixed(2)}`;
+    this.DOM.envio.textContent = `$${envio.toFixed(2)}`;
+    this.DOM.total.textContent = `$${total.toFixed(2)}`;
+    this.DOM.contadorItems.textContent = `${totalItems} Producto${totalItems !== 1 ? "s" : ""}`;
   }
 
-// Asigna eventos a los botones generados dinámicamente para manejar acciones del usuario
-  function asignarEventos() {
-  // Aumentar cantidad
-    document.querySelectorAll(".btn-sumar").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const index = parseInt(btn.dataset.index);
-        carrito[index].cantidad++;
-        guardarYActualizar();
-      });
-    });
-
-// Disminuir cantidad (mínimo 1)
-    document.querySelectorAll(".btn-restar").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const index = parseInt(btn.dataset.index);
-        if (carrito[index].cantidad > 1) {
-          carrito[index].cantidad--;
-          guardarYActualizar();
-        }
-      });
-    });
-
-// Eliminar producto del carrito
-    document.querySelectorAll(".btn-eliminar").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const index = parseInt(btn.dataset.index);
-        carrito.splice(index, 1);
-        guardarYActualizar();
-      });
-    });
+  pagar() {
+    // Aquí iría la lógica de pago
+    alert('Redirigiendo a pasarela de pago...');
+    this.service.vaciarCarrito();
+    this.render();
   }
+}
 
-// Guarda el carrito actualizado y vuelve a renderizar la interfaz
-  function guardarYActualizar() {
-    StorageService.setCarrito(carrito);
-    actualizarUI();
-  }
-  
-// Llamada inicial para mostrar el estado actual del carrito
-  actualizarUI();
+// Inicialización al cargar el DOM
+document.addEventListener("DOMContentLoaded", () => {
+  const carritoService = new CarritoService();
+  new CarritoUI(carritoService);
 });
-
