@@ -208,9 +208,6 @@ function initHeader() {
   
   setupSearch('searchToggle', 'navbarSearch', 'searchResults', searchLinks);
   setupSearch('searchToggleMobile', 'navbarSearchMobile', 'searchResultsMobile', searchLinks);
-
-  // Actualiza el ícono después de que el header esté listo
-  setTimeout(updateUserIcon, 50);
 }
 
 // Event listeners
@@ -219,4 +216,3 @@ window.addEventListener('storage', (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', initHeader);
-window.addEventListener('load', updateUserIcon);
